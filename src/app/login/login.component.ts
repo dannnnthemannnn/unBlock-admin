@@ -12,6 +12,7 @@ export class LoginComponent {
     username = '';
     password = '';
     error = '';
+    test = 'yellow';
 
     constructor(//private authService: AuthService, 
         private router: Router) {

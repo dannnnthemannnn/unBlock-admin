@@ -1,16 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { AuthModule } from './auth/auth.module';
+import { LoginModule } from './login/login.module';
+import { AdminModule } from './admin/admin.module';
+import { ApiModule } from './api/api.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AuthModule,
+    AdminModule,
+    LoginModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ApiModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

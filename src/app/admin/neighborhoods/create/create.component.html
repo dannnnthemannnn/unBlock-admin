@@ -1,0 +1,10 @@
+<div class="container">
+    <form #createForm="ngForm" (ngSubmit)="create()">
+        <div class="form-group">
+            <label for="name">Neighborhood name:</label>
+            <input class="form-control" name="name" type="text" [(ngModel)]="name" />
+        </div>
+        <button class="btn btn-success">Submit</button>
+        <div [hidden]="!error ">{{error}}</div>
+    </form>
+</div>

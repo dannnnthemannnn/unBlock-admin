@@ -4,10 +4,18 @@ import { AdminComponent } from './admin.component';
 
 import { AuthGuard } from '../auth/auth-guard.service'
 
+import { NeighborhoodsComponent } from './neighborhoods/neighborhoods.component';
+
 const adminRoutes: Routes = [
     {
-        path: 'admin', component: AdminComponent,
-        //canActivate: [AuthGuard]
+        path: '',
+        component: AdminComponent,
+        children: [
+            {
+                path: '',
+                component: NeighborhoodsComponent
+            }
+        ]
     }
 ];
 

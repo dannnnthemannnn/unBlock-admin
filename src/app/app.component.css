@@ -1,0 +1,13 @@
+h1 {
+    display: inline-block;
+}
+
+button {
+    vertical-align: top;
+    margin-top: 22px;
+    margin-left: 25px;
+}
+
+.header {
+    margin-bottom: 20px;
+}

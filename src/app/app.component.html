@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div class="header" style="text-align:center">
   <h1>
     unBlock Admin
   </h1>
+  <button md-raised-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
 </div>
 <router-outlet></router-outlet>

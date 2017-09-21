@@ -22,7 +22,7 @@ export class LoginComponent {
                 this.router.navigate(['']);
             }, error => {
                 console.log(error);
-                this.error = error.message;
+                this.error = error.error.message;
             });
     }
 }

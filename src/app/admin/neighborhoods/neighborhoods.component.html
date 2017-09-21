@@ -1,9 +1,10 @@
 <div *ngIf="!loading">
-    <md-select placeholder="Neighborhood">
-        <md-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood.getId()">{{ neighborhood.getTitle() }}</md-option>
+    <md-select placeholder="Neighborhood" [(ngModel)]="selectedNeighborhood">
+        <md-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood.id">{{ neighborhood.name }}</md-option>
     </md-select>
 
     <button md-raised-button (click)="onCreateClick()">Create new neighborhood</button>
 
+    <view-neighborhood *ngIf="selectedNeighborhood" [selectedNeighborhood]="selectedNeighborhood"></view-neighborhood>
 </div>
 <md-spinner *ngIf="loading"></md-spinner>

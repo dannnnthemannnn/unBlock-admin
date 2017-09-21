@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 
+import { AuthModule } from '../auth/auth.module';
+
 import { NeighborhoodsModule } from './neighborhoods/neighborhoods.module';
 
 @NgModule({
@@ -11,6 +13,7 @@ import { NeighborhoodsModule } from './neighborhoods/neighborhoods.module';
         AdminComponent
     ],
     imports: [
+        AuthModule,
         AdminRoutingModule,
         NeighborhoodsModule
     ]

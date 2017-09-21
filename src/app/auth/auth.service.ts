@@ -8,6 +8,8 @@ import { UnblockService } from '../api/unblock.service';
 
 import { AuthConstants } from './auth.const';
 
+import { com } from '../protos/compiled.js'
+
 @Injectable()
 export class AuthService {
 
@@ -29,8 +31,11 @@ export class AuthService {
     }
 
     login(usernameOrEmail: string, password: string) {
-        return this.unblockService.login(usernameOrEmail, password).do(resp => {
-            this.cookieService.set(AuthConstants.COOKIE_TOKEN, resp.headers.get(AuthConstants.HEADER_TOKEN));
-        });
+        return this.unblockService.login(
+            new com.unblock.proto.LoginRequest({ usernameOrEmail, password }))
+            .do(resp => {
+                console.log(resp.headers.get(AuthConstants.HEADER_TOKEN))
+                this.cookieService.set(AuthConstants.COOKIE_TOKEN, resp.headers.get(AuthConstants.HEADER_TOKEN));
+            });
     }
 }

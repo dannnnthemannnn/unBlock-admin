@@ -13,7 +13,13 @@ const adminRoutes: Routes = [
         children: [
             {
                 path: '',
-                component: NeighborhoodsComponent
+                redirectTo: 'neighborhoods',
+                pathMatch: 'prefix'
+            },
+            {
+                path: 'neighborhoods',
+                component: NeighborhoodsComponent,
+                canActivate: [AuthGuard],
             }
         ]
     }

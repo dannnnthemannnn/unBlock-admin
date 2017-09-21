@@ -5,7 +5,7 @@ import { MdSelectModule } from '@angular/material';
 import { MdProgressSpinnerModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 
-import { ViewComponent } from './create.component';
+import { ViewComponent } from './view.component';
 
 @NgModule({
     declarations: [
@@ -19,4 +19,4 @@ import { ViewComponent } from './create.component';
         ViewComponent
     ]
 })
-export class CreateModule { }
+export class ViewModule { }

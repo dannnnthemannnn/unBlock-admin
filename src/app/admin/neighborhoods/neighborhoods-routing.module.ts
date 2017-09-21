@@ -11,6 +11,10 @@ const neighborhoodRoutes: Routes = [
         component: NeighborhoodsComponent
     },
     {
+        path: ':id',
+        component: NeighborhoodsComponent
+    },
+    {
         path: 'create',
         component: CreateComponent
     }

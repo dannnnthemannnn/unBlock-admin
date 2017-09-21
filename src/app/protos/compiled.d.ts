@@ -489,6 +489,186 @@ export namespace com {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a ListNeighborhoodResponse. */
+            interface IListNeighborhoodResponse {
+
+                /** ListNeighborhoodResponse neighborhoods */
+                neighborhoods?: com.unblock.proto.INeighborhood[];
+            }
+
+            /** Represents a ListNeighborhoodResponse. */
+            class ListNeighborhoodResponse {
+
+                /**
+                 * Constructs a new ListNeighborhoodResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IListNeighborhoodResponse);
+
+                /** ListNeighborhoodResponse neighborhoods. */
+                public neighborhoods: com.unblock.proto.INeighborhood[];
+
+                /**
+                 * Creates a new ListNeighborhoodResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListNeighborhoodResponse instance
+                 */
+                public static create(properties?: com.unblock.proto.IListNeighborhoodResponse): com.unblock.proto.ListNeighborhoodResponse;
+
+                /**
+                 * Encodes the specified ListNeighborhoodResponse message. Does not implicitly {@link com.unblock.proto.ListNeighborhoodResponse.verify|verify} messages.
+                 * @param message ListNeighborhoodResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IListNeighborhoodResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListNeighborhoodResponse message, length delimited. Does not implicitly {@link com.unblock.proto.ListNeighborhoodResponse.verify|verify} messages.
+                 * @param message ListNeighborhoodResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IListNeighborhoodResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListNeighborhoodResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListNeighborhoodResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.ListNeighborhoodResponse;
+
+                /**
+                 * Decodes a ListNeighborhoodResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListNeighborhoodResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.ListNeighborhoodResponse;
+
+                /**
+                 * Verifies a ListNeighborhoodResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListNeighborhoodResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListNeighborhoodResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.ListNeighborhoodResponse;
+
+                /**
+                 * Creates a plain object from a ListNeighborhoodResponse message. Also converts values to other types if specified.
+                 * @param message ListNeighborhoodResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.ListNeighborhoodResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListNeighborhoodResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a CreateNeighborhoodRequest. */
+            interface ICreateNeighborhoodRequest {
+
+                /** CreateNeighborhoodRequest name */
+                name?: string;
+            }
+
+            /** Represents a CreateNeighborhoodRequest. */
+            class CreateNeighborhoodRequest {
+
+                /**
+                 * Constructs a new CreateNeighborhoodRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.ICreateNeighborhoodRequest);
+
+                /** CreateNeighborhoodRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new CreateNeighborhoodRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateNeighborhoodRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.ICreateNeighborhoodRequest): com.unblock.proto.CreateNeighborhoodRequest;
+
+                /**
+                 * Encodes the specified CreateNeighborhoodRequest message. Does not implicitly {@link com.unblock.proto.CreateNeighborhoodRequest.verify|verify} messages.
+                 * @param message CreateNeighborhoodRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.ICreateNeighborhoodRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateNeighborhoodRequest message, length delimited. Does not implicitly {@link com.unblock.proto.CreateNeighborhoodRequest.verify|verify} messages.
+                 * @param message CreateNeighborhoodRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.ICreateNeighborhoodRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateNeighborhoodRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateNeighborhoodRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.CreateNeighborhoodRequest;
+
+                /**
+                 * Decodes a CreateNeighborhoodRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateNeighborhoodRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.CreateNeighborhoodRequest;
+
+                /**
+                 * Verifies a CreateNeighborhoodRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateNeighborhoodRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateNeighborhoodRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.CreateNeighborhoodRequest;
+
+                /**
+                 * Creates a plain object from a CreateNeighborhoodRequest message. Also converts values to other types if specified.
+                 * @param message CreateNeighborhoodRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.CreateNeighborhoodRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateNeighborhoodRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of a Neighborhood. */
             interface INeighborhood {
 

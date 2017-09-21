@@ -538,9 +538,9 @@ $root.com = (function() {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.x != null && message.hasOwnProperty("x"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.x);
+                                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
                             if (message.y != null && message.hasOwnProperty("y"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.y);
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
                             return writer;
                         };
 
@@ -576,10 +576,10 @@ $root.com = (function() {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    message.x = reader.int32();
+                                    message.x = reader.float();
                                     break;
                                 case 2:
-                                    message.y = reader.int32();
+                                    message.y = reader.float();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -617,11 +617,11 @@ $root.com = (function() {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.x != null && message.hasOwnProperty("x"))
-                                if (!$util.isInteger(message.x))
-                                    return "x: integer expected";
+                                if (typeof message.x !== "number")
+                                    return "x: number expected";
                             if (message.y != null && message.hasOwnProperty("y"))
-                                if (!$util.isInteger(message.y))
-                                    return "y: integer expected";
+                                if (typeof message.y !== "number")
+                                    return "y: number expected";
                             return null;
                         };
 
@@ -638,9 +638,9 @@ $root.com = (function() {
                                 return object;
                             var message = new $root.com.unblock.proto.Block.Bounds.Point();
                             if (object.x != null)
-                                message.x = object.x | 0;
+                                message.x = Number(object.x);
                             if (object.y != null)
-                                message.y = object.y | 0;
+                                message.y = Number(object.y);
                             return message;
                         };
 
@@ -662,9 +662,9 @@ $root.com = (function() {
                                 object.y = 0;
                             }
                             if (message.x != null && message.hasOwnProperty("x"))
-                                object.x = message.x;
+                                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
                             if (message.y != null && message.hasOwnProperty("y"))
-                                object.y = message.y;
+                                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
                             return object;
                         };
 
@@ -1081,6 +1081,399 @@ $root.com = (function() {
                 };
 
                 return GetNeighborhoodRequest;
+            })();
+
+            proto.ListNeighborhoodResponse = (function() {
+
+                /**
+                 * Properties of a ListNeighborhoodResponse.
+                 * @memberof com.unblock.proto
+                 * @interface IListNeighborhoodResponse
+                 * @property {Array.<com.unblock.proto.INeighborhood>} [neighborhoods] ListNeighborhoodResponse neighborhoods
+                 */
+
+                /**
+                 * Constructs a new ListNeighborhoodResponse.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a ListNeighborhoodResponse.
+                 * @constructor
+                 * @param {com.unblock.proto.IListNeighborhoodResponse=} [properties] Properties to set
+                 */
+                function ListNeighborhoodResponse(properties) {
+                    this.neighborhoods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ListNeighborhoodResponse neighborhoods.
+                 * @member {Array.<com.unblock.proto.INeighborhood>}neighborhoods
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @instance
+                 */
+                ListNeighborhoodResponse.prototype.neighborhoods = $util.emptyArray;
+
+                /**
+                 * Creates a new ListNeighborhoodResponse instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {com.unblock.proto.IListNeighborhoodResponse=} [properties] Properties to set
+                 * @returns {com.unblock.proto.ListNeighborhoodResponse} ListNeighborhoodResponse instance
+                 */
+                ListNeighborhoodResponse.create = function create(properties) {
+                    return new ListNeighborhoodResponse(properties);
+                };
+
+                /**
+                 * Encodes the specified ListNeighborhoodResponse message. Does not implicitly {@link com.unblock.proto.ListNeighborhoodResponse.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {com.unblock.proto.IListNeighborhoodResponse} message ListNeighborhoodResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListNeighborhoodResponse.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.neighborhoods != null && message.neighborhoods.length)
+                        for (var i = 0; i < message.neighborhoods.length; ++i)
+                            $root.com.unblock.proto.Neighborhood.encode(message.neighborhoods[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ListNeighborhoodResponse message, length delimited. Does not implicitly {@link com.unblock.proto.ListNeighborhoodResponse.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {com.unblock.proto.IListNeighborhoodResponse} message ListNeighborhoodResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListNeighborhoodResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ListNeighborhoodResponse message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.ListNeighborhoodResponse} ListNeighborhoodResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListNeighborhoodResponse.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.ListNeighborhoodResponse();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.neighborhoods && message.neighborhoods.length))
+                                message.neighborhoods = [];
+                            message.neighborhoods.push($root.com.unblock.proto.Neighborhood.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ListNeighborhoodResponse message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.ListNeighborhoodResponse} ListNeighborhoodResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListNeighborhoodResponse.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ListNeighborhoodResponse message.
+                 * @function verify
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListNeighborhoodResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.neighborhoods != null && message.hasOwnProperty("neighborhoods")) {
+                        if (!Array.isArray(message.neighborhoods))
+                            return "neighborhoods: array expected";
+                        for (var i = 0; i < message.neighborhoods.length; ++i) {
+                            var error = $root.com.unblock.proto.Neighborhood.verify(message.neighborhoods[i]);
+                            if (error)
+                                return "neighborhoods." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ListNeighborhoodResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.ListNeighborhoodResponse} ListNeighborhoodResponse
+                 */
+                ListNeighborhoodResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.ListNeighborhoodResponse)
+                        return object;
+                    var message = new $root.com.unblock.proto.ListNeighborhoodResponse();
+                    if (object.neighborhoods) {
+                        if (!Array.isArray(object.neighborhoods))
+                            throw TypeError(".com.unblock.proto.ListNeighborhoodResponse.neighborhoods: array expected");
+                        message.neighborhoods = [];
+                        for (var i = 0; i < object.neighborhoods.length; ++i) {
+                            if (typeof object.neighborhoods[i] !== "object")
+                                throw TypeError(".com.unblock.proto.ListNeighborhoodResponse.neighborhoods: object expected");
+                            message.neighborhoods[i] = $root.com.unblock.proto.Neighborhood.fromObject(object.neighborhoods[i]);
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ListNeighborhoodResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @static
+                 * @param {com.unblock.proto.ListNeighborhoodResponse} message ListNeighborhoodResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListNeighborhoodResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.neighborhoods = [];
+                    if (message.neighborhoods && message.neighborhoods.length) {
+                        object.neighborhoods = [];
+                        for (var j = 0; j < message.neighborhoods.length; ++j)
+                            object.neighborhoods[j] = $root.com.unblock.proto.Neighborhood.toObject(message.neighborhoods[j], options);
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ListNeighborhoodResponse to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.ListNeighborhoodResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListNeighborhoodResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return ListNeighborhoodResponse;
+            })();
+
+            proto.CreateNeighborhoodRequest = (function() {
+
+                /**
+                 * Properties of a CreateNeighborhoodRequest.
+                 * @memberof com.unblock.proto
+                 * @interface ICreateNeighborhoodRequest
+                 * @property {string} [name] CreateNeighborhoodRequest name
+                 */
+
+                /**
+                 * Constructs a new CreateNeighborhoodRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a CreateNeighborhoodRequest.
+                 * @constructor
+                 * @param {com.unblock.proto.ICreateNeighborhoodRequest=} [properties] Properties to set
+                 */
+                function CreateNeighborhoodRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * CreateNeighborhoodRequest name.
+                 * @member {string}name
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @instance
+                 */
+                CreateNeighborhoodRequest.prototype.name = "";
+
+                /**
+                 * Creates a new CreateNeighborhoodRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {com.unblock.proto.ICreateNeighborhoodRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.CreateNeighborhoodRequest} CreateNeighborhoodRequest instance
+                 */
+                CreateNeighborhoodRequest.create = function create(properties) {
+                    return new CreateNeighborhoodRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified CreateNeighborhoodRequest message. Does not implicitly {@link com.unblock.proto.CreateNeighborhoodRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {com.unblock.proto.ICreateNeighborhoodRequest} message CreateNeighborhoodRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CreateNeighborhoodRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified CreateNeighborhoodRequest message, length delimited. Does not implicitly {@link com.unblock.proto.CreateNeighborhoodRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {com.unblock.proto.ICreateNeighborhoodRequest} message CreateNeighborhoodRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CreateNeighborhoodRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a CreateNeighborhoodRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.CreateNeighborhoodRequest} CreateNeighborhoodRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CreateNeighborhoodRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.CreateNeighborhoodRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.name = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a CreateNeighborhoodRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.CreateNeighborhoodRequest} CreateNeighborhoodRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CreateNeighborhoodRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a CreateNeighborhoodRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CreateNeighborhoodRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a CreateNeighborhoodRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.CreateNeighborhoodRequest} CreateNeighborhoodRequest
+                 */
+                CreateNeighborhoodRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.CreateNeighborhoodRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.CreateNeighborhoodRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a CreateNeighborhoodRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @static
+                 * @param {com.unblock.proto.CreateNeighborhoodRequest} message CreateNeighborhoodRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CreateNeighborhoodRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+
+                /**
+                 * Converts this CreateNeighborhoodRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.CreateNeighborhoodRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CreateNeighborhoodRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return CreateNeighborhoodRequest;
             })();
 
             proto.Neighborhood = (function() {

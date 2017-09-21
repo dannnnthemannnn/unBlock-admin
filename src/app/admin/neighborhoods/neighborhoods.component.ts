@@ -11,7 +11,7 @@ import { com } from '../../protos/compiled';
 export class NeighborhoodsComponent {
 
     loading = true;
-    neighborhoods: com.unblock.proto.Neighborhood[];
+    neighborhoods: com.unblock.proto.INeighborhood[];
 
     constructor(
         private unblockService: UnblockService,
@@ -21,6 +21,7 @@ export class NeighborhoodsComponent {
             .subscribe(
             data => {
                 this.loading = false;
+                this.neighborhoods = data.neighborhoods;
             },
             error => {
                 console.log(error);

@@ -1,23 +1,22 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router, ParamMap } from '@angular/router';
 
 import { UnblockService } from '../../../api/unblock.service';
 
+import { com } from '../../../protos/compiled.js'
+
 @Component({
+    selector: 'view-neighborhood',
     templateUrl: './view.component.html'
 })
-export class CreateComponent {
+export class ViewComponent {
+    @Input() selectedNeighborhood: com.unblock.proto.Neighborhood;
 
     constructor(
-        private unblockService: UnblockService,
-        private router: Router
-    ) { }
+        private unblockService: UnblockService
+    ) {
 
-    view() {
-        this.unblockService.createNeighborhood(name)
-            .subscribe(
-            neighborhood => { console.log(neighborhood); },
-            error => { console.log(error); }
-            );
     }
+
+    view() { }
 }

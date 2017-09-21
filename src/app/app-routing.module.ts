@@ -9,7 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 const appRoutes: Routes = [
     {
         path: '',
-        loadChildren: 'app/admin/admin.module#AdminModule',
+        component: AdminComponent,
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard]
     },

@@ -27,6 +27,7 @@ export class AuthService {
     }
 
     logout() {
+        console.log(this.cookieService.get(AuthConstants.COOKIE_TOKEN))
         this.cookieService.delete(AuthConstants.COOKIE_TOKEN);
     }
 

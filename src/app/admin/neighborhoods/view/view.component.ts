@@ -1,22 +1,31 @@
-import { Component, Input } from '@angular/core';
-import { Router, ParamMap } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { UnblockService } from '../../../api/unblock.service';
 
 import { com } from '../../../protos/compiled.js'
 
 @Component({
-    selector: 'view-neighborhood',
     templateUrl: './view.component.html'
 })
-export class ViewComponent {
-    @Input() selectedNeighborhood: com.unblock.proto.Neighborhood;
+export class ViewComponent implements OnInit {
+    private currentId;
 
     constructor(
-        private unblockService: UnblockService
+        private unblockService: UnblockService,
+        private router: Router,
+        private route: ActivatedRoute
     ) {
-
+        console.log('constructor:');
     }
 
-    view() { }
+    ngOnInit() {
+        this.route.paramMap.subscribe(paramMap => {
+            this.currentId = paramMap.get('id');
+        })
+    }
+
+    onEditClick() {
+        this.router.navigate(['edit', this.currentId]);
+    }
 }

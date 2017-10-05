@@ -32,4 +32,9 @@ export class NeighborhoodsComponent {
     onCreateClick() {
         this.router.navigate(['create']);
     }
+
+    onOptionSelected(newValue) {
+        console.log(newValue);
+        this.router.navigate([newValue]);
+    }
 }

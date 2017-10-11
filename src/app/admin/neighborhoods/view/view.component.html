@@ -1,2 +1,20 @@
-<h3>View the neighborhood!</h3>
+<div *ngIf="neighborhood">
+    <h3>Title: {{neighborhood.name}}</h3>
+    <h5>Image: {{neighborhood.image}}</h5>
+
+    <button md-raised-button (click)="onNewBlockClick()">New Block</button>
+
+    <new-block *ngIf="newBlock"></new-block>
+    <cur-block *ngIf="!newBlock && curBlock"></cur-block>
+
+    <svg [attr.width]="imageWidth" [attr.height]="imageHeight">
+        <defs>
+            <pattern id="image" x="0" y="0" patternUnits="userSpaceOnUse" [attr.width]="imageWidth" [attr.height]="imageHeight">
+                <image x="0" y="0" [attr.xlink:href]="getNeighborhoodImageUrl()"></image>
+            </pattern>
+        </defs>
+        <rect [attr.width]="imageWidth" [attr.height]="imageHeight" fill="url(#image)" (click)="onBackgroundClick($event)" />
+        <rect width="100" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+    </svg>
+</div>
 <button class="btn btn-success" (click)="onEditClick()">Edit</button>

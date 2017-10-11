@@ -1485,6 +1485,7 @@ $root.com = (function() {
                  * @property {string} [id] Neighborhood id
                  * @property {string} [name] Neighborhood name
                  * @property {Array.<com.unblock.proto.IBlock>} [blocks] Neighborhood blocks
+                 * @property {string} [image] Neighborhood image
                  */
 
                 /**
@@ -1527,6 +1528,14 @@ $root.com = (function() {
                 Neighborhood.prototype.blocks = $util.emptyArray;
 
                 /**
+                 * Neighborhood image.
+                 * @member {string}image
+                 * @memberof com.unblock.proto.Neighborhood
+                 * @instance
+                 */
+                Neighborhood.prototype.image = "";
+
+                /**
                  * Creates a new Neighborhood instance using the specified properties.
                  * @function create
                  * @memberof com.unblock.proto.Neighborhood
@@ -1557,6 +1566,8 @@ $root.com = (function() {
                     if (message.blocks != null && message.blocks.length)
                         for (var i = 0; i < message.blocks.length; ++i)
                             $root.com.unblock.proto.Block.encode(message.blocks[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.image != null && message.hasOwnProperty("image"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.image);
                     return writer;
                 };
 
@@ -1601,6 +1612,9 @@ $root.com = (function() {
                             if (!(message.blocks && message.blocks.length))
                                 message.blocks = [];
                             message.blocks.push($root.com.unblock.proto.Block.decode(reader, reader.uint32()));
+                            break;
+                        case 4:
+                            message.image = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1652,6 +1666,9 @@ $root.com = (function() {
                                 return "blocks." + error;
                         }
                     }
+                    if (message.image != null && message.hasOwnProperty("image"))
+                        if (!$util.isString(message.image))
+                            return "image: string expected";
                     return null;
                 };
 
@@ -1681,6 +1698,8 @@ $root.com = (function() {
                             message.blocks[i] = $root.com.unblock.proto.Block.fromObject(object.blocks[i]);
                         }
                     }
+                    if (object.image != null)
+                        message.image = String(object.image);
                     return message;
                 };
 
@@ -1702,6 +1721,7 @@ $root.com = (function() {
                     if (options.defaults) {
                         object.id = "";
                         object.name = "";
+                        object.image = "";
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -1712,6 +1732,8 @@ $root.com = (function() {
                         for (var j = 0; j < message.blocks.length; ++j)
                             object.blocks[j] = $root.com.unblock.proto.Block.toObject(message.blocks[j], options);
                     }
+                    if (message.image != null && message.hasOwnProperty("image"))
+                        object.image = message.image;
                     return object;
                 };
 

@@ -9,7 +9,9 @@ import { AuthConstants } from '../auth/auth.const';
 
 import { com } from '../protos/compiled.js'
 
-const URL_ROOT = "http://localhost:8080";
+const URL_ROOT = 'http://localhost:8080';
+const RESOURCE_PREFIX = 'static';
+const IMAGE_PREFIX = 'images';
 
 @Injectable()
 export class UnblockService {
@@ -18,6 +20,14 @@ export class UnblockService {
         private http: HttpClient,
         private cookieService: CookieService,
     ) { }
+
+    get imageResourcePrefix() {
+        return `${this.resourcePrefix}/${IMAGE_PREFIX}`
+    }
+
+    get resourcePrefix() {
+        return `${URL_ROOT}/${RESOURCE_PREFIX}`;
+    }
 
     login(request: com.unblock.proto.LoginRequest) {
         return this.http.post(
@@ -28,6 +38,13 @@ export class UnblockService {
                 observe: 'response',
             }
         );
+    }
+
+    getNeighborhood(id: string) {
+        return this.http.get<com.unblock.proto.Neighborhood>(
+            this.path(`neighborhood/${id}`),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.Neighborhood.create(value));
     }
 
     createNeighborhood(request: com.unblock.proto.CreateNeighborhoodRequest) {

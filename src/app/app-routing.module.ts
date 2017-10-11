@@ -45,14 +45,14 @@ const appRoutes: Routes = [
         ]
     },
     {
+        path: 'login',
+        component: LoginComponent,
+    },
+    {
         path: '',
         redirectTo: 'admin',
         pathMatch: 'prefix'
     },
-    {
-        path: 'login',
-        component: LoginComponent,
-    }
 ];
 
 @NgModule({

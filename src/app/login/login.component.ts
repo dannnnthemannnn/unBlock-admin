@@ -19,8 +19,9 @@ export class LoginComponent {
         this.authService.login(this.username, this.password)
             .subscribe(data => {
                 this.error = '';
-                this.router.navigate(['']);
+                this.router.navigate(['/', '']);
             }, error => {
+                console.log('error');
                 console.log(error);
                 this.error = error.error.message;
             });

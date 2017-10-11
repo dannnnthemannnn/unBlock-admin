@@ -680,6 +680,9 @@ export namespace com {
 
                 /** Neighborhood blocks */
                 blocks?: com.unblock.proto.IBlock[];
+
+                /** Neighborhood image */
+                image?: string;
             }
 
             /** Represents a Neighborhood. */
@@ -699,6 +702,9 @@ export namespace com {
 
                 /** Neighborhood blocks. */
                 public blocks: com.unblock.proto.IBlock[];
+
+                /** Neighborhood image. */
+                public image: string;
 
                 /**
                  * Creates a new Neighborhood instance using the specified properties.

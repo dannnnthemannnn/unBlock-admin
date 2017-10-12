@@ -6,21 +6,19 @@ import { MdSelectModule } from '@angular/material';
 import { MdProgressSpinnerModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 
-import { NewBlockModule } from './new-block/new-block.module';
-import { ViewComponent } from './view.component';
+import { NewBlockComponent } from './new-block.component';
 
 @NgModule({
     declarations: [
-        ViewComponent
+        NewBlockComponent
     ],
     imports: [
         FormsModule,
         RouterModule,
-        CommonModule,
-        NewBlockModule
+        CommonModule
     ],
     exports: [
-        ViewComponent
+        NewBlockComponent
     ]
 })
-export class ViewModule { }
+export class NewBlockModule { }

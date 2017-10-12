@@ -1,0 +1,16 @@
+<div class="container">
+    <form #newBlockForm="ngForm" (ngSubmit)="create()">
+        <div class="form-group">
+            <label for="name">Block name:</label>
+            <input class="form-control" name="name" type="text" [(ngModel)]="name" />
+        </div>
+        <div>
+            <label for="points"></label>
+            <ul>
+                <li *ngFor="let point of points">{{point.x}}, {{point.y}}</li>
+            </ul>
+        </div>
+        <button md-raised-button>Submit</button>
+        <div [hidden]="!error ">{{error}}</div>
+    </form>
+</div>

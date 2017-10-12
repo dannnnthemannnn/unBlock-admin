@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { UnblockService } from '../../../api/unblock.service';
 
-import { com } from '../../../protos/compiled.js'
+import { com } from '../../../protos/compiled.js';
 
 @Component({
     templateUrl: './view.component.html'
@@ -14,6 +14,7 @@ export class ViewComponent implements OnInit {
     imageHeight = 0;
     imageWidth = 0;
     newBlock = false;
+    newPoints: com.unblock.proto.Block.Bounds.Point[] = [];
 
     constructor(
         private unblockService: UnblockService,
@@ -51,8 +52,21 @@ export class ViewComponent implements OnInit {
         this.newBlock = true;
     }
 
+    onResetClick() {
+        if (this.newBlock) {
+            this.newPoints = [];
+        }
+    }
+
+    getNewPointsPolygon() {
+        return this.newPoints.map(point => `${point.x},${point.y}`).join(' ');
+    }
+
     onBackgroundClick(event: MouseEvent) {
-        console.log(event);
+        if (this.newBlock) {
+            console.log(event);
+            this.newPoints.push(new com.unblock.proto.Block.Bounds.Point({ x: event.offsetX, y: event.offsetY }));
+        }
     }
 
     getNeighborhoodImageUrl() {

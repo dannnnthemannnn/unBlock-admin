@@ -4,8 +4,10 @@
 
     <button md-raised-button (click)="onNewBlockClick()">New Block</button>
 
-    <new-block *ngIf="newBlock"></new-block>
-    <cur-block *ngIf="!newBlock && curBlock"></cur-block>
+    <new-block *ngIf="newBlock" [points]="newPoints"></new-block>
+    <!--<cur-block *ngIf="!newBlock && curBlock"></cur-block>-->
+
+    <button md-raised-button *ngIf="newBlock" (click)="onResetClick()">Reset</button>
 
     <svg [attr.width]="imageWidth" [attr.height]="imageHeight">
         <defs>
@@ -14,7 +16,8 @@
             </pattern>
         </defs>
         <rect [attr.width]="imageWidth" [attr.height]="imageHeight" fill="url(#image)" (click)="onBackgroundClick($event)" />
-        <rect width="100" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+        <polygon *ngIf="newBlock" [attr.points]="getNewPointsPolygon()" fill="red" fill-opacity="0.3" />
+        <circle *ngFor="let point of newPoints" [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="red" />
     </svg>
 </div>
 <button class="btn btn-success" (click)="onEditClick()">Edit</button>

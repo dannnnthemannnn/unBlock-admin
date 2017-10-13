@@ -17,7 +17,8 @@
         </defs>
         <rect [attr.width]="imageWidth" [attr.height]="imageHeight" fill="url(#image)" (click)="onBackgroundClick($event)" />
         <polygon *ngIf="newBlock" [attr.points]="getNewPointsPolygon()" fill="red" fill-opacity="0.3" />
-        <circle *ngFor="let point of newPoints" [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="red" />
+        <circle *ngFor="let point of newPoints" [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="red" (mousedown)="pointMouseDown($event)"
+            (mouseup)="pointMouseUp($event)" (mousemove)="pointMouseMove($event, point)" />
     </svg>
 </div>
 <button class="btn btn-success" (click)="onEditClick()">Edit</button>

@@ -15,6 +15,7 @@ export class ViewComponent implements OnInit {
     imageWidth = 0;
     newBlock = false;
     newPoints: com.unblock.proto.Block.Bounds.Point[] = [];
+    isMovingPoint = false;
 
     constructor(
         private unblockService: UnblockService,
@@ -55,6 +56,21 @@ export class ViewComponent implements OnInit {
     onResetClick() {
         if (this.newBlock) {
             this.newPoints = [];
+        }
+    }
+
+    pointMouseDown(event: MouseEvent) {
+        this.isMovingPoint = true;
+    }
+
+    pointMouseUp(event: MouseEvent) {
+        this.isMovingPoint = false;
+    }
+
+    pointMouseMove(event: MouseEvent, point: com.unblock.proto.Block.Bounds.Point) {
+        if (this.isMovingPoint) {
+            point.x = event.offsetX;
+            point.y = event.offsetY;
         }
     }
 

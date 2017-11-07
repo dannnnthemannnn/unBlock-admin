@@ -13,9 +13,10 @@ export class ViewComponent implements OnInit {
     neighborhood: com.unblock.proto.Neighborhood;
     imageHeight = 0;
     imageWidth = 0;
-    newBlock = false;
-    newPoints: com.unblock.proto.Block.Bounds.Point[] = [];
+    curBlock: com.unblock.proto.Block | null = null;
     isMovingPoint = false;
+    curPoint: com.unblock.proto.Bounds.IPoint | null = null;
+    curAttraction: com.unblock.proto.Attraction | null = null;
 
     constructor(
         private unblockService: UnblockService,
@@ -40,9 +41,13 @@ export class ViewComponent implements OnInit {
                         console.log(img.width + 'x' + img.height);
                     };
                     img.src = this.getNeighborhoodImageUrl();
-                })
-        })
+                });
+        });
+    }
 
+    onNewBlock(block: com.unblock.proto.IBlock) {
+        console.log(block);
+        this.curBlock = null;
     }
 
     onEditClick() {
@@ -50,38 +55,77 @@ export class ViewComponent implements OnInit {
     }
 
     onNewBlockClick() {
-        this.newBlock = true;
+        this.curBlock = new com.unblock.proto.Block({
+            bounds: new com.unblock.proto.Bounds({
+                points: []
+            })
+        });
+    }
+
+    onNewAttractionClick() {
+        this.curAttraction = new com.unblock.proto.Attraction();
     }
 
     onResetClick() {
-        if (this.newBlock) {
-            this.newPoints = [];
-        }
+        this.curBlock.bounds.points = [];
     }
 
-    pointMouseDown(event: MouseEvent) {
-        this.isMovingPoint = true;
+    onCancelClick() {
+        this.curBlock = null;
+    }
+
+    pointMouseDown(event: MouseEvent, point: com.unblock.proto.Bounds.IPoint) {
+        if (this.curBlock) {
+            this.isMovingPoint = true;
+            this.curPoint = point;
+        }
     }
 
     pointMouseUp(event: MouseEvent) {
         this.isMovingPoint = false;
+        this.curPoint = null;
+        this.curAttraction = null;
     }
 
-    pointMouseMove(event: MouseEvent, point: com.unblock.proto.Block.Bounds.Point) {
-        if (this.isMovingPoint) {
-            point.x = event.offsetX;
-            point.y = event.offsetY;
+    pointMouseMove(event: MouseEvent) {
+        if (this.isMovingPoint && this.curPoint) {
+            this.curPoint.x = event.offsetX;
+            this.curPoint.y = event.offsetY;
+        }
+
+        if (this.isMovingPoint && this.curAttraction) {
+            this.curAttraction.x = event.offsetX;
+            this.curAttraction.y = event.offsetY;
         }
     }
 
     getNewPointsPolygon() {
-        return this.newPoints.map(point => `${point.x},${point.y}`).join(' ');
+        return this.convertToPointsPolygon(this.curBlock.bounds.points);
+    }
+
+    getBlockPointsPolygon(block: com.unblock.proto.Block) {
+        return this.convertToPointsPolygon(block.bounds.points);
+    }
+
+    private convertToPointsPolygon(points: com.unblock.proto.Bounds.IPoint[]) {
+        return points.map(point => `${point.x},${point.y}`).join(' ');
     }
 
     onBackgroundClick(event: MouseEvent) {
-        if (this.newBlock) {
+        if (this.curBlock) {
             console.log(event);
-            this.newPoints.push(new com.unblock.proto.Block.Bounds.Point({ x: event.offsetX, y: event.offsetY }));
+            this.curBlock.bounds.points.push(new com.unblock.proto.Bounds.Point({ x: event.offsetX, y: event.offsetY }));
+        }
+
+        if (this.curAttraction) {
+            this.curAttraction.x = event.offsetX;
+            this.curAttraction.y = event.offsetY;
+        }
+    }
+
+    onBlockClick(block: com.unblock.proto.Block) {
+        if (!this.curBlock) {
+            this.curBlock = block;
         }
     }
 

@@ -3,11 +3,12 @@
     <h5>Image: {{neighborhood.image}}</h5>
 
     <button md-raised-button (click)="onNewBlockClick()">New Block</button>
+    <button md-raised-button (click)="onNewAttractionClick()">New Attraction</button>
 
-    <new-block *ngIf="newBlock" [points]="newPoints"></new-block>
-    <!--<cur-block *ngIf="!newBlock && curBlock"></cur-block>-->
+    <new-block *ngIf="curBlock" [block]="curBlock" [neighborhoodId]="neighborhood.id" (blockCreated)="onNewBlock($event)"></new-block>
 
-    <button md-raised-button *ngIf="newBlock" (click)="onResetClick()">Reset</button>
+    <button md-raised-button *ngIf="curBlock" (click)="onResetClick()">Reset</button>
+    <button md-raised-button *ngIf="curBlock" (click)="onCancelClick()">Cancel</button>
 
     <svg [attr.width]="imageWidth" [attr.height]="imageHeight">
         <defs>
@@ -15,10 +16,17 @@
                 <image x="0" y="0" [attr.xlink:href]="getNeighborhoodImageUrl()"></image>
             </pattern>
         </defs>
-        <rect [attr.width]="imageWidth" [attr.height]="imageHeight" fill="url(#image)" (click)="onBackgroundClick($event)" />
-        <polygon *ngIf="newBlock" [attr.points]="getNewPointsPolygon()" fill="red" fill-opacity="0.3" />
-        <circle *ngFor="let point of newPoints" [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="red" (mousedown)="pointMouseDown($event)"
-            (mouseup)="pointMouseUp($event)" (mousemove)="pointMouseMove($event, point)" />
+        <rect [attr.width]="imageWidth" [attr.height]="imageHeight" fill="url(#image)" (click)="onBackgroundClick($event)" (mousemove)="pointMouseMove($event)"
+        />
+        <polygon *ngIf="curBlock" [attr.points]="getNewPointsPolygon()" fill="blue" fill-opacity="0.7" />
+        <circle *ngFor="let point of curBlock?.bounds.points" [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="red" (mousedown)="pointMouseDown($event, point)"
+            (mouseup)="pointMouseUp($event)" (mousemove)="pointMouseMove($event)" />
+
+        <g *ngFor="let block of neighborhood.blocks">
+            <polygon [attr.points]="getBlockPointsPolygon(block)" fill="red" fill-opacity="0.3" (click)="onBlockClick(block)" />
+            <circle *ngFor="let point of block.bounds.points" [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="red" (mousedown)="pointMouseDown($event, point)"
+                (mouseup)="pointMouseUp($event)" (mousemove)="pointMouseMove($event)" />
+        </g>
     </svg>
 </div>
 <button class="btn btn-success" (click)="onEditClick()">Edit</button>

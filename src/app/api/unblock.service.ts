@@ -62,6 +62,22 @@ export class UnblockService {
         ).map(value => com.unblock.proto.ListNeighborhoodResponse.create(value));
     }
 
+    createBlock(request: com.unblock.proto.CreateBlockRequest) {
+        return this.http.post(
+            this.path('block'),
+            request.toJSON(),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.Block.create(value));
+    }
+
+    updateBlockBounds(request: com.unblock.proto.UpdateBlockBoundsRequest) {
+        return this.http.post(
+            this.path('block/bounds'),
+            request.toJSON(),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.Block.create(value));
+    }
+
     private getHeaders() {
         console.log('Cookie:' + this.cookieService.get(AuthConstants.COOKIE_TOKEN));
         return {

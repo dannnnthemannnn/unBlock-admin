@@ -11,7 +11,7 @@
                 <li *ngFor="let point of block.bounds.points">{{point.x}}, {{point.y}}</li>
             </ul>
         </div>
-        <button md-raised-button>Submit</button>
+        <button mat-raised-button>Submit</button>
         <div [hidden]="!error ">{{error}}</div>
     </form>
     <div *ngIf="error">{{error}}</div>

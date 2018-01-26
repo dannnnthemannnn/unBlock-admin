@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
     username = '';
@@ -19,7 +20,7 @@ export class LoginComponent {
         this.authService.login(this.username, this.password)
             .subscribe(data => {
                 this.error = '';
-                this.router.navigate(['/', '']);
+                this.router.navigate(['admin', '']);
             }, error => {
                 console.log('error');
                 console.log(error);

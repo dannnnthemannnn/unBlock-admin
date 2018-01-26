@@ -2,13 +2,13 @@
     <h3>Title: {{neighborhood.name}}</h3>
     <h5>Image: {{neighborhood.image}}</h5>
 
-    <button md-raised-button (click)="onNewBlockClick()">New Block</button>
-    <button md-raised-button (click)="onNewAttractionClick()">New Attraction</button>
+    <button mat-raised-button (click)="onNewBlockClick()">New Block</button>
+    <button mat-raised-button (click)="onNewAttractionClick()">New Attraction</button>
 
     <new-block *ngIf="curBlock" [block]="curBlock" [neighborhoodId]="neighborhood.id" (blockCreated)="onNewBlock($event)"></new-block>
 
-    <button md-raised-button *ngIf="curBlock" (click)="onResetClick()">Reset</button>
-    <button md-raised-button *ngIf="curBlock" (click)="onCancelClick()">Cancel</button>
+    <button mat-raised-button *ngIf="curBlock" (click)="onResetClick()">Reset</button>
+    <button mat-raised-button *ngIf="curBlock" (click)="onCancelClick()">Cancel</button>
 
     <svg [attr.width]="imageWidth" [attr.height]="imageHeight">
         <defs>

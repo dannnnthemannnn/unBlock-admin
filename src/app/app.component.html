@@ -1,8 +1,16 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="header" style="text-align:center">
-  <h1>
-    unBlock Admin
-  </h1>
-  <button md-raised-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+<mat-toolbar color="accent">
+  <div class="toolbar-elements">
+    <a mat-button class="title" routerLink="/" routerLinkActive="active">unBlock</a>
+    <nav mat-tab-nav-bar >
+      <a mat-button routerLink="/admin/users" routerLinkActive="active">Users</a>
+      <a mat-button routerLink="/admin/cities" routerLinkActive="active">Cities</a>
+      <a mat-button routerLink="/admin/neighborhoods" routerLinkActive="active">Neighborhoods</a>
+      <a mat-button routerLink="/admin/blocks" routerLinkActive="active">Blocks</a>
+    </nav>
+
+    <a class="logout" mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
+  </div>
+</mat-toolbar>
+<div class="content">
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

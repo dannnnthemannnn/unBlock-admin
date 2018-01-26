@@ -9,7 +9,7 @@ import { AuthConstants } from '../auth/auth.const';
 
 import { com } from '../protos/compiled.js'
 
-const URL_ROOT = 'http://localhost:8080';
+const URL_ROOT = 'http://localhost:8080/v1';
 const RESOURCE_PREFIX = 'static';
 const IMAGE_PREFIX = 'images';
 

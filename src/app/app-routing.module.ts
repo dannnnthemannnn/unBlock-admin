@@ -20,27 +20,8 @@ const appRoutes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
             {
-                path: 'neighborhoods',
-                component: NeighborhoodsComponent,
-                children: [
-                    {
-                        path: 'create',
-                        component: CreateComponent
-                    },
-                    {
-                        path: 'edit/:id',
-                        component: EditComponent
-                    },
-                    {
-                        path: ':id',
-                        component: ViewComponent
-                    }
-                ]
-            },
-            {
-                path: '',
-                redirectTo: 'neighborhoods',
-                pathMatch: 'prefix'
+                path: 'cities',
+                component: NeighborhoodsComponent
             },
         ]
     },
@@ -50,8 +31,12 @@ const appRoutes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'admin',
+        redirectTo: '/admin',
         pathMatch: 'prefix'
+    },
+    {
+        path: '*',
+        redirectTo: '/admin'
     },
 ];
 

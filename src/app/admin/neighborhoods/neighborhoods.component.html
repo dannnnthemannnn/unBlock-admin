@@ -1,10 +1,10 @@
 <div *ngIf="!loading">
-    <md-select placeholder="Neighborhood" [(ngModel)]="selectedNeighborhood" (ngModelChange)="onOptionSelected($event)">
-        <md-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood.id">{{ neighborhood.name }}</md-option>
-    </md-select>
+    <mat-select placeholder="Neighborhood" [(ngModel)]="selectedNeighborhood" (ngModelChange)="onOptionSelected($event)">
+        <mat-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood.id">{{ neighborhood.name }}</mat-option>
+    </mat-select>
 
-    <button md-raised-button (click)="onCreateClick()">Create new neighborhood</button>
+    <button mat-raised-button (click)="onCreateClick()">Create new neighborhood</button>
 
     <router-outlet></router-outlet>
 </div>
-<md-spinner *ngIf="loading"></md-spinner>
+<mat-spinner *ngIf="loading"></mat-spinner>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdSelectModule } from '@angular/material';
-import { MdProgressSpinnerModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -23,9 +23,9 @@ import { EditModule } from './edit/edit.module';
         ViewModule,
         CreateModule,
         EditModule,
-        MdSelectModule,
-        MdProgressSpinnerModule,
-        MdButtonModule,
+        MatSelectModule,
+        MatProgressSpinnerModule,
+        MatButtonModule,
     ],
     exports: [
         NeighborhoodsComponent

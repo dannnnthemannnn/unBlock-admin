@@ -11,14 +11,23 @@ import { NeighborhoodsComponent } from './admin/neighborhoods/neighborhoods.comp
 import { ViewComponent } from './admin/neighborhoods/view/view.component';
 import { CreateComponent } from './admin/neighborhoods/create/create.component';
 import { EditComponent } from './admin/neighborhoods/edit/edit.component';
+import { UserComponent } from './admin/user/user.component';
 
 const appRoutes: Routes = [
     {
         path: 'admin',
-        component: AdminComponent,
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
         children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'user'
+            },
+            {
+                path: 'user',
+                component: UserComponent
+            },
             {
                 path: 'cities',
                 component: NeighborhoodsComponent
@@ -30,13 +39,8 @@ const appRoutes: Routes = [
         component: LoginComponent,
     },
     {
-        path: '',
-        redirectTo: '/admin',
-        pathMatch: 'prefix'
-    },
-    {
-        path: '*',
-        redirectTo: '/admin'
+        path: '**',
+        redirectTo: 'admin'
     },
 ];
 

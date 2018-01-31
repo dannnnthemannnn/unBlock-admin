@@ -1,0 +1,98 @@
+<div class="search">
+    <mat-form-field>
+        <input 
+            matInput 
+            name="username"
+            placeholder="Search username"
+            [matAutocomplete]="userAutocomplete"
+            [(ngModel)]="username" />
+    </mat-form-field>
+    
+    <mat-autocomplete #userAutocomplete="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option">
+            {{ option }}
+        </mat-option>
+    </mat-autocomplete>
+
+    <button 
+        mat-raised-button 
+        color="primary">
+        Create New
+    </button>
+</div>
+
+<mat-card>
+    <div class="row">
+        <mat-form-field>
+            <input 
+                matInput 
+                name="username"
+                placeholder="Username" 
+                required 
+                [(ngModel)]="username" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <input 
+                matInput 
+                name="email"
+                placeholder="Email" 
+                required 
+                [(ngModel)]="email" />
+
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <div class="mat-form-field">
+            <mat-checkbox 
+                name="admin"
+                [(ngModel)]="admin">
+                Admin
+            </mat-checkbox>
+        </div>
+    
+        <div class="mat-form-field">
+            <button 
+                mat-raised-button
+                color="primary"
+                (click)="onSave()">
+                Save
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+            <mat-form-field>
+                <input 
+                    matInput 
+                    type="password"
+                    name="password"
+                    placeholder="New Password" 
+                    required 
+                    [(ngModel)]="password" />
+            </mat-form-field>
+    
+            <mat-form-field>
+                <input
+                    matInput 
+                    type="password"
+                    name="passwordConfirm"
+                    placeholder="Confirm Password" 
+                    required 
+                    [(ngModel)]="passwordConfirm" />
+            </mat-form-field>
+        </div>
+    
+        <div class="row">
+            <div class="mat-form-field">
+                <button 
+                    mat-raised-button
+                    color="primary">
+                    Change Password
+                </button>
+            </div>
+        </div>
+
+    
+</mat-card>

@@ -34,6 +34,7 @@ nav a {
 }
 
 .content {
+    padding-top: 24px;
     width: 960px;
     margin: 0 auto;
 }

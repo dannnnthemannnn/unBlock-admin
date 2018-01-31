@@ -19,7 +19,15 @@
                 [(ngModel)]="password" />
         </mat-form-field>
 
-        <button mat-raised-button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+        <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            [disabled]="!loginForm.form.valid">
+            Login
+        </button>
+
+        <mat-error *ngIf="error">{{error}}</mat-error>
     </form>
     
 </mat-card>

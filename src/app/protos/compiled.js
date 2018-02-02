@@ -8294,26 +8294,24 @@ $root.com = (function() {
                 return LoginRequest;
             })();
 
-            proto.NewUserRequest = (function() {
+            proto.CreateUserRequest = (function() {
 
                 /**
-                 * Properties of a NewUserRequest.
+                 * Properties of a CreateUserRequest.
                  * @memberof com.unblock.proto
-                 * @interface INewUserRequest
-                 * @property {string|null} [username] NewUserRequest username
-                 * @property {string|null} [password] NewUserRequest password
-                 * @property {string|null} [email] NewUserRequest email
+                 * @interface ICreateUserRequest
+                 * @property {com.unblock.proto.CreateUserRequest.ICreateUserInfo|null} [info] CreateUserRequest info
                  */
 
                 /**
-                 * Constructs a new NewUserRequest.
+                 * Constructs a new CreateUserRequest.
                  * @memberof com.unblock.proto
-                 * @classdesc Represents a NewUserRequest.
-                 * @implements INewUserRequest
+                 * @classdesc Represents a CreateUserRequest.
+                 * @implements ICreateUserRequest
                  * @constructor
-                 * @param {com.unblock.proto.INewUserRequest=} [properties] Properties to set
+                 * @param {com.unblock.proto.ICreateUserRequest=} [properties] Properties to set
                  */
-                function NewUserRequest(properties) {
+                function CreateUserRequest(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -8321,98 +8319,1559 @@ $root.com = (function() {
                 }
 
                 /**
-                 * NewUserRequest username.
-                 * @member {string} username
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * CreateUserRequest info.
+                 * @member {com.unblock.proto.CreateUserRequest.ICreateUserInfo|null|undefined} info
+                 * @memberof com.unblock.proto.CreateUserRequest
                  * @instance
                  */
-                NewUserRequest.prototype.username = "";
+                CreateUserRequest.prototype.info = null;
 
                 /**
-                 * NewUserRequest password.
-                 * @member {string} password
-                 * @memberof com.unblock.proto.NewUserRequest
-                 * @instance
-                 */
-                NewUserRequest.prototype.password = "";
-
-                /**
-                 * NewUserRequest email.
-                 * @member {string} email
-                 * @memberof com.unblock.proto.NewUserRequest
-                 * @instance
-                 */
-                NewUserRequest.prototype.email = "";
-
-                /**
-                 * Creates a new NewUserRequest instance using the specified properties.
+                 * Creates a new CreateUserRequest instance using the specified properties.
                  * @function create
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.CreateUserRequest
                  * @static
-                 * @param {com.unblock.proto.INewUserRequest=} [properties] Properties to set
-                 * @returns {com.unblock.proto.NewUserRequest} NewUserRequest instance
+                 * @param {com.unblock.proto.ICreateUserRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.CreateUserRequest} CreateUserRequest instance
                  */
-                NewUserRequest.create = function create(properties) {
-                    return new NewUserRequest(properties);
+                CreateUserRequest.create = function create(properties) {
+                    return new CreateUserRequest(properties);
                 };
 
                 /**
-                 * Encodes the specified NewUserRequest message. Does not implicitly {@link com.unblock.proto.NewUserRequest.verify|verify} messages.
+                 * Encodes the specified CreateUserRequest message. Does not implicitly {@link com.unblock.proto.CreateUserRequest.verify|verify} messages.
                  * @function encode
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.CreateUserRequest
                  * @static
-                 * @param {com.unblock.proto.INewUserRequest} message NewUserRequest message or plain object to encode
+                 * @param {com.unblock.proto.ICreateUserRequest} message CreateUserRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                NewUserRequest.encode = function encode(message, writer) {
+                CreateUserRequest.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.info != null && message.hasOwnProperty("info"))
+                        $root.com.unblock.proto.CreateUserRequest.CreateUserInfo.encode(message.info, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified CreateUserRequest message, length delimited. Does not implicitly {@link com.unblock.proto.CreateUserRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.CreateUserRequest
+                 * @static
+                 * @param {com.unblock.proto.ICreateUserRequest} message CreateUserRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CreateUserRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a CreateUserRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.CreateUserRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.CreateUserRequest} CreateUserRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CreateUserRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.CreateUserRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.info = $root.com.unblock.proto.CreateUserRequest.CreateUserInfo.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a CreateUserRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.CreateUserRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.CreateUserRequest} CreateUserRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CreateUserRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a CreateUserRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.CreateUserRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CreateUserRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.info != null && message.hasOwnProperty("info")) {
+                        var error = $root.com.unblock.proto.CreateUserRequest.CreateUserInfo.verify(message.info);
+                        if (error)
+                            return "info." + error;
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a CreateUserRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.CreateUserRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.CreateUserRequest} CreateUserRequest
+                 */
+                CreateUserRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.CreateUserRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.CreateUserRequest();
+                    if (object.info != null) {
+                        if (typeof object.info !== "object")
+                            throw TypeError(".com.unblock.proto.CreateUserRequest.info: object expected");
+                        message.info = $root.com.unblock.proto.CreateUserRequest.CreateUserInfo.fromObject(object.info);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a CreateUserRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.CreateUserRequest
+                 * @static
+                 * @param {com.unblock.proto.CreateUserRequest} message CreateUserRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CreateUserRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.info = null;
+                    if (message.info != null && message.hasOwnProperty("info"))
+                        object.info = $root.com.unblock.proto.CreateUserRequest.CreateUserInfo.toObject(message.info, options);
+                    return object;
+                };
+
+                /**
+                 * Converts this CreateUserRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.CreateUserRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CreateUserRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                CreateUserRequest.CreateUserInfo = (function() {
+
+                    /**
+                     * Properties of a CreateUserInfo.
+                     * @memberof com.unblock.proto.CreateUserRequest
+                     * @interface ICreateUserInfo
+                     * @property {string|null} [username] CreateUserInfo username
+                     * @property {string|null} [password] CreateUserInfo password
+                     * @property {string|null} [email] CreateUserInfo email
+                     */
+
+                    /**
+                     * Constructs a new CreateUserInfo.
+                     * @memberof com.unblock.proto.CreateUserRequest
+                     * @classdesc Represents a CreateUserInfo.
+                     * @implements ICreateUserInfo
+                     * @constructor
+                     * @param {com.unblock.proto.CreateUserRequest.ICreateUserInfo=} [properties] Properties to set
+                     */
+                    function CreateUserInfo(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * CreateUserInfo username.
+                     * @member {string} username
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @instance
+                     */
+                    CreateUserInfo.prototype.username = "";
+
+                    /**
+                     * CreateUserInfo password.
+                     * @member {string} password
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @instance
+                     */
+                    CreateUserInfo.prototype.password = "";
+
+                    /**
+                     * CreateUserInfo email.
+                     * @member {string} email
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @instance
+                     */
+                    CreateUserInfo.prototype.email = "";
+
+                    /**
+                     * Creates a new CreateUserInfo instance using the specified properties.
+                     * @function create
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.CreateUserRequest.ICreateUserInfo=} [properties] Properties to set
+                     * @returns {com.unblock.proto.CreateUserRequest.CreateUserInfo} CreateUserInfo instance
+                     */
+                    CreateUserInfo.create = function create(properties) {
+                        return new CreateUserInfo(properties);
+                    };
+
+                    /**
+                     * Encodes the specified CreateUserInfo message. Does not implicitly {@link com.unblock.proto.CreateUserRequest.CreateUserInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.CreateUserRequest.ICreateUserInfo} message CreateUserInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateUserInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.username != null && message.hasOwnProperty("username"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+                        if (message.password != null && message.hasOwnProperty("password"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.password);
+                        if (message.email != null && message.hasOwnProperty("email"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.email);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified CreateUserInfo message, length delimited. Does not implicitly {@link com.unblock.proto.CreateUserRequest.CreateUserInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.CreateUserRequest.ICreateUserInfo} message CreateUserInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateUserInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a CreateUserInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {com.unblock.proto.CreateUserRequest.CreateUserInfo} CreateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateUserInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.CreateUserRequest.CreateUserInfo();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.username = reader.string();
+                                break;
+                            case 2:
+                                message.password = reader.string();
+                                break;
+                            case 3:
+                                message.email = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a CreateUserInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {com.unblock.proto.CreateUserRequest.CreateUserInfo} CreateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateUserInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a CreateUserInfo message.
+                     * @function verify
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateUserInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.username != null && message.hasOwnProperty("username"))
+                            if (!$util.isString(message.username))
+                                return "username: string expected";
+                        if (message.password != null && message.hasOwnProperty("password"))
+                            if (!$util.isString(message.password))
+                                return "password: string expected";
+                        if (message.email != null && message.hasOwnProperty("email"))
+                            if (!$util.isString(message.email))
+                                return "email: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates a CreateUserInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {com.unblock.proto.CreateUserRequest.CreateUserInfo} CreateUserInfo
+                     */
+                    CreateUserInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.com.unblock.proto.CreateUserRequest.CreateUserInfo)
+                            return object;
+                        var message = new $root.com.unblock.proto.CreateUserRequest.CreateUserInfo();
+                        if (object.username != null)
+                            message.username = String(object.username);
+                        if (object.password != null)
+                            message.password = String(object.password);
+                        if (object.email != null)
+                            message.email = String(object.email);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a CreateUserInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.CreateUserRequest.CreateUserInfo} message CreateUserInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateUserInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.username = "";
+                            object.password = "";
+                            object.email = "";
+                        }
+                        if (message.username != null && message.hasOwnProperty("username"))
+                            object.username = message.username;
+                        if (message.password != null && message.hasOwnProperty("password"))
+                            object.password = message.password;
+                        if (message.email != null && message.hasOwnProperty("email"))
+                            object.email = message.email;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this CreateUserInfo to JSON.
+                     * @function toJSON
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateUserInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    return CreateUserInfo;
+                })();
+
+                return CreateUserRequest;
+            })();
+
+            proto.ListUsersResponse = (function() {
+
+                /**
+                 * Properties of a ListUsersResponse.
+                 * @memberof com.unblock.proto
+                 * @interface IListUsersResponse
+                 * @property {Array.<com.unblock.proto.IUser>|null} [users] ListUsersResponse users
+                 */
+
+                /**
+                 * Constructs a new ListUsersResponse.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a ListUsersResponse.
+                 * @implements IListUsersResponse
+                 * @constructor
+                 * @param {com.unblock.proto.IListUsersResponse=} [properties] Properties to set
+                 */
+                function ListUsersResponse(properties) {
+                    this.users = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ListUsersResponse users.
+                 * @member {Array.<com.unblock.proto.IUser>} users
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @instance
+                 */
+                ListUsersResponse.prototype.users = $util.emptyArray;
+
+                /**
+                 * Creates a new ListUsersResponse instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {com.unblock.proto.IListUsersResponse=} [properties] Properties to set
+                 * @returns {com.unblock.proto.ListUsersResponse} ListUsersResponse instance
+                 */
+                ListUsersResponse.create = function create(properties) {
+                    return new ListUsersResponse(properties);
+                };
+
+                /**
+                 * Encodes the specified ListUsersResponse message. Does not implicitly {@link com.unblock.proto.ListUsersResponse.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {com.unblock.proto.IListUsersResponse} message ListUsersResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListUsersResponse.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.users != null && message.users.length)
+                        for (var i = 0; i < message.users.length; ++i)
+                            $root.com.unblock.proto.User.encode(message.users[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ListUsersResponse message, length delimited. Does not implicitly {@link com.unblock.proto.ListUsersResponse.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {com.unblock.proto.IListUsersResponse} message ListUsersResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListUsersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ListUsersResponse message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.ListUsersResponse} ListUsersResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListUsersResponse.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.ListUsersResponse();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            if (!(message.users && message.users.length))
+                                message.users = [];
+                            message.users.push($root.com.unblock.proto.User.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ListUsersResponse message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.ListUsersResponse} ListUsersResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListUsersResponse.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ListUsersResponse message.
+                 * @function verify
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListUsersResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.users != null && message.hasOwnProperty("users")) {
+                        if (!Array.isArray(message.users))
+                            return "users: array expected";
+                        for (var i = 0; i < message.users.length; ++i) {
+                            var error = $root.com.unblock.proto.User.verify(message.users[i]);
+                            if (error)
+                                return "users." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ListUsersResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.ListUsersResponse} ListUsersResponse
+                 */
+                ListUsersResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.ListUsersResponse)
+                        return object;
+                    var message = new $root.com.unblock.proto.ListUsersResponse();
+                    if (object.users) {
+                        if (!Array.isArray(object.users))
+                            throw TypeError(".com.unblock.proto.ListUsersResponse.users: array expected");
+                        message.users = [];
+                        for (var i = 0; i < object.users.length; ++i) {
+                            if (typeof object.users[i] !== "object")
+                                throw TypeError(".com.unblock.proto.ListUsersResponse.users: object expected");
+                            message.users[i] = $root.com.unblock.proto.User.fromObject(object.users[i]);
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ListUsersResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @static
+                 * @param {com.unblock.proto.ListUsersResponse} message ListUsersResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListUsersResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.users = [];
+                    if (message.users && message.users.length) {
+                        object.users = [];
+                        for (var j = 0; j < message.users.length; ++j)
+                            object.users[j] = $root.com.unblock.proto.User.toObject(message.users[j], options);
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ListUsersResponse to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.ListUsersResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListUsersResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return ListUsersResponse;
+            })();
+
+            proto.UpdateUserInfoRequest = (function() {
+
+                /**
+                 * Properties of an UpdateUserInfoRequest.
+                 * @memberof com.unblock.proto
+                 * @interface IUpdateUserInfoRequest
+                 * @property {string|null} [id] UpdateUserInfoRequest id
+                 * @property {com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo|null} [info] UpdateUserInfoRequest info
+                 */
+
+                /**
+                 * Constructs a new UpdateUserInfoRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents an UpdateUserInfoRequest.
+                 * @implements IUpdateUserInfoRequest
+                 * @constructor
+                 * @param {com.unblock.proto.IUpdateUserInfoRequest=} [properties] Properties to set
+                 */
+                function UpdateUserInfoRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * UpdateUserInfoRequest id.
+                 * @member {string} id
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @instance
+                 */
+                UpdateUserInfoRequest.prototype.id = "";
+
+                /**
+                 * UpdateUserInfoRequest info.
+                 * @member {com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo|null|undefined} info
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @instance
+                 */
+                UpdateUserInfoRequest.prototype.info = null;
+
+                /**
+                 * Creates a new UpdateUserInfoRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateUserInfoRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.UpdateUserInfoRequest} UpdateUserInfoRequest instance
+                 */
+                UpdateUserInfoRequest.create = function create(properties) {
+                    return new UpdateUserInfoRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified UpdateUserInfoRequest message. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateUserInfoRequest} message UpdateUserInfoRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateUserInfoRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.info != null && message.hasOwnProperty("info"))
+                        $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.encode(message.info, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified UpdateUserInfoRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateUserInfoRequest} message UpdateUserInfoRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateUserInfoRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes an UpdateUserInfoRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.UpdateUserInfoRequest} UpdateUserInfoRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateUserInfoRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateUserInfoRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.info = $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes an UpdateUserInfoRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.UpdateUserInfoRequest} UpdateUserInfoRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateUserInfoRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies an UpdateUserInfoRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpdateUserInfoRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.info != null && message.hasOwnProperty("info")) {
+                        var error = $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.verify(message.info);
+                        if (error)
+                            return "info." + error;
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates an UpdateUserInfoRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.UpdateUserInfoRequest} UpdateUserInfoRequest
+                 */
+                UpdateUserInfoRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.UpdateUserInfoRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.UpdateUserInfoRequest();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.info != null) {
+                        if (typeof object.info !== "object")
+                            throw TypeError(".com.unblock.proto.UpdateUserInfoRequest.info: object expected");
+                        message.info = $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.fromObject(object.info);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from an UpdateUserInfoRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @static
+                 * @param {com.unblock.proto.UpdateUserInfoRequest} message UpdateUserInfoRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpdateUserInfoRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.info = null;
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.info != null && message.hasOwnProperty("info"))
+                        object.info = $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.toObject(message.info, options);
+                    return object;
+                };
+
+                /**
+                 * Converts this UpdateUserInfoRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.UpdateUserInfoRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpdateUserInfoRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                UpdateUserInfoRequest.UpdateUserInfo = (function() {
+
+                    /**
+                     * Properties of an UpdateUserInfo.
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest
+                     * @interface IUpdateUserInfo
+                     * @property {string|null} [username] UpdateUserInfo username
+                     * @property {string|null} [email] UpdateUserInfo email
+                     */
+
+                    /**
+                     * Constructs a new UpdateUserInfo.
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest
+                     * @classdesc Represents an UpdateUserInfo.
+                     * @implements IUpdateUserInfo
+                     * @constructor
+                     * @param {com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo=} [properties] Properties to set
+                     */
+                    function UpdateUserInfo(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * UpdateUserInfo username.
+                     * @member {string} username
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @instance
+                     */
+                    UpdateUserInfo.prototype.username = "";
+
+                    /**
+                     * UpdateUserInfo email.
+                     * @member {string} email
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @instance
+                     */
+                    UpdateUserInfo.prototype.email = "";
+
+                    /**
+                     * Creates a new UpdateUserInfo instance using the specified properties.
+                     * @function create
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo=} [properties] Properties to set
+                     * @returns {com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo} UpdateUserInfo instance
+                     */
+                    UpdateUserInfo.create = function create(properties) {
+                        return new UpdateUserInfo(properties);
+                    };
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo} message UpdateUserInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateUserInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.username != null && message.hasOwnProperty("username"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+                        if (message.email != null && message.hasOwnProperty("email"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.email);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo} message UpdateUserInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateUserInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo} UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateUserInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.username = reader.string();
+                                break;
+                            case 2:
+                                message.email = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo} UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateUserInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies an UpdateUserInfo message.
+                     * @function verify
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateUserInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.username != null && message.hasOwnProperty("username"))
+                            if (!$util.isString(message.username))
+                                return "username: string expected";
+                        if (message.email != null && message.hasOwnProperty("email"))
+                            if (!$util.isString(message.email))
+                                return "email: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates an UpdateUserInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo} UpdateUserInfo
+                     */
+                    UpdateUserInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo)
+                            return object;
+                        var message = new $root.com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo();
+                        if (object.username != null)
+                            message.username = String(object.username);
+                        if (object.email != null)
+                            message.email = String(object.email);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from an UpdateUserInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo} message UpdateUserInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateUserInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.username = "";
+                            object.email = "";
+                        }
+                        if (message.username != null && message.hasOwnProperty("username"))
+                            object.username = message.username;
+                        if (message.email != null && message.hasOwnProperty("email"))
+                            object.email = message.email;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this UpdateUserInfo to JSON.
+                     * @function toJSON
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateUserInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    return UpdateUserInfo;
+                })();
+
+                return UpdateUserInfoRequest;
+            })();
+
+            proto.UpdateUserPasswordRequest = (function() {
+
+                /**
+                 * Properties of an UpdateUserPasswordRequest.
+                 * @memberof com.unblock.proto
+                 * @interface IUpdateUserPasswordRequest
+                 * @property {string|null} [id] UpdateUserPasswordRequest id
+                 * @property {com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo|null} [info] UpdateUserPasswordRequest info
+                 */
+
+                /**
+                 * Constructs a new UpdateUserPasswordRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents an UpdateUserPasswordRequest.
+                 * @implements IUpdateUserPasswordRequest
+                 * @constructor
+                 * @param {com.unblock.proto.IUpdateUserPasswordRequest=} [properties] Properties to set
+                 */
+                function UpdateUserPasswordRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * UpdateUserPasswordRequest id.
+                 * @member {string} id
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @instance
+                 */
+                UpdateUserPasswordRequest.prototype.id = "";
+
+                /**
+                 * UpdateUserPasswordRequest info.
+                 * @member {com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo|null|undefined} info
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @instance
+                 */
+                UpdateUserPasswordRequest.prototype.info = null;
+
+                /**
+                 * Creates a new UpdateUserPasswordRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateUserPasswordRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.UpdateUserPasswordRequest} UpdateUserPasswordRequest instance
+                 */
+                UpdateUserPasswordRequest.create = function create(properties) {
+                    return new UpdateUserPasswordRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified UpdateUserPasswordRequest message. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateUserPasswordRequest} message UpdateUserPasswordRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateUserPasswordRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.info != null && message.hasOwnProperty("info"))
+                        $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.encode(message.info, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified UpdateUserPasswordRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateUserPasswordRequest} message UpdateUserPasswordRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateUserPasswordRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes an UpdateUserPasswordRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.UpdateUserPasswordRequest} UpdateUserPasswordRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateUserPasswordRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateUserPasswordRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.info = $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes an UpdateUserPasswordRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.UpdateUserPasswordRequest} UpdateUserPasswordRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateUserPasswordRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies an UpdateUserPasswordRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpdateUserPasswordRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.info != null && message.hasOwnProperty("info")) {
+                        var error = $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.verify(message.info);
+                        if (error)
+                            return "info." + error;
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates an UpdateUserPasswordRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.UpdateUserPasswordRequest} UpdateUserPasswordRequest
+                 */
+                UpdateUserPasswordRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.UpdateUserPasswordRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.UpdateUserPasswordRequest();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.info != null) {
+                        if (typeof object.info !== "object")
+                            throw TypeError(".com.unblock.proto.UpdateUserPasswordRequest.info: object expected");
+                        message.info = $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.fromObject(object.info);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from an UpdateUserPasswordRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @static
+                 * @param {com.unblock.proto.UpdateUserPasswordRequest} message UpdateUserPasswordRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpdateUserPasswordRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.info = null;
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.info != null && message.hasOwnProperty("info"))
+                        object.info = $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.toObject(message.info, options);
+                    return object;
+                };
+
+                /**
+                 * Converts this UpdateUserPasswordRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpdateUserPasswordRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                UpdateUserPasswordRequest.UpdateUserInfo = (function() {
+
+                    /**
+                     * Properties of an UpdateUserInfo.
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                     * @interface IUpdateUserInfo
+                     * @property {string|null} [password] UpdateUserInfo password
+                     */
+
+                    /**
+                     * Constructs a new UpdateUserInfo.
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest
+                     * @classdesc Represents an UpdateUserInfo.
+                     * @implements IUpdateUserInfo
+                     * @constructor
+                     * @param {com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo=} [properties] Properties to set
+                     */
+                    function UpdateUserInfo(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * UpdateUserInfo password.
+                     * @member {string} password
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @instance
+                     */
+                    UpdateUserInfo.prototype.password = "";
+
+                    /**
+                     * Creates a new UpdateUserInfo instance using the specified properties.
+                     * @function create
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo=} [properties] Properties to set
+                     * @returns {com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo} UpdateUserInfo instance
+                     */
+                    UpdateUserInfo.create = function create(properties) {
+                        return new UpdateUserInfo(properties);
+                    };
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo} message UpdateUserInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateUserInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.password != null && message.hasOwnProperty("password"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.password);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo} message UpdateUserInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateUserInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo} UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateUserInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.password = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo} UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateUserInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies an UpdateUserInfo message.
+                     * @function verify
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateUserInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.password != null && message.hasOwnProperty("password"))
+                            if (!$util.isString(message.password))
+                                return "password: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates an UpdateUserInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo} UpdateUserInfo
+                     */
+                    UpdateUserInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo)
+                            return object;
+                        var message = new $root.com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo();
+                        if (object.password != null)
+                            message.password = String(object.password);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from an UpdateUserInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @static
+                     * @param {com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo} message UpdateUserInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateUserInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.password = "";
+                        if (message.password != null && message.hasOwnProperty("password"))
+                            object.password = message.password;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this UpdateUserInfo to JSON.
+                     * @function toJSON
+                     * @memberof com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateUserInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    return UpdateUserInfo;
+                })();
+
+                return UpdateUserPasswordRequest;
+            })();
+
+            proto.User = (function() {
+
+                /**
+                 * Properties of a User.
+                 * @memberof com.unblock.proto
+                 * @interface IUser
+                 * @property {string|null} [id] User id
+                 * @property {string|null} [username] User username
+                 * @property {string|null} [email] User email
+                 */
+
+                /**
+                 * Constructs a new User.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a User.
+                 * @implements IUser
+                 * @constructor
+                 * @param {com.unblock.proto.IUser=} [properties] Properties to set
+                 */
+                function User(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * User id.
+                 * @member {string} id
+                 * @memberof com.unblock.proto.User
+                 * @instance
+                 */
+                User.prototype.id = "";
+
+                /**
+                 * User username.
+                 * @member {string} username
+                 * @memberof com.unblock.proto.User
+                 * @instance
+                 */
+                User.prototype.username = "";
+
+                /**
+                 * User email.
+                 * @member {string} email
+                 * @memberof com.unblock.proto.User
+                 * @instance
+                 */
+                User.prototype.email = "";
+
+                /**
+                 * Creates a new User instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.User
+                 * @static
+                 * @param {com.unblock.proto.IUser=} [properties] Properties to set
+                 * @returns {com.unblock.proto.User} User instance
+                 */
+                User.create = function create(properties) {
+                    return new User(properties);
+                };
+
+                /**
+                 * Encodes the specified User message. Does not implicitly {@link com.unblock.proto.User.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.User
+                 * @static
+                 * @param {com.unblock.proto.IUser} message User message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                User.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
                     if (message.username != null && message.hasOwnProperty("username"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
-                    if (message.password != null && message.hasOwnProperty("password"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.password);
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
                     if (message.email != null && message.hasOwnProperty("email"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.email);
                     return writer;
                 };
 
                 /**
-                 * Encodes the specified NewUserRequest message, length delimited. Does not implicitly {@link com.unblock.proto.NewUserRequest.verify|verify} messages.
+                 * Encodes the specified User message, length delimited. Does not implicitly {@link com.unblock.proto.User.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.User
                  * @static
-                 * @param {com.unblock.proto.INewUserRequest} message NewUserRequest message or plain object to encode
+                 * @param {com.unblock.proto.IUser} message User message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                NewUserRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                User.encodeDelimited = function encodeDelimited(message, writer) {
                     return this.encode(message, writer).ldelim();
                 };
 
                 /**
-                 * Decodes a NewUserRequest message from the specified reader or buffer.
+                 * Decodes a User message from the specified reader or buffer.
                  * @function decode
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.User
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {com.unblock.proto.NewUserRequest} NewUserRequest
+                 * @returns {com.unblock.proto.User} User
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NewUserRequest.decode = function decode(reader, length) {
+                User.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.NewUserRequest();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.User();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1:
-                            message.username = reader.string();
+                            message.id = reader.string();
                             break;
                         case 2:
-                            message.password = reader.string();
+                            message.username = reader.string();
                             break;
                         case 3:
                             message.email = reader.string();
@@ -8426,38 +9885,38 @@ $root.com = (function() {
                 };
 
                 /**
-                 * Decodes a NewUserRequest message from the specified reader or buffer, length delimited.
+                 * Decodes a User message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.User
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {com.unblock.proto.NewUserRequest} NewUserRequest
+                 * @returns {com.unblock.proto.User} User
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NewUserRequest.decodeDelimited = function decodeDelimited(reader) {
+                User.decodeDelimited = function decodeDelimited(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
                 };
 
                 /**
-                 * Verifies a NewUserRequest message.
+                 * Verifies a User message.
                  * @function verify
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.User
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                NewUserRequest.verify = function verify(message) {
+                User.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
                     if (message.username != null && message.hasOwnProperty("username"))
                         if (!$util.isString(message.username))
                             return "username: string expected";
-                    if (message.password != null && message.hasOwnProperty("password"))
-                        if (!$util.isString(message.password))
-                            return "password: string expected";
                     if (message.email != null && message.hasOwnProperty("email"))
                         if (!$util.isString(message.email))
                             return "email: string expected";
@@ -8465,65 +9924,65 @@ $root.com = (function() {
                 };
 
                 /**
-                 * Creates a NewUserRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates a User message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.User
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {com.unblock.proto.NewUserRequest} NewUserRequest
+                 * @returns {com.unblock.proto.User} User
                  */
-                NewUserRequest.fromObject = function fromObject(object) {
-                    if (object instanceof $root.com.unblock.proto.NewUserRequest)
+                User.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.User)
                         return object;
-                    var message = new $root.com.unblock.proto.NewUserRequest();
+                    var message = new $root.com.unblock.proto.User();
+                    if (object.id != null)
+                        message.id = String(object.id);
                     if (object.username != null)
                         message.username = String(object.username);
-                    if (object.password != null)
-                        message.password = String(object.password);
                     if (object.email != null)
                         message.email = String(object.email);
                     return message;
                 };
 
                 /**
-                 * Creates a plain object from a NewUserRequest message. Also converts values to other types if specified.
+                 * Creates a plain object from a User message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.User
                  * @static
-                 * @param {com.unblock.proto.NewUserRequest} message NewUserRequest
+                 * @param {com.unblock.proto.User} message User
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                NewUserRequest.toObject = function toObject(message, options) {
+                User.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
                     if (options.defaults) {
+                        object.id = "";
                         object.username = "";
-                        object.password = "";
                         object.email = "";
                     }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
                     if (message.username != null && message.hasOwnProperty("username"))
                         object.username = message.username;
-                    if (message.password != null && message.hasOwnProperty("password"))
-                        object.password = message.password;
                     if (message.email != null && message.hasOwnProperty("email"))
                         object.email = message.email;
                     return object;
                 };
 
                 /**
-                 * Converts this NewUserRequest to JSON.
+                 * Converts this User to JSON.
                  * @function toJSON
-                 * @memberof com.unblock.proto.NewUserRequest
+                 * @memberof com.unblock.proto.User
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                NewUserRequest.prototype.toJSON = function toJSON() {
+                User.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                return NewUserRequest;
+                return User;
             })();
 
             return proto;

@@ -3637,103 +3637,772 @@ export namespace com {
                 public toJSON(): { [k: string]: any };
             }
 
-            /** Properties of a NewUserRequest. */
-            interface INewUserRequest {
+            /** Properties of a CreateUserRequest. */
+            interface ICreateUserRequest {
 
-                /** NewUserRequest username */
-                username?: (string|null);
-
-                /** NewUserRequest password */
-                password?: (string|null);
-
-                /** NewUserRequest email */
-                email?: (string|null);
+                /** CreateUserRequest info */
+                info?: (com.unblock.proto.CreateUserRequest.ICreateUserInfo|null);
             }
 
-            /** Represents a NewUserRequest. */
-            class NewUserRequest implements INewUserRequest {
+            /** Represents a CreateUserRequest. */
+            class CreateUserRequest implements ICreateUserRequest {
 
                 /**
-                 * Constructs a new NewUserRequest.
+                 * Constructs a new CreateUserRequest.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: com.unblock.proto.INewUserRequest);
+                constructor(properties?: com.unblock.proto.ICreateUserRequest);
 
-                /** NewUserRequest username. */
-                public username: string;
-
-                /** NewUserRequest password. */
-                public password: string;
-
-                /** NewUserRequest email. */
-                public email: string;
+                /** CreateUserRequest info. */
+                public info?: (com.unblock.proto.CreateUserRequest.ICreateUserInfo|null);
 
                 /**
-                 * Creates a new NewUserRequest instance using the specified properties.
+                 * Creates a new CreateUserRequest instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns NewUserRequest instance
+                 * @returns CreateUserRequest instance
                  */
-                public static create(properties?: com.unblock.proto.INewUserRequest): com.unblock.proto.NewUserRequest;
+                public static create(properties?: com.unblock.proto.ICreateUserRequest): com.unblock.proto.CreateUserRequest;
 
                 /**
-                 * Encodes the specified NewUserRequest message. Does not implicitly {@link com.unblock.proto.NewUserRequest.verify|verify} messages.
-                 * @param message NewUserRequest message or plain object to encode
+                 * Encodes the specified CreateUserRequest message. Does not implicitly {@link com.unblock.proto.CreateUserRequest.verify|verify} messages.
+                 * @param message CreateUserRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: com.unblock.proto.INewUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: com.unblock.proto.ICreateUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified NewUserRequest message, length delimited. Does not implicitly {@link com.unblock.proto.NewUserRequest.verify|verify} messages.
-                 * @param message NewUserRequest message or plain object to encode
+                 * Encodes the specified CreateUserRequest message, length delimited. Does not implicitly {@link com.unblock.proto.CreateUserRequest.verify|verify} messages.
+                 * @param message CreateUserRequest message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: com.unblock.proto.INewUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: com.unblock.proto.ICreateUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a NewUserRequest message from the specified reader or buffer.
+                 * Decodes a CreateUserRequest message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns NewUserRequest
+                 * @returns CreateUserRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.NewUserRequest;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.CreateUserRequest;
 
                 /**
-                 * Decodes a NewUserRequest message from the specified reader or buffer, length delimited.
+                 * Decodes a CreateUserRequest message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns NewUserRequest
+                 * @returns CreateUserRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.NewUserRequest;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.CreateUserRequest;
 
                 /**
-                 * Verifies a NewUserRequest message.
+                 * Verifies a CreateUserRequest message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a NewUserRequest message from a plain object. Also converts values to their respective internal types.
+                 * Creates a CreateUserRequest message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns NewUserRequest
+                 * @returns CreateUserRequest
                  */
-                public static fromObject(object: { [k: string]: any }): com.unblock.proto.NewUserRequest;
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.CreateUserRequest;
 
                 /**
-                 * Creates a plain object from a NewUserRequest message. Also converts values to other types if specified.
-                 * @param message NewUserRequest
+                 * Creates a plain object from a CreateUserRequest message. Also converts values to other types if specified.
+                 * @param message CreateUserRequest
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: com.unblock.proto.NewUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: com.unblock.proto.CreateUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this NewUserRequest to JSON.
+                 * Converts this CreateUserRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace CreateUserRequest {
+
+                /** Properties of a CreateUserInfo. */
+                interface ICreateUserInfo {
+
+                    /** CreateUserInfo username */
+                    username?: (string|null);
+
+                    /** CreateUserInfo password */
+                    password?: (string|null);
+
+                    /** CreateUserInfo email */
+                    email?: (string|null);
+                }
+
+                /** Represents a CreateUserInfo. */
+                class CreateUserInfo implements ICreateUserInfo {
+
+                    /**
+                     * Constructs a new CreateUserInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: com.unblock.proto.CreateUserRequest.ICreateUserInfo);
+
+                    /** CreateUserInfo username. */
+                    public username: string;
+
+                    /** CreateUserInfo password. */
+                    public password: string;
+
+                    /** CreateUserInfo email. */
+                    public email: string;
+
+                    /**
+                     * Creates a new CreateUserInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateUserInfo instance
+                     */
+                    public static create(properties?: com.unblock.proto.CreateUserRequest.ICreateUserInfo): com.unblock.proto.CreateUserRequest.CreateUserInfo;
+
+                    /**
+                     * Encodes the specified CreateUserInfo message. Does not implicitly {@link com.unblock.proto.CreateUserRequest.CreateUserInfo.verify|verify} messages.
+                     * @param message CreateUserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: com.unblock.proto.CreateUserRequest.ICreateUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateUserInfo message, length delimited. Does not implicitly {@link com.unblock.proto.CreateUserRequest.CreateUserInfo.verify|verify} messages.
+                     * @param message CreateUserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: com.unblock.proto.CreateUserRequest.ICreateUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateUserInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.CreateUserRequest.CreateUserInfo;
+
+                    /**
+                     * Decodes a CreateUserInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.CreateUserRequest.CreateUserInfo;
+
+                    /**
+                     * Verifies a CreateUserInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateUserInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateUserInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): com.unblock.proto.CreateUserRequest.CreateUserInfo;
+
+                    /**
+                     * Creates a plain object from a CreateUserInfo message. Also converts values to other types if specified.
+                     * @param message CreateUserInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: com.unblock.proto.CreateUserRequest.CreateUserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateUserInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of a ListUsersResponse. */
+            interface IListUsersResponse {
+
+                /** ListUsersResponse users */
+                users?: (com.unblock.proto.IUser[]|null);
+            }
+
+            /** Represents a ListUsersResponse. */
+            class ListUsersResponse implements IListUsersResponse {
+
+                /**
+                 * Constructs a new ListUsersResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IListUsersResponse);
+
+                /** ListUsersResponse users. */
+                public users: com.unblock.proto.IUser[];
+
+                /**
+                 * Creates a new ListUsersResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListUsersResponse instance
+                 */
+                public static create(properties?: com.unblock.proto.IListUsersResponse): com.unblock.proto.ListUsersResponse;
+
+                /**
+                 * Encodes the specified ListUsersResponse message. Does not implicitly {@link com.unblock.proto.ListUsersResponse.verify|verify} messages.
+                 * @param message ListUsersResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IListUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListUsersResponse message, length delimited. Does not implicitly {@link com.unblock.proto.ListUsersResponse.verify|verify} messages.
+                 * @param message ListUsersResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IListUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListUsersResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListUsersResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.ListUsersResponse;
+
+                /**
+                 * Decodes a ListUsersResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListUsersResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.ListUsersResponse;
+
+                /**
+                 * Verifies a ListUsersResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListUsersResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListUsersResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.ListUsersResponse;
+
+                /**
+                 * Creates a plain object from a ListUsersResponse message. Also converts values to other types if specified.
+                 * @param message ListUsersResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.ListUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListUsersResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an UpdateUserInfoRequest. */
+            interface IUpdateUserInfoRequest {
+
+                /** UpdateUserInfoRequest id */
+                id?: (string|null);
+
+                /** UpdateUserInfoRequest info */
+                info?: (com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo|null);
+            }
+
+            /** Represents an UpdateUserInfoRequest. */
+            class UpdateUserInfoRequest implements IUpdateUserInfoRequest {
+
+                /**
+                 * Constructs a new UpdateUserInfoRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IUpdateUserInfoRequest);
+
+                /** UpdateUserInfoRequest id. */
+                public id: string;
+
+                /** UpdateUserInfoRequest info. */
+                public info?: (com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo|null);
+
+                /**
+                 * Creates a new UpdateUserInfoRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateUserInfoRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.IUpdateUserInfoRequest): com.unblock.proto.UpdateUserInfoRequest;
+
+                /**
+                 * Encodes the specified UpdateUserInfoRequest message. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.verify|verify} messages.
+                 * @param message UpdateUserInfoRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IUpdateUserInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateUserInfoRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.verify|verify} messages.
+                 * @param message UpdateUserInfoRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IUpdateUserInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateUserInfoRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateUserInfoRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateUserInfoRequest;
+
+                /**
+                 * Decodes an UpdateUserInfoRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateUserInfoRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateUserInfoRequest;
+
+                /**
+                 * Verifies an UpdateUserInfoRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateUserInfoRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateUserInfoRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateUserInfoRequest;
+
+                /**
+                 * Creates a plain object from an UpdateUserInfoRequest message. Also converts values to other types if specified.
+                 * @param message UpdateUserInfoRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.UpdateUserInfoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateUserInfoRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace UpdateUserInfoRequest {
+
+                /** Properties of an UpdateUserInfo. */
+                interface IUpdateUserInfo {
+
+                    /** UpdateUserInfo username */
+                    username?: (string|null);
+
+                    /** UpdateUserInfo email */
+                    email?: (string|null);
+                }
+
+                /** Represents an UpdateUserInfo. */
+                class UpdateUserInfo implements IUpdateUserInfo {
+
+                    /**
+                     * Constructs a new UpdateUserInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo);
+
+                    /** UpdateUserInfo username. */
+                    public username: string;
+
+                    /** UpdateUserInfo email. */
+                    public email: string;
+
+                    /**
+                     * Creates a new UpdateUserInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateUserInfo instance
+                     */
+                    public static create(properties?: com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo): com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo;
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.verify|verify} messages.
+                     * @param message UpdateUserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo.verify|verify} messages.
+                     * @param message UpdateUserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: com.unblock.proto.UpdateUserInfoRequest.IUpdateUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo;
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo;
+
+                    /**
+                     * Verifies an UpdateUserInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateUserInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateUserInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo;
+
+                    /**
+                     * Creates a plain object from an UpdateUserInfo message. Also converts values to other types if specified.
+                     * @param message UpdateUserInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateUserInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of an UpdateUserPasswordRequest. */
+            interface IUpdateUserPasswordRequest {
+
+                /** UpdateUserPasswordRequest id */
+                id?: (string|null);
+
+                /** UpdateUserPasswordRequest info */
+                info?: (com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo|null);
+            }
+
+            /** Represents an UpdateUserPasswordRequest. */
+            class UpdateUserPasswordRequest implements IUpdateUserPasswordRequest {
+
+                /**
+                 * Constructs a new UpdateUserPasswordRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IUpdateUserPasswordRequest);
+
+                /** UpdateUserPasswordRequest id. */
+                public id: string;
+
+                /** UpdateUserPasswordRequest info. */
+                public info?: (com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo|null);
+
+                /**
+                 * Creates a new UpdateUserPasswordRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateUserPasswordRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.IUpdateUserPasswordRequest): com.unblock.proto.UpdateUserPasswordRequest;
+
+                /**
+                 * Encodes the specified UpdateUserPasswordRequest message. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.verify|verify} messages.
+                 * @param message UpdateUserPasswordRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IUpdateUserPasswordRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateUserPasswordRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.verify|verify} messages.
+                 * @param message UpdateUserPasswordRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IUpdateUserPasswordRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateUserPasswordRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateUserPasswordRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateUserPasswordRequest;
+
+                /**
+                 * Decodes an UpdateUserPasswordRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateUserPasswordRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateUserPasswordRequest;
+
+                /**
+                 * Verifies an UpdateUserPasswordRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateUserPasswordRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateUserPasswordRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateUserPasswordRequest;
+
+                /**
+                 * Creates a plain object from an UpdateUserPasswordRequest message. Also converts values to other types if specified.
+                 * @param message UpdateUserPasswordRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.UpdateUserPasswordRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateUserPasswordRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace UpdateUserPasswordRequest {
+
+                /** Properties of an UpdateUserInfo. */
+                interface IUpdateUserInfo {
+
+                    /** UpdateUserInfo password */
+                    password?: (string|null);
+                }
+
+                /** Represents an UpdateUserInfo. */
+                class UpdateUserInfo implements IUpdateUserInfo {
+
+                    /**
+                     * Constructs a new UpdateUserInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo);
+
+                    /** UpdateUserInfo password. */
+                    public password: string;
+
+                    /**
+                     * Creates a new UpdateUserInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateUserInfo instance
+                     */
+                    public static create(properties?: com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo): com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo;
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.verify|verify} messages.
+                     * @param message UpdateUserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateUserInfo message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo.verify|verify} messages.
+                     * @param message UpdateUserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: com.unblock.proto.UpdateUserPasswordRequest.IUpdateUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo;
+
+                    /**
+                     * Decodes an UpdateUserInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateUserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo;
+
+                    /**
+                     * Verifies an UpdateUserInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateUserInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateUserInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo;
+
+                    /**
+                     * Creates a plain object from an UpdateUserInfo message. Also converts values to other types if specified.
+                     * @param message UpdateUserInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: com.unblock.proto.UpdateUserPasswordRequest.UpdateUserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateUserInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of a User. */
+            interface IUser {
+
+                /** User id */
+                id?: (string|null);
+
+                /** User username */
+                username?: (string|null);
+
+                /** User email */
+                email?: (string|null);
+            }
+
+            /** Represents a User. */
+            class User implements IUser {
+
+                /**
+                 * Constructs a new User.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IUser);
+
+                /** User id. */
+                public id: string;
+
+                /** User username. */
+                public username: string;
+
+                /** User email. */
+                public email: string;
+
+                /**
+                 * Creates a new User instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns User instance
+                 */
+                public static create(properties?: com.unblock.proto.IUser): com.unblock.proto.User;
+
+                /**
+                 * Encodes the specified User message. Does not implicitly {@link com.unblock.proto.User.verify|verify} messages.
+                 * @param message User message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified User message, length delimited. Does not implicitly {@link com.unblock.proto.User.verify|verify} messages.
+                 * @param message User message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a User message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns User
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.User;
+
+                /**
+                 * Decodes a User message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns User
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.User;
+
+                /**
+                 * Verifies a User message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a User message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns User
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.User;
+
+                /**
+                 * Creates a plain object from a User message. Also converts values to other types if specified.
+                 * @param message User
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this User to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };

@@ -17,7 +17,7 @@ export class UserComponent {
     constructor(private readonly userService: UserService) {}
 
     onCreateNew() {
-
+        
     }
 
     onSave() {

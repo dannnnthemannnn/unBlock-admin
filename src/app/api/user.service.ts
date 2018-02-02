@@ -7,65 +7,27 @@ import 'rxjs/Rx';
 
 import { AuthConstants } from '../auth/auth.const';
 
+import { URL_ROOT } from './api.const';
+
 import { com } from '../protos/compiled.js'
 
-const URL_ROOT = 'http://localhost:8080/v1';
-
 @Injectable()
-export class UnblockService {
+export class UserService {
 
     constructor(
         private http: HttpClient,
         private cookieService: CookieService,
     ) { }
 
-    login(request: com.unblock.proto.LoginRequest) {
+    newUser(request: com.unblock.proto.NewUserRequest) {
         return this.http.post(
-            this.path('login'),
+            this.path('newUser'),
             request.toJSON(),
             {
                 headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
                 observe: 'response',
             }
         );
-    }
-
-    getNeighborhood(id: string) {
-        return this.http.get<com.unblock.proto.Neighborhood>(
-            this.path(`neighborhood/${id}`),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value));
-    }
-
-    createNeighborhood(request: com.unblock.proto.CreateNeighborhoodRequest) {
-        return this.http.post(
-            this.path('neighborhood'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value));
-    }
-
-    listNeighborhoods() {
-        return this.http.get<com.unblock.proto.ListNeighborhoodResponse>(
-            this.path('neighborhoods'),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.ListNeighborhoodResponse.create(value));
-    }
-
-    createBlock(request: com.unblock.proto.CreateBlockRequest) {
-        return this.http.post(
-            this.path('block'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Block.create(value));
-    }
-
-    updateBlockBounds(request: com.unblock.proto.UpdateBlockBoundsRequest) {
-        return this.http.post(
-            this.path('block/bounds'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Block.create(value));
     }
 
     private getHeaders() {

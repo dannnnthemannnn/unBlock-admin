@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { UserService } from '../../api/user.service';
+
 @Component({
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css']
@@ -12,7 +14,7 @@ export class UserComponent {
     password: string;
     confirmPassword: string;
 
-    constructor() {}
+    constructor(private readonly userService: UserService) {}
 
     onCreateNew() {
 

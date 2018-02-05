@@ -7,7 +7,8 @@ import { UserService } from './user.service';
 
 @NgModule({
     providers: [
-        UnblockService
+        UnblockService,
+        UserService
     ],
 })
 export class ApiModule { }

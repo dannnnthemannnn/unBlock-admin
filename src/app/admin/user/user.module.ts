@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatAutocompleteModule } from '@angular/material';
 
@@ -11,6 +11,7 @@ import { UserComponent } from './user.component';
     ],
     imports: [
         FormsModule,
+        ReactiveFormsModule,
         CommonModule,
         MatCardModule,
         MatAutocompleteModule,

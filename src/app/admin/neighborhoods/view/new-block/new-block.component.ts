@@ -35,7 +35,7 @@ export class NewBlockComponent {
     private updateBlock() {
         const response = this.unblockService.updateBlockBounds(new com.unblock.proto.UpdateBlockBoundsRequest({
             id: this.block.id,
-            bounds: this.block.bounds
+            update: { bounds: this.block.bounds },
         }));
         this.handleCall(response);
     }
@@ -43,8 +43,10 @@ export class NewBlockComponent {
     private createBlock() {
         const response = this.unblockService.createBlock(new com.unblock.proto.CreateBlockRequest({
             neighborhoodId: this.neighborhoodId,
-            name: this.name,
-            bounds: this.block.bounds
+            info: {
+                name: this.name,
+                bounds: this.block.bounds
+            },
         }));
         this.handleCall(response);
     }

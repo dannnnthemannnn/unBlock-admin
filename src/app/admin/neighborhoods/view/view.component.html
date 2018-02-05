@@ -1,6 +1,5 @@
 <div *ngIf="neighborhood">
     <h3>Title: {{neighborhood.name}}</h3>
-    <h5>Image: {{neighborhood.image}}</h5>
 
     <button mat-raised-button (click)="onNewBlockClick()">New Block</button>
     <button mat-raised-button (click)="onNewAttractionClick()">New Attraction</button>
@@ -10,7 +9,7 @@
     <button mat-raised-button *ngIf="curBlock" (click)="onResetClick()">Reset</button>
     <button mat-raised-button *ngIf="curBlock" (click)="onCancelClick()">Cancel</button>
 
-    <svg [attr.width]="imageWidth" [attr.height]="imageHeight">
+    <!--svg [attr.width]="imageWidth" [attr.height]="imageHeight">
         <defs>
             <pattern id="image" x="0" y="0" patternUnits="userSpaceOnUse" [attr.width]="imageWidth" [attr.height]="imageHeight">
                 <image x="0" y="0" [attr.xlink:href]="getNeighborhoodImageUrl()"></image>
@@ -27,6 +26,6 @@
             <circle *ngFor="let point of block.bounds.points" [attr.cx]="point.x" [attr.cy]="point.y" r="4" fill="red" (mousedown)="pointMouseDown($event, point)"
                 (mouseup)="pointMouseUp($event)" (mousemove)="pointMouseMove($event)" />
         </g>
-    </svg>
+    </svg-->
 </div>
 <button class="btn btn-success" (click)="onEditClick()">Edit</button>

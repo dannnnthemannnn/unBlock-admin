@@ -37,14 +37,14 @@ export class UnblockService {
                 headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
                 observe: 'response',
             }
-        );
+        ).toPromise();
     }
 
     getNeighborhood(id: string) {
         return this.http.get<com.unblock.proto.Neighborhood>(
             this.path(`neighborhood/${id}`),
             this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value));
+        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
     }
 
     createNeighborhood(request: com.unblock.proto.CreateNeighborhoodRequest) {
@@ -52,14 +52,14 @@ export class UnblockService {
             this.path('neighborhood'),
             request.toJSON(),
             this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value));
+        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
     }
 
     listNeighborhoods() {
-        return this.http.get<com.unblock.proto.ListNeighborhoodResponse>(
+        return this.http.get(
             this.path('neighborhoods'),
             this.getHeaders()
-        ).map(value => com.unblock.proto.ListNeighborhoodResponse.create(value));
+        ).map(value => com.unblock.proto.ListNeighborhoodsResponse.create(value)).toPromise();
     }
 
     createBlock(request: com.unblock.proto.CreateBlockRequest) {
@@ -67,7 +67,7 @@ export class UnblockService {
             this.path('block'),
             request.toJSON(),
             this.getHeaders()
-        ).map(value => com.unblock.proto.Block.create(value));
+        ).map(value => com.unblock.proto.Block.create(value)).toPromise();
     }
 
     updateBlockBounds(request: com.unblock.proto.UpdateBlockBoundsRequest) {
@@ -75,7 +75,7 @@ export class UnblockService {
             this.path('block/bounds'),
             request.toJSON(),
             this.getHeaders()
-        ).map(value => com.unblock.proto.Block.create(value));
+        ).map(value => com.unblock.proto.Block.create(value)).toPromise();
     }
 
     private getHeaders() {

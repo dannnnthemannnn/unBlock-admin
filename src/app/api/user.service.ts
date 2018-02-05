@@ -24,21 +24,22 @@ export class UserService {
             this.path('user'),
             request.toJSON(),
             this.getHeaders()
-        );
+        ).toPromise();
     }
 
     get(id: string) {
         return this.http.get(
             this.path(`user/${id}`),
             this.getHeaders()
-        ).map(value => com.unblock.proto.User.create(value));
+        ).map(value => com.unblock.proto.User.create(value)).toPromise();
     }
 
     list() {
+        console.log('listing');
         return this.http.get(
             this.path(`users`),
             this.getHeaders()
-        ).map(value => com.unblock.proto.ListUsersResponse.create(value));
+        ).map(value => com.unblock.proto.ListUsersResponse.create(value).users).toPromise();
     }
 
     updateInfo(request: com.unblock.proto.UpdateUserInfoRequest) {
@@ -46,7 +47,7 @@ export class UserService {
             this.path('user:info'),
             request.toJSON(),
             this.getHeaders()
-        ).map(value => com.unblock.proto.User.create(value));
+        ).map(value => com.unblock.proto.User.create(value)).toPromise();
     }
 
     updatePassword(request: com.unblock.proto.UpdateUserPasswordRequest) {
@@ -54,7 +55,7 @@ export class UserService {
             this.path('user:password'),
             request.toJSON(),
             this.getHeaders()
-        ).map(value => com.unblock.proto.User.create(value));
+        ).map(value => com.unblock.proto.User.create(value)).toPromise();
     }
 
     private getHeaders() {

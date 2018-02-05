@@ -19,7 +19,9 @@ export class CreateComponent {
     create() {
         this.unblockService.createNeighborhood(
             new com.unblock.proto.CreateNeighborhoodRequest({
-                name: this.name
+                info: {
+                    name: this.name
+                }
             }))
             .subscribe(
             neighborhood => {

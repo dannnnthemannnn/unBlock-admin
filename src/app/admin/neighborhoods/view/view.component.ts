@@ -40,7 +40,6 @@ export class ViewComponent implements OnInit {
                         this.imageWidth = img.width;
                         console.log(img.width + 'x' + img.height);
                     };
-                    img.src = this.getNeighborhoodImageUrl();
                 });
         });
     }
@@ -94,8 +93,8 @@ export class ViewComponent implements OnInit {
         }
 
         if (this.isMovingPoint && this.curAttraction) {
-            this.curAttraction.x = event.offsetX;
-            this.curAttraction.y = event.offsetY;
+            this.curAttraction.location.x = event.offsetX;
+            this.curAttraction.location.y = event.offsetY;
         }
     }
 
@@ -118,8 +117,8 @@ export class ViewComponent implements OnInit {
         }
 
         if (this.curAttraction) {
-            this.curAttraction.x = event.offsetX;
-            this.curAttraction.y = event.offsetY;
+            this.curAttraction.location.x = event.offsetX;
+            this.curAttraction.location.y = event.offsetY;
         }
     }
 
@@ -127,13 +126,5 @@ export class ViewComponent implements OnInit {
         if (!this.curBlock) {
             this.curBlock = block;
         }
-    }
-
-    getNeighborhoodImageUrl() {
-        if (this.neighborhood) {
-            return `${this.unblockService.imageResourcePrefix}/${this.neighborhood.image}`;
-        }
-
-        return '';
     }
 }

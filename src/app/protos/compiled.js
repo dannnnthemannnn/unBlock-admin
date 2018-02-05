@@ -8492,6 +8492,7 @@ $root.com = (function() {
                      * @property {string|null} [username] CreateUserInfo username
                      * @property {string|null} [password] CreateUserInfo password
                      * @property {string|null} [email] CreateUserInfo email
+                     * @property {com.unblock.proto.Level|null} [level] CreateUserInfo level
                      */
 
                     /**
@@ -8534,6 +8535,14 @@ $root.com = (function() {
                     CreateUserInfo.prototype.email = "";
 
                     /**
+                     * CreateUserInfo level.
+                     * @member {com.unblock.proto.Level} level
+                     * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
+                     * @instance
+                     */
+                    CreateUserInfo.prototype.level = 0;
+
+                    /**
                      * Creates a new CreateUserInfo instance using the specified properties.
                      * @function create
                      * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
@@ -8563,6 +8572,8 @@ $root.com = (function() {
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.password);
                         if (message.email != null && message.hasOwnProperty("email"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.email);
+                        if (message.level != null && message.hasOwnProperty("level"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.level);
                         return writer;
                     };
 
@@ -8605,6 +8616,9 @@ $root.com = (function() {
                                 break;
                             case 3:
                                 message.email = reader.string();
+                                break;
+                            case 4:
+                                message.level = reader.int32();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -8650,6 +8664,15 @@ $root.com = (function() {
                         if (message.email != null && message.hasOwnProperty("email"))
                             if (!$util.isString(message.email))
                                 return "email: string expected";
+                        if (message.level != null && message.hasOwnProperty("level"))
+                            switch (message.level) {
+                            default:
+                                return "level: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
 
@@ -8671,6 +8694,20 @@ $root.com = (function() {
                             message.password = String(object.password);
                         if (object.email != null)
                             message.email = String(object.email);
+                        switch (object.level) {
+                        case "LEVEL_UNSPECIFIED":
+                        case 0:
+                            message.level = 0;
+                            break;
+                        case "DEFAULT":
+                        case 1:
+                            message.level = 1;
+                            break;
+                        case "ADMIN":
+                        case 2:
+                            message.level = 2;
+                            break;
+                        }
                         return message;
                     };
 
@@ -8691,6 +8728,7 @@ $root.com = (function() {
                             object.username = "";
                             object.password = "";
                             object.email = "";
+                            object.level = options.enums === String ? "LEVEL_UNSPECIFIED" : 0;
                         }
                         if (message.username != null && message.hasOwnProperty("username"))
                             object.username = message.username;
@@ -8698,6 +8736,8 @@ $root.com = (function() {
                             object.password = message.password;
                         if (message.email != null && message.hasOwnProperty("email"))
                             object.email = message.email;
+                        if (message.level != null && message.hasOwnProperty("level"))
+                            object.level = options.enums === String ? $root.com.unblock.proto.Level[message.level] : message.level;
                         return object;
                     };
 
@@ -9146,6 +9186,7 @@ $root.com = (function() {
                      * @interface IUpdateUserInfo
                      * @property {string|null} [username] UpdateUserInfo username
                      * @property {string|null} [email] UpdateUserInfo email
+                     * @property {com.unblock.proto.Level|null} [level] UpdateUserInfo level
                      */
 
                     /**
@@ -9180,6 +9221,14 @@ $root.com = (function() {
                     UpdateUserInfo.prototype.email = "";
 
                     /**
+                     * UpdateUserInfo level.
+                     * @member {com.unblock.proto.Level} level
+                     * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
+                     * @instance
+                     */
+                    UpdateUserInfo.prototype.level = 0;
+
+                    /**
                      * Creates a new UpdateUserInfo instance using the specified properties.
                      * @function create
                      * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
@@ -9207,6 +9256,8 @@ $root.com = (function() {
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
                         if (message.email != null && message.hasOwnProperty("email"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.email);
+                        if (message.level != null && message.hasOwnProperty("level"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.level);
                         return writer;
                     };
 
@@ -9246,6 +9297,9 @@ $root.com = (function() {
                                 break;
                             case 2:
                                 message.email = reader.string();
+                                break;
+                            case 3:
+                                message.level = reader.int32();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -9288,6 +9342,15 @@ $root.com = (function() {
                         if (message.email != null && message.hasOwnProperty("email"))
                             if (!$util.isString(message.email))
                                 return "email: string expected";
+                        if (message.level != null && message.hasOwnProperty("level"))
+                            switch (message.level) {
+                            default:
+                                return "level: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
 
@@ -9307,6 +9370,20 @@ $root.com = (function() {
                             message.username = String(object.username);
                         if (object.email != null)
                             message.email = String(object.email);
+                        switch (object.level) {
+                        case "LEVEL_UNSPECIFIED":
+                        case 0:
+                            message.level = 0;
+                            break;
+                        case "DEFAULT":
+                        case 1:
+                            message.level = 1;
+                            break;
+                        case "ADMIN":
+                        case 2:
+                            message.level = 2;
+                            break;
+                        }
                         return message;
                     };
 
@@ -9326,11 +9403,14 @@ $root.com = (function() {
                         if (options.defaults) {
                             object.username = "";
                             object.email = "";
+                            object.level = options.enums === String ? "LEVEL_UNSPECIFIED" : 0;
                         }
                         if (message.username != null && message.hasOwnProperty("username"))
                             object.username = message.username;
                         if (message.email != null && message.hasOwnProperty("email"))
                             object.email = message.email;
+                        if (message.level != null && message.hasOwnProperty("level"))
+                            object.level = options.enums === String ? $root.com.unblock.proto.Level[message.level] : message.level;
                         return object;
                     };
 
@@ -9753,6 +9833,22 @@ $root.com = (function() {
                 return UpdateUserPasswordRequest;
             })();
 
+            /**
+             * Level enum.
+             * @name com.unblock.proto.Level
+             * @enum {string}
+             * @property {number} LEVEL_UNSPECIFIED=0 LEVEL_UNSPECIFIED value
+             * @property {number} DEFAULT=1 DEFAULT value
+             * @property {number} ADMIN=2 ADMIN value
+             */
+            proto.Level = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "LEVEL_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "DEFAULT"] = 1;
+                values[valuesById[2] = "ADMIN"] = 2;
+                return values;
+            })();
+
             proto.User = (function() {
 
                 /**
@@ -9762,6 +9858,7 @@ $root.com = (function() {
                  * @property {string|null} [id] User id
                  * @property {string|null} [username] User username
                  * @property {string|null} [email] User email
+                 * @property {com.unblock.proto.Level|null} [level] User level
                  */
 
                 /**
@@ -9804,6 +9901,14 @@ $root.com = (function() {
                 User.prototype.email = "";
 
                 /**
+                 * User level.
+                 * @member {com.unblock.proto.Level} level
+                 * @memberof com.unblock.proto.User
+                 * @instance
+                 */
+                User.prototype.level = 0;
+
+                /**
                  * Creates a new User instance using the specified properties.
                  * @function create
                  * @memberof com.unblock.proto.User
@@ -9833,6 +9938,8 @@ $root.com = (function() {
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
                     if (message.email != null && message.hasOwnProperty("email"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.email);
+                    if (message.level != null && message.hasOwnProperty("level"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.level);
                     return writer;
                 };
 
@@ -9875,6 +9982,9 @@ $root.com = (function() {
                             break;
                         case 3:
                             message.email = reader.string();
+                            break;
+                        case 4:
+                            message.level = reader.int32();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -9920,6 +10030,15 @@ $root.com = (function() {
                     if (message.email != null && message.hasOwnProperty("email"))
                         if (!$util.isString(message.email))
                             return "email: string expected";
+                    if (message.level != null && message.hasOwnProperty("level"))
+                        switch (message.level) {
+                        default:
+                            return "level: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
 
@@ -9941,6 +10060,20 @@ $root.com = (function() {
                         message.username = String(object.username);
                     if (object.email != null)
                         message.email = String(object.email);
+                    switch (object.level) {
+                    case "LEVEL_UNSPECIFIED":
+                    case 0:
+                        message.level = 0;
+                        break;
+                    case "DEFAULT":
+                    case 1:
+                        message.level = 1;
+                        break;
+                    case "ADMIN":
+                    case 2:
+                        message.level = 2;
+                        break;
+                    }
                     return message;
                 };
 
@@ -9961,6 +10094,7 @@ $root.com = (function() {
                         object.id = "";
                         object.username = "";
                         object.email = "";
+                        object.level = options.enums === String ? "LEVEL_UNSPECIFIED" : 0;
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -9968,6 +10102,8 @@ $root.com = (function() {
                         object.username = message.username;
                     if (message.email != null && message.hasOwnProperty("email"))
                         object.email = message.email;
+                    if (message.level != null && message.hasOwnProperty("level"))
+                        object.level = options.enums === String ? $root.com.unblock.proto.Level[message.level] : message.level;
                     return object;
                 };
 

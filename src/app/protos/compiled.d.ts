@@ -3740,6 +3740,9 @@ export namespace com {
 
                     /** CreateUserInfo email */
                     email?: (string|null);
+
+                    /** CreateUserInfo level */
+                    level?: (com.unblock.proto.Level|null);
                 }
 
                 /** Represents a CreateUserInfo. */
@@ -3759,6 +3762,9 @@ export namespace com {
 
                     /** CreateUserInfo email. */
                     public email: string;
+
+                    /** CreateUserInfo level. */
+                    public level: com.unblock.proto.Level;
 
                     /**
                      * Creates a new CreateUserInfo instance using the specified properties.
@@ -4028,6 +4034,9 @@ export namespace com {
 
                     /** UpdateUserInfo email */
                     email?: (string|null);
+
+                    /** UpdateUserInfo level */
+                    level?: (com.unblock.proto.Level|null);
                 }
 
                 /** Represents an UpdateUserInfo. */
@@ -4044,6 +4053,9 @@ export namespace com {
 
                     /** UpdateUserInfo email. */
                     public email: string;
+
+                    /** UpdateUserInfo level. */
+                    public level: com.unblock.proto.Level;
 
                     /**
                      * Creates a new UpdateUserInfo instance using the specified properties.
@@ -4306,6 +4318,13 @@ export namespace com {
                 }
             }
 
+            /** Level enum. */
+            enum Level {
+                LEVEL_UNSPECIFIED = 0,
+                DEFAULT = 1,
+                ADMIN = 2
+            }
+
             /** Properties of a User. */
             interface IUser {
 
@@ -4317,6 +4336,9 @@ export namespace com {
 
                 /** User email */
                 email?: (string|null);
+
+                /** User level */
+                level?: (com.unblock.proto.Level|null);
             }
 
             /** Represents a User. */
@@ -4336,6 +4358,9 @@ export namespace com {
 
                 /** User email. */
                 public email: string;
+
+                /** User level. */
+                public level: com.unblock.proto.Level;
 
                 /**
                  * Creates a new User instance using the specified properties.

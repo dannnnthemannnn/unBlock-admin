@@ -1,7 +1,7 @@
 <div class="search">
     <mat-form-field>
         <input matInput name="username" placeholder="Search username" [matAutocomplete]="userAutocomplete"
-            [formControl]="usernameControl" />
+            [formControl]="usernameSearchControl" />
     </mat-form-field>
 
     <mat-autocomplete #userAutocomplete="matAutocomplete" [displayWith]="displayUser"
@@ -19,25 +19,26 @@
 <mat-card>
     <div class="row">
         <mat-form-field>
-            <input matInput name="username" placeholder="Username" required [(ngModel)]="username"
+            <input matInput name="username" placeholder="Username" required [formControl]="usernameControl"
             />
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput name="email" placeholder="Email" required [(ngModel)]="email" />
+            <input matInput name="email" placeholder="Email" required [formControl]="emailControl"
+            />
 
         </mat-form-field>
     </div>
 
     <div class="row">
         <div class="mat-form-field">
-            <mat-checkbox name="admin" [(ngModel)]="admin">
+            <mat-checkbox name="admin" [formControl]="adminControl">
                 Admin
             </mat-checkbox>
         </div>
 
         <div class="mat-form-field">
-            <button mat-raised-button color="primary" (click)="onSave()">
+            <button *ngIf="user" mat-raised-button color="primary" (click)="onSave()">
                 Save
             </button>
         </div>
@@ -46,19 +47,22 @@
     <div class="row">
         <mat-form-field>
             <input matInput type="password" name="password" placeholder="New Password" required
-                [(ngModel)]="password" />
+                [formControl]="passwordControl" />
         </mat-form-field>
 
         <mat-form-field>
             <input matInput type="password" name="passwordConfirm" placeholder="Confirm Password"
-                required [(ngModel)]="passwordConfirm" />
+                required [formControl]="passwordConfirmControl" />
         </mat-form-field>
     </div>
 
     <div class="row">
         <div class="mat-form-field">
-            <button mat-raised-button color="primary">
+            <button *ngIf="user" mat-raised-button color="primary" (click)="onChangePassword()">
                 Change Password
+            </button>
+            <button *ngIf="!user" mat-raised-button color="primary" (click)="onCreateNew()">
+                Save
             </button>
         </div>
     </div>

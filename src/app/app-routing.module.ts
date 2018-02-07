@@ -6,12 +6,8 @@ import { AuthGuard } from './auth/auth-guard.service'
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 
-import { NeighborhoodsComponent } from './admin/neighborhoods/neighborhoods.component'
-
-import { ViewComponent } from './admin/neighborhoods/view/view.component';
-import { CreateComponent } from './admin/neighborhoods/create/create.component';
-import { EditComponent } from './admin/neighborhoods/edit/edit.component';
 import { UserComponent } from './admin/user/user.component';
+import { CityComponent } from './admin/city/city.component'
 
 const appRoutes: Routes = [
     {
@@ -29,8 +25,8 @@ const appRoutes: Routes = [
                 component: UserComponent
             },
             {
-                path: 'cities',
-                component: NeighborhoodsComponent
+                path: 'city',
+                component: CityComponent
             },
         ]
     },

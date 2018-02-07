@@ -24,7 +24,7 @@ export class UserService {
             this.path('user'),
             request.toJSON(),
             this.getHeaders()
-        ).toPromise();
+        ).map(value => com.unblock.proto.User.create(value)).toPromise();
     }
 
     get(id: string) {

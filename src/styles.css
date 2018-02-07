@@ -7,3 +7,44 @@ body {
 button {
   text-transform: uppercase;
 }
+
+.search {
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.search mat-form-field {
+  width: 300px;
+}
+
+button {
+  height: 36px;
+}
+
+mat-card.unblock-card {
+  width: 600px;
+  margin: 0 auto;
+  padding: 32px 64px 48px 64px;
+}
+
+div.row  {
+  display: flex;
+  margin: 0 -30px;
+  margin-bottom: 24px;
+}
+
+div.row mat-form-field div.mat-input-wrapper {
+  width: 100%;
+}
+
+div.row mat-form-field,
+div.row div.mat-form-field {
+  display: flex;
+  width: 100%;
+  margin: 0 30px;
+  align-items: center;
+}

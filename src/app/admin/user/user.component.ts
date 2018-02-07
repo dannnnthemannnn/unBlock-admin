@@ -32,7 +32,7 @@ export class UserComponent {
 
     constructor(private readonly userService: UserService) {
         this.fullUserList = this.userService.list();
-        this.users = this.usernameSearchControl.valueChanges.flatMap(
+        this.users = this.usernameSearchControl.valueChanges.startWith('').flatMap(
             value => this.getUsernames(value)
         );
     }
@@ -57,6 +57,7 @@ export class UserComponent {
 
     onCreateMode() {
         this.user = null;
+        this.usernameSearchControl.setValue('');
         this.usernameControl.setValue('');
         this.emailControl.setValue('');
         this.adminControl.setValue(false);
@@ -65,7 +66,7 @@ export class UserComponent {
     }
 
     onCreateNew() {
-        if (this.passwordControl.value && this.passwordControl.value !== this.passwordConfirmControl.value) return;
+        if (!this.passwordControl.value && this.passwordControl.value !== this.passwordConfirmControl.value) return;
 
         const level = this.adminControl.value ? com.unblock.proto.Level.ADMIN : com.unblock.proto.Level.DEFAULT;
 
@@ -77,7 +78,9 @@ export class UserComponent {
                 level
             }
         });
-        this.userService.create(userRequest);
+        this.userService.create(userRequest).then(() => {
+            this.fullUserList = this.userService.list();
+        });
     }
 
     onSave() {
@@ -94,7 +97,7 @@ export class UserComponent {
     }
 
     onChangePassword() {
-        if (this.passwordControl.value && this.passwordControl.value !== this.passwordConfirmControl.value) return;
+        if (!this.passwordControl.value || this.passwordControl.value !== this.passwordConfirmControl.value) return;
 
         const passwordRequest = new com.unblock.proto.UpdateUserPasswordRequest({
             id: this.user.id,

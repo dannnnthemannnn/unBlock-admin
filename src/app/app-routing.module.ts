@@ -7,7 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 
 import { UserComponent } from './admin/user/user.component';
-import { CityComponent } from './admin/city/city.component'
+import { CityComponent } from './admin/city/city.component';
+import { NeighborhoodComponent } from './admin/neighborhood/neighborhood.component';
 
 const appRoutes: Routes = [
     {
@@ -18,15 +19,19 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'user'
+                redirectTo: 'users'
             },
             {
-                path: 'user',
+                path: 'users',
                 component: UserComponent
             },
             {
-                path: 'city',
+                path: 'cities',
                 component: CityComponent
+            },
+            {
+                path: 'neighborhoods',
+                component: NeighborhoodComponent
             },
         ]
     },

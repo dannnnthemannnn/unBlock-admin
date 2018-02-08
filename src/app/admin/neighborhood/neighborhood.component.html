@@ -1,0 +1,72 @@
+<div class="search">
+  <mat-form-field>
+    <input matInput name="neighborhood" placeholder="Search neighborhoods" [matAutocomplete]="neighborhoodAutocomplete"
+      [formControl]="neighborhoodSearchControl" />
+  </mat-form-field>
+
+  <mat-autocomplete #neighborhoodAutocomplete="matAutocomplete" [displayWith]="displayNeighborhood"
+    (optionSelected)="neighborhoodSelected($event.option.value)">
+    <mat-option *ngFor="let neighborhood of neighborhoods | async" [value]="neighborhoods">
+      {{ displayNeighborhood(neighborhood) }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <button mat-raised-button color="primary" (click)="onCreateMode()">
+    Create New
+  </button>
+</div>
+
+<mat-card class="unblock-card">
+  <div class="row">
+    <mat-form-field>
+      <input matInput name="name" placeholder="Name" required [formControl]="nameControl"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field>
+      <mat-select placeholder="Select City" [formControl]="cityControl">
+        <mat-option *ngFor="let city of fullCitiesList | async">
+          {{city.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div class="row">
+    <div class="mat-form-field">
+      <button mat-raised-button color="primary" (click)="onSave()">
+        Save
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="neighborhood">
+    <div class="mat-form-field">
+      <button mat-raised-button color="primary" (click)="onDisableToggle()">
+        {{disabled ? 'Enable' : 'Disable'}}
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row" *ngIf="neighborhood">
+    <mat-form-field>
+      <mat-select placeholder="Blocks" [formControl]="blockControl">
+        <mat-option *ngFor="let block of blocks">
+          {{block.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="mat-form-field">
+      <button mat-raised-button color="primary" (click)="editBlock()">
+        Edit
+      </button>
+    </div>
+  </div>
+
+
+</mat-card>

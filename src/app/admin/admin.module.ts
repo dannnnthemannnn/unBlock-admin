@@ -6,9 +6,9 @@ import { AdminComponent } from './admin.component';
 
 import { AuthModule } from '../auth/auth.module';
 
-import { NeighborhoodsModule } from './neighborhoods/neighborhoods.module';
 import { UserModule } from './user/user.module';
 import { CityModule } from './city/city.module';
+import { NeighborhoodModule } from './neighborhood/neighborhood.module';
 
 @NgModule({
     declarations: [
@@ -17,9 +17,9 @@ import { CityModule } from './city/city.module';
     imports: [
         RouterModule,
         BrowserModule,
-        NeighborhoodsModule,
         UserModule,
         CityModule,
+        NeighborhoodModule,
     ]
 })
 export class AdminModule { }

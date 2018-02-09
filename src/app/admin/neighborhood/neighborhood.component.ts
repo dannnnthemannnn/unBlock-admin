@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -8,11 +9,14 @@ import { map } from 'rxjs/operators/map';
 
 import { NeighborhoodService } from '../../api/neighborhood.service';
 import { CityService } from '../../api/city.service';
+import { NEIGHBORHOOD_ID_PARAM } from '../../app-routing.const';
 
 import { com } from '../../protos/compiled.js'
 
 // TODO: Figure out how to handle enum values without redefining them here
 const NEIGHBORHOOD_DISABLED = 'NEIGHBORHOOD_DISABLED';
+
+// TODO: Move this and other similar constants to the api classes and export them
 
 @Component({
   templateUrl: './neighborhood.component.html',
@@ -35,12 +39,22 @@ export class NeighborhoodComponent {
 
   neighborhood: com.unblock.proto.INeighborhood | null = null;
 
+  displayableNeighborhood = (neighborhood: com.unblock.proto.INeighborhood) => this.displayNeighborhood(neighborhood);
+
   constructor(
     private readonly neighborhoodService: NeighborhoodService,
-    private readonly cityService: CityService
+    private readonly cityService: CityService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
   ) {
+    this.route.paramMap.subscribe(params => {
+      if (params.has(NEIGHBORHOOD_ID_PARAM)) {
+        this.loadNeighborhood(params.get(NEIGHBORHOOD_ID_PARAM));
+      }
+    });
+
     this.getFullCitiesList();
-    this.getCitiesLookup().then(cityLookup => { this.cityLookup = cityLookup; });
+    this.getCitiesLookup();
     this.getFullNeighborhoodList();
 
     this.neighborhoods = this.neighborhoodSearchControl.valueChanges.startWith('').flatMap(
@@ -52,12 +66,38 @@ export class NeighborhoodComponent {
     return this.neighborhood && this.neighborhood.status.toString() === NEIGHBORHOOD_DISABLED;
   }
 
+  loadNeighborhood(neighborhoodId: string) {
+    this.neighborhoodService.get(neighborhoodId).then(neighborhood => {
+      this.updateNeighborhoodDetails(neighborhood);
+    });
+  }
+
+  updateNeighborhoodDetails(neighborhood: com.unblock.proto.INeighborhood) {
+    this.neighborhoodSearchControl.setValue('');
+    this.nameControl.setValue(neighborhood.name);
+    this.disabledControl.setValue(this.disabled);
+    this.updateCityDetails(neighborhood.cityId);
+    this.blocks = neighborhood.blocks;
+    this.neighborhood = neighborhood;
+  }
+
+  updateCityDetails(cityId: string) {
+    if (!cityId) return;
+    this.getCitiesLookup().then(lookup => {
+      this.cityControl.setValue(lookup.get(cityId));
+    });
+  }
+
   getFullNeighborhoodList() {
     if (!this.fullNeighborhoodList) {
-      this.fullNeighborhoodList = this.neighborhoodService.list().then(neighborhoods => {
-        neighborhoods.sort((a, b) => this.displayNeighborhood(a) < this.displayNeighborhood(b) ? -1 : 1);
-        return neighborhoods;
-      });
+      this.fullNeighborhoodList =
+        this.getCitiesLookup()
+          .then(() => this.neighborhoodService.list())
+          .then(neighborhoods => {
+            neighborhoods.sort((a, b) =>
+              this.displayNeighborhood(a) < this.displayNeighborhood(b) ? -1 : 1);
+            return neighborhoods;
+          });
     }
     return this.fullNeighborhoodList;
   }
@@ -75,8 +115,10 @@ export class NeighborhoodComponent {
   getCitiesLookup() {
     if (!this.cityLookupPromise) {
       this.cityLookupPromise = this.getFullCitiesList().then(cities => {
-        const transform: (value: com.unblock.proto.ICity) => [string, com.unblock.proto.ICity] = city => [city.id, city];
-        return new Map(cities.map(transform));
+        const transform: (value: com.unblock.proto.ICity) =>
+          [string, com.unblock.proto.ICity] = city => [city.id, city];
+        this.cityLookup = new Map(cities.map(transform));
+        return this.cityLookup;
       });
     }
     return this.cityLookupPromise;
@@ -86,7 +128,10 @@ export class NeighborhoodComponent {
     if (typeof value !== 'string') {
       return Promise.resolve([]);
     }
-    return this.fullNeighborhoodList.then(neighborhoods => neighborhoods.filter(neighborhood => neighborhood.name.toLowerCase().startsWith(value.toLowerCase())));
+    return this.getFullNeighborhoodList()
+      .then(neighborhoods =>
+        neighborhoods.filter(neighborhood =>
+          neighborhood.name.toLowerCase().startsWith(value.toLowerCase())));
   }
 
   displayNeighborhood(neighborhood: com.unblock.proto.INeighborhood) {
@@ -101,18 +146,16 @@ export class NeighborhoodComponent {
     return `${cityDisplay} - ${neighborhood.name}`;
   }
 
+  navigate(paths: string[]) {
+    this.router.navigate(['admin', 'neighborhoods'].concat(paths));
+  }
+
   neighborhoodSelected(neighborhood: com.unblock.proto.INeighborhood) {
-    this.nameControl.setValue(neighborhood.name);
-    this.disabledControl.setValue(this.disabled);
-    this.blocks = neighborhood.blocks;
-    this.neighborhood = neighborhood;
+    this.navigate([neighborhood.id]);
   }
 
   onCreateMode() {
-    this.neighborhood = null;
-    this.neighborhoodSearchControl.setValue('');
-    this.nameControl.setValue('');
-    this.disabledControl.setValue(false);
+    this.navigate([]);
   }
 
   onSave() {
@@ -122,6 +165,7 @@ export class NeighborhoodComponent {
       this.createNewNeighborhood();
     }
   }
+
   updateNeighborhood() {
     this.neighborhoodService.updateInfo(new com.unblock.proto.UpdateNeighborhoodInfoRequest({
       id: this.neighborhood.id,
@@ -145,17 +189,13 @@ export class NeighborhoodComponent {
 
   createNewNeighborhood() {
     this.neighborhoodService.create(new com.unblock.proto.CreateNeighborhoodRequest({
+      cityId: (this.cityControl.value as com.unblock.proto.ICity).id,
       info: {
         name: this.nameControl.value
       }
     })).then(neighborhood => {
-      this.neighborhood = neighborhood;
-      // TODO: Add neighborhood to list without making another call
-      this.fullNeighborhoodList = this.getFullNeighborhoodList();
-      this.fullNeighborhoodList.then(() => {
-        this.neighborhoodSearchControl.setValue('');
-      });
-    })
+      this.navigate([neighborhood.id]);
+    });
   }
 
   onEditBlock() {

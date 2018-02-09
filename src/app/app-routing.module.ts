@@ -10,6 +10,8 @@ import { UserComponent } from './admin/user/user.component';
 import { CityComponent } from './admin/city/city.component';
 import { NeighborhoodComponent } from './admin/neighborhood/neighborhood.component';
 
+import { USER_ID_PARAM, CITY_ID_PARAM, NEIGHBORHOOD_ID_PARAM } from './app-routing.const';
+
 const appRoutes: Routes = [
     {
         path: 'admin',
@@ -22,12 +24,24 @@ const appRoutes: Routes = [
                 redirectTo: 'users'
             },
             {
+                path: `users/:${USER_ID_PARAM}`,
+                component: UserComponent
+            },
+            {
                 path: 'users',
                 component: UserComponent
             },
             {
+                path: `cities/:${CITY_ID_PARAM}`,
+                component: CityComponent
+            },
+            {
                 path: 'cities',
                 component: CityComponent
+            },
+            {
+                path: `neighborhoods/:${NEIGHBORHOOD_ID_PARAM}`,
+                component: NeighborhoodComponent
             },
             {
                 path: 'neighborhoods',
@@ -49,7 +63,7 @@ const appRoutes: Routes = [
     imports: [
         RouterModule.forRoot(
             appRoutes,
-            { enableTracing: true } // <-- debugging purposes only
+            { enableTracing: false } // <-- debugging purposes only
         )
     ],
     exports: [

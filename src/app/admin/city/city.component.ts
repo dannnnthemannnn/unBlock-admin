@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -7,6 +8,7 @@ import { flatMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators/map';
 
 import { CityService } from '../../api/city.service';
+import { CITY_ID_PARAM } from '../../app-routing.const';
 
 import { com } from '../../protos/compiled.js'
 
@@ -29,7 +31,16 @@ export class CityComponent {
 
   city: com.unblock.proto.ICity | null = null;
 
-  constructor(private readonly cityService: CityService) {
+  constructor(
+    private readonly cityService: CityService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+  ) {
+    this.route.paramMap.subscribe(params => {
+      if (params.has(CITY_ID_PARAM)) {
+        this.loadCity(params.get(CITY_ID_PARAM));
+      }
+    })
     this.fullCityList = this.getFullCityList();
     this.cities = this.citySearchControl.valueChanges.startWith('').flatMap(
       value => this.getCities(value)
@@ -40,6 +51,20 @@ export class CityComponent {
     return this.city && this.city.status.toString() === CITY_DISABLED;
   }
 
+  loadCity(cityId: string) {
+    this.cityService.get(cityId).then(city => {
+      this.updateCityDetails(city);
+    })
+  }
+
+  updateCityDetails(city: com.unblock.proto.ICity) {
+    this.citySearchControl.setValue('');
+    this.nameControl.setValue(city.name);
+    this.disabledControl.setValue(this.disabled);
+    this.neighborhoods = city.neighborhoods;
+    this.city = city;
+  }
+
   getCities(value: string): Promise<com.unblock.proto.ICity[]> {
     if (typeof value !== 'string') {
       return Promise.resolve([]);
@@ -47,11 +72,12 @@ export class CityComponent {
     return this.fullCityList.then(cities => cities.filter(city => city.name.toLowerCase().startsWith(value.toLowerCase())));
   }
 
+  navigate(paths: string[]) {
+    this.router.navigate(['admin', 'cities'].concat(paths));
+  }
+
   citySelected(city: com.unblock.proto.ICity) {
-    this.nameControl.setValue(city.name);
-    this.disabledControl.setValue(this.disabled);
-    this.neighborhoods = city.neighborhoods;
-    this.city = city;
+    this.navigate([city.id]);
   }
 
   displayCity(city: com.unblock.proto.ICity) {
@@ -59,10 +85,7 @@ export class CityComponent {
   }
 
   onCreateMode() {
-    this.city = null;
-    this.citySearchControl.setValue('');
-    this.nameControl.setValue('');
-    this.disabledControl.setValue(false);
+    this.navigate([]);
   }
 
   onSave() {
@@ -107,12 +130,7 @@ export class CityComponent {
         name: this.nameControl.value
       }
     })).then(city => {
-      this.city = city;
-      // TODO: Add city to list without making another call
-      this.fullCityList = this.getFullCityList();
-      this.fullCityList.then(() => {
-        this.citySearchControl.setValue('');
-      });
+      this.navigate([city.id]);
     })
   }
 

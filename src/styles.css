@@ -29,6 +29,7 @@ mat-card.unblock-card {
   width: 600px;
   margin: 0 auto;
   padding: 32px 64px 48px 64px;
+  margin-bottom: 32px;
 }
 
 div.row  {

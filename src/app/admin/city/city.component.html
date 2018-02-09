@@ -37,12 +37,13 @@
       </button>
     </div>
   </div>
+</mat-card>
 
-
-  <div class="row" *ngIf="city">
+<mat-card class="unblock-card" *ngIf="city">
+  <div class="row">
     <mat-form-field>
       <mat-select placeholder="Neighborhoods" [formControl]="neighborhoodControl">
-        <mat-option *ngFor="let neighborhood of neighborhoods">
+        <mat-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">
           {{neighborhood.name}}
         </mat-option>
       </mat-select>
@@ -54,6 +55,4 @@
       </button>
     </div>
   </div>
-
-
 </mat-card>

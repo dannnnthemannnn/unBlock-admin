@@ -9,6 +9,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CityModule } from './city/city.module';
 import { NeighborhoodModule } from './neighborhood/neighborhood.module';
+import { BlockModule } from './block/block.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { NeighborhoodModule } from './neighborhood/neighborhood.module';
         UserModule,
         CityModule,
         NeighborhoodModule,
+        BlockModule,
     ]
 })
 export class AdminModule { }

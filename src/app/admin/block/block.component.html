@@ -1,0 +1,71 @@
+<div *ngIf="!loading">
+  <div class="search">
+    <mat-form-field>
+      <input matInput name="block" placeholder="Search blocks" [matAutocomplete]="blockAutocomplete"
+        [formControl]="blockSearchControl" />
+    </mat-form-field>
+
+    <mat-autocomplete #blockAutocomplete="matAutocomplete" [displayWith]="displayableBlock"
+      (optionSelected)="blockSelected($event.option.value)">
+      <mat-option *ngFor="let block of blocks | async" [value]="block">
+        {{ displayBlock(block) }}
+      </mat-option>
+    </mat-autocomplete>
+
+    <button mat-raised-button color="primary" (click)="onCreateMode()">
+      Create New
+    </button>
+  </div>
+
+  <mat-card class="unblock-card">
+    <div class="row">
+      <mat-form-field>
+        <input matInput name="name" placeholder="Name" required [formControl]="nameControl"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-select placeholder="Select Neighborhood" [formControl]="neighborhoodControl">
+          <mat-option *ngFor="let neighborhood of fullNeighborhoodsList | async" [value]="neighborhood">
+            {{displayNeighborhood(neighborhood)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="row">
+      <div class="mat-form-field">
+        <button mat-raised-button color="primary" (click)="onSave()">
+          {{ block ? 'Save' : 'Create' }}
+        </button>
+      </div>
+
+      <div class="mat-form-field" *ngIf="block">
+        <button mat-raised-button color="primary" (click)="onDisableToggle()">
+          {{disabled ? 'Enable Block' : 'Disable Block'}}
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="unblock-card" *ngIf="block">
+    <div class="row">
+      <mat-form-field>
+        <mat-select placeholder="Attractions" [formControl]="attractionControl">
+          <mat-option *ngFor="let attraction of attractions">
+            {{attraction.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="mat-form-field">
+        <button mat-raised-button color="primary" (click)="editBlock()">
+          Edit
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>

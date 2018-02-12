@@ -42,7 +42,7 @@
       </button>
     </div>
 
-    <div class="mat-form-field">
+    <div class="mat-form-field" *ngIf="neighborhood">
       <button mat-raised-button color="primary" (click)="onDisableToggle()">
         {{disabled ? 'Enable Neighborhood' : 'Disable Neighborhood'}}
       </button>

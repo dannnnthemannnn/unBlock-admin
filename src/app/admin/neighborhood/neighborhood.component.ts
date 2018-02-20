@@ -167,24 +167,18 @@ export class NeighborhoodComponent {
   }
 
   updateNeighborhood() {
-    this.neighborhoodService.updateInfo(new com.unblock.proto.UpdateNeighborhoodInfoRequest({
+    this.neighborhoodService.assignToCity(new com.unblock.proto.AssignNeighborhoodToCityRequest({
       id: this.neighborhood.id,
-      info: {
-        name: this.nameControl.value
-      }
-    })).then(neighborhood => {
-      this.neighborhood = neighborhood;
-    });
-  }
-
-  onDisableToggle() {
-    const status = this.disabled ? com.unblock.proto.NeighborhoodStatus.NEIGHBORHOOD_LIVE : com.unblock.proto.NeighborhoodStatus.NEIGHBORHOOD_DISABLED;
-    this.neighborhoodService.updateStatus(new com.unblock.proto.UpdateNeighborhoodStatusRequest({
-      id: this.neighborhood.id,
-      status
-    })).then(neighborhood => {
-      this.neighborhood = neighborhood;
-    });
+      cityId: this.cityControl.value.id
+    })).then(() =>
+      this.neighborhoodService.updateInfo(new com.unblock.proto.UpdateNeighborhoodInfoRequest({
+        id: this.neighborhood.id,
+        info: {
+          name: this.nameControl.value
+        }
+      }))).then(neighborhood => {
+        this.neighborhood = neighborhood;
+      });
   }
 
   createNewNeighborhood() {
@@ -195,6 +189,16 @@ export class NeighborhoodComponent {
       }
     })).then(neighborhood => {
       this.navigate([neighborhood.id]);
+    });
+  }
+
+  onDisableToggle() {
+    const status = this.disabled ? com.unblock.proto.NeighborhoodStatus.NEIGHBORHOOD_LIVE : com.unblock.proto.NeighborhoodStatus.NEIGHBORHOOD_DISABLED;
+    this.neighborhoodService.updateStatus(new com.unblock.proto.UpdateNeighborhoodStatusRequest({
+      id: this.neighborhood.id,
+      status
+    })).then(neighborhood => {
+      this.neighborhood = neighborhood;
     });
   }
 

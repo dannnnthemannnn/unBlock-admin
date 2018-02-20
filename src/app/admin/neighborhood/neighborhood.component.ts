@@ -16,8 +16,6 @@ import { com } from '../../protos/compiled.js'
 // TODO: Figure out how to handle enum values without redefining them here
 const NEIGHBORHOOD_DISABLED = 'NEIGHBORHOOD_DISABLED';
 
-// TODO: Move this and other similar constants to the api classes and export them
-
 @Component({
   templateUrl: './neighborhood.component.html',
   styleUrls: ['./neighborhood.component.css']

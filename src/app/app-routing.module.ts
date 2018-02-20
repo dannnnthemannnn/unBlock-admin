@@ -9,8 +9,9 @@ import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './admin/user/user.component';
 import { CityComponent } from './admin/city/city.component';
 import { NeighborhoodComponent } from './admin/neighborhood/neighborhood.component';
+import { BlockComponent } from './admin/block/block.component';
 
-import { USER_ID_PARAM, CITY_ID_PARAM, NEIGHBORHOOD_ID_PARAM } from './app-routing.const';
+import { USER_ID_PARAM, CITY_ID_PARAM, NEIGHBORHOOD_ID_PARAM, BLOCK_ID_PARAM } from './app-routing.const';
 
 const appRoutes: Routes = [
     {
@@ -47,6 +48,14 @@ const appRoutes: Routes = [
                 path: 'neighborhoods',
                 component: NeighborhoodComponent
             },
+            {
+                path: `blocks/:${BLOCK_ID_PARAM}`,
+                component: BlockComponent
+            },
+            {
+                path: 'blocks',
+                component: BlockComponent
+            },
         ]
     },
     {
@@ -63,7 +72,7 @@ const appRoutes: Routes = [
     imports: [
         RouterModule.forRoot(
             appRoutes,
-            { enableTracing: false } // <-- debugging purposes only
+            { enableTracing: true } // <-- debugging purposes only
         )
     ],
     exports: [

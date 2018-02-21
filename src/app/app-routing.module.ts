@@ -10,8 +10,9 @@ import { UserComponent } from './admin/user/user.component';
 import { CityComponent } from './admin/city/city.component';
 import { NeighborhoodComponent } from './admin/neighborhood/neighborhood.component';
 import { BlockComponent } from './admin/block/block.component';
+import { AttractionComponent } from './admin/attraction/attraction.component';
 
-import { USER_ID_PARAM, CITY_ID_PARAM, NEIGHBORHOOD_ID_PARAM, BLOCK_ID_PARAM } from './app-routing.const';
+import { USER_ID_PARAM, CITY_ID_PARAM, NEIGHBORHOOD_ID_PARAM, BLOCK_ID_PARAM, ATTRACTION_ID_PARAM } from './app-routing.const';
 
 const appRoutes: Routes = [
     {
@@ -55,6 +56,14 @@ const appRoutes: Routes = [
             {
                 path: 'blocks',
                 component: BlockComponent
+            },
+            {
+                path: `attractions/:${ATTRACTION_ID_PARAM}`,
+                component: AttractionComponent
+            },
+            {
+                path: 'attractions',
+                component: AttractionComponent
             },
         ]
     },

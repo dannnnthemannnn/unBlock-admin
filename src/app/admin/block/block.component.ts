@@ -42,6 +42,9 @@ export class BlockComponent {
   disabledControl = new FormControl('');
   attractionControl = new FormControl('');
 
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+
   block: com.unblock.proto.IBlock | null = null;
 
   loading = true;

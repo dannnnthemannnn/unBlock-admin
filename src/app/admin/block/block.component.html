@@ -35,7 +35,6 @@
       </mat-form-field>
     </div>
 
-
     <div class="row">
       <div class="mat-form-field">
         <button mat-raised-button color="primary" (click)="onSave()">
@@ -69,3 +68,8 @@
     </div>
   </mat-card>
 </div>
+
+
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>

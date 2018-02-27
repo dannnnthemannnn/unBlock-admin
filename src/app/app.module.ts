@@ -15,8 +15,6 @@ import { LoginModule } from './login/login.module';
 import { AdminModule } from './admin/admin.module';
 import { ApiModule } from './api/api.module';
 
-import { AgmCoreModule } from '@agm/core';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -34,9 +32,6 @@ import { AgmCoreModule } from '@agm/core';
     AppRoutingModule,
     HttpClientModule,
     ApiModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC58Vw5LAsU1APbTdkQb3J14mMadVhx7Sc'
-    }),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

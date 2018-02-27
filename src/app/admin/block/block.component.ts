@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { AgmMap } from '@agm/core';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -47,6 +48,8 @@ export class BlockComponent {
 
   block: com.unblock.proto.IBlock | null = null;
 
+  @ViewChild(AgmMap) public agmMap: AgmMap;
+
   loading = true;
 
   displayableBlock = (block: com.unblock.proto.IBlock) => this.displayBlock(block);
@@ -77,6 +80,12 @@ export class BlockComponent {
     this.blocks = this.blockSearchControl.valueChanges.startWith('').flatMap(
       value => this.getBlocks(value)
     );
+  }
+
+  ngAfterViewInit() {
+    console.log(this.agmMap);
+    this.agmMap.triggerResize();
+    console.log('resized');
   }
 
   get disabled() {

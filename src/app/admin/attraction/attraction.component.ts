@@ -7,10 +7,11 @@ import { startWith } from 'rxjs/operators/startWith';
 import { flatMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators/map';
 
+import { AttractionService } from '../../api/attraction.service';
 import { BlockService } from '../../api/block.service';
 import { NeighborhoodService } from '../../api/neighborhood.service';
 import { CityService } from '../../api/city.service';
-import { BLOCK_ID_PARAM } from '../../app-routing.const';
+import { ATTRACTION_ID_PARAM } from '../../app-routing.const';
 
 import { com } from '../../protos/compiled.js'
 
@@ -22,92 +23,107 @@ const ATTRACTION_DISABLED = 'ATTRACTION_DISABLED';
   styleUrls: ['./attraction.component.css']
 })
 export class AttractionComponent {
-  /*fullBlocksList: Promise<com.unblock.proto.IBlock[]>;
+  fullAttractionsList: Promise<com.unblock.proto.IAttraction[]>;
+  fullBlocksList: Promise<com.unblock.proto.IBlock[]>;
   fullNeighborhoodsList: Promise<com.unblock.proto.INeighborhood[]>;
   fullCitiesList: Promise<com.unblock.proto.ICity[]>;
 
+  blockLookupPromise: Promise<Map<string, com.unblock.proto.IBlock>>;
+  blockLookup: Map<string, com.unblock.proto.IBlock> = null;
   neighborhoodLookupPromise: Promise<Map<string, com.unblock.proto.INeighborhood>>;
   neighborhoodLookup: Map<string, com.unblock.proto.INeighborhood> = null;
   cityLookupPromise: Promise<Map<string, com.unblock.proto.ICity>>;
   cityLookup: Map<string, com.unblock.proto.ICity> = null;
 
-  blocks: Observable<com.unblock.proto.IBlock[]>;
-  attractions: com.unblock.proto.IAttraction[] = [];
+  attractions: Observable<com.unblock.proto.IAttraction[]>;
 
-  blockSearchControl = new FormControl('');
+  attractionSearchControl = new FormControl('');
   nameControl = new FormControl('');
-  neighborhoodControl = new FormControl('');
+  blockControl = new FormControl('');
   disabledControl = new FormControl('');
-  attractionControl = new FormControl('');
 
-  block: com.unblock.proto.IBlock | null = null;
+  attraction: com.unblock.proto.IAttraction | null = null;
 
   loading = true;
 
-  displayableBlock = (block: com.unblock.proto.IBlock) => this.displayBlock(block);
+  displayableAttraction = (attraction: com.unblock.proto.IAttraction) => this.displayAttraction(attraction);
 
   constructor(
+    private readonly attractionService: AttractionService,
     private readonly blockService: BlockService,
     private readonly neighborhoodService: NeighborhoodService,
     private readonly cityService: CityService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
   ) {
-    // TODO: Update this to reflect the block parameters
+    // TODO: Update this to reflect the attraction parameters
     this.route.paramMap.subscribe(params => {
-      if (params.has(BLOCK_ID_PARAM)) {
-        this.loadBlock(params.get(BLOCK_ID_PARAM));
+      if (params.has(ATTRACTION_ID_PARAM)) {
+        this.loadAttraction(params.get(ATTRACTION_ID_PARAM));
       }
     });
 
     Promise.all([
       this.getCityLookup(),
       this.getNeighborhoodLookup(),
-      this.getFullNeighborhoodsList(),
-      this.getFullBlockList(),
+      this.getBlockLookup(),
+      this.getFullBlocksList(),
+      this.getFullAttractionList(),
     ]).then(() => {
       this.loading = false;
     })
 
-    this.blocks = this.blockSearchControl.valueChanges.startWith('').flatMap(
-      value => this.getBlocks(value)
+    this.attractions = this.attractionSearchControl.valueChanges.startWith('').flatMap(
+      value => this.getAttractions(value)
     );
   }
 
   get disabled() {
-    return this.block && this.block.status.toString() === BLOCK_DISABLED;
+    return this.attraction && this.attraction.status.toString() === ATTRACTION_DISABLED;
   }
 
-  loadBlock(blockId: string) {
-    this.blockService.get(blockId).then(block => {
-      this.updateBlockDetails(block);
+  loadAttraction(attractionId: string) {
+    this.attractionService.get(attractionId).then(attraction => {
+      this.updateAttractionDetails(attraction);
     });
   }
 
-  updateBlockDetails(block: com.unblock.proto.IBlock) {
-    this.blockSearchControl.setValue('');
-    this.nameControl.setValue(block.name);
+  updateAttractionDetails(attraction: com.unblock.proto.IAttraction) {
+    this.attractionSearchControl.setValue('');
+    this.nameControl.setValue(attraction.name);
     this.disabledControl.setValue(this.disabled);
-    this.updateNeighborhoodDetails(block.neighborhoodId);
-    this.attractions = block.attractions;
-    this.block = block;
+    this.updateBlockDetails(attraction.blockId);
+    this.attraction = attraction;
   }
 
-  updateNeighborhoodDetails(neighborhoodId: string) {
-    if (!neighborhoodId) return;
-    this.getNeighborhoodLookup().then(lookup => {
-      this.neighborhoodControl.setValue(lookup.get(neighborhoodId));
+  updateBlockDetails(blockId: string) {
+    if (!blockId) return;
+    this.getBlockLookup().then(lookup => {
+      this.blockControl.setValue(lookup.get(blockId));
     });
   }
 
-  getFullBlockList() {
+  getFullAttractionList() {
+    if (!this.fullAttractionsList) {
+      this.fullAttractionsList =
+        Promise.all([this.getCityLookup(), this.getNeighborhoodLookup(), this.getBlockLookup()])
+          .then(() => this.attractionService.list())
+          .then(attractions => {
+            attractions.sort((a, b) =>
+              this.displayAttraction(a) < this.displayAttraction(b) ? -1 : 1);
+            return attractions;
+          });
+    }
+    return this.fullAttractionsList;
+  }
+
+  getFullBlocksList() {
     if (!this.fullBlocksList) {
       this.fullBlocksList =
         Promise.all([this.getCityLookup(), this.getNeighborhoodLookup()])
           .then(() => this.blockService.list())
           .then(blocks => {
-            blocks.sort((a, b) =>
-              this.displayBlock(a) < this.displayBlock(b) ? -1 : 1);
+            blocks.sort((a, b) => this.displayBlock(a) < this.displayBlock(b) ? -1 : 1);
             return blocks;
           });
     }
@@ -116,10 +132,7 @@ export class AttractionComponent {
 
   getFullNeighborhoodsList() {
     if (!this.fullNeighborhoodsList) {
-      this.fullNeighborhoodsList = this.neighborhoodService.list().then(neighborhoods => {
-        neighborhoods.sort((a, b) => this.displayNeighborhood(a) < this.displayNeighborhood(b) ? -1 : 1);
-        return neighborhoods;
-      });
+      this.fullNeighborhoodsList = this.neighborhoodService.list();
     }
     return this.fullNeighborhoodsList;
   }
@@ -143,6 +156,18 @@ export class AttractionComponent {
     return this.cityLookupPromise;
   }
 
+  getBlockLookup() {
+    if (!this.blockLookupPromise) {
+      this.blockLookupPromise = this.getFullBlocksList().then(blocks => {
+        const transform: (value: com.unblock.proto.IBlock) =>
+          [string, com.unblock.proto.IBlock] = block => [block.id, block];
+        this.blockLookup = new Map(blocks.map(transform));
+        return this.blockLookup;
+      });
+    }
+    return this.blockLookupPromise;
+  }
+
   getNeighborhoodLookup() {
     if (!this.neighborhoodLookupPromise) {
       this.neighborhoodLookupPromise = this.getFullNeighborhoodsList().then(neighborhoods => {
@@ -155,14 +180,28 @@ export class AttractionComponent {
     return this.neighborhoodLookupPromise;
   }
 
-  getBlocks(value: string): Promise<com.unblock.proto.IBlock[]> {
+  getAttractions(value: string): Promise<com.unblock.proto.IAttraction[]> {
     if (typeof value !== 'string') {
       return Promise.resolve([]);
     }
-    return this.getFullBlockList()
-      .then(blocks =>
-        blocks.filter(block =>
-          this.displayBlock(block).toLowerCase().includes(value.toLowerCase())));
+    return this.getFullAttractionList()
+      .then(attractions =>
+        attractions.filter(attraction =>
+          this.displayAttraction(attraction).toLowerCase().includes(value.toLowerCase())));
+  }
+
+  displayAttraction(attraction: com.unblock.proto.IAttraction) {
+    if (!attraction) return '';
+
+    let city = null;
+    let neighborhood = null;
+    let block = null;
+    if (attraction.blockId && this.blockLookup && this.neighborhoodLookup && this.cityLookup) {
+      block = this.blockLookup.get(attraction.blockId);
+      neighborhood = this.neighborhoodLookup.get(block.neighborhoodId);
+      city = neighborhood ? this.cityLookup.get(neighborhood.cityId) : null;
+    }
+    return `${this.retrieveName(attraction)} (${this.retrieveName(city)} - ${this.retrieveName(neighborhood)} - ${this.retrieveName(block)})`;
   }
 
   displayBlock(block: com.unblock.proto.IBlock) {
@@ -170,21 +209,11 @@ export class AttractionComponent {
 
     let city = null;
     let neighborhood = null;
-    if (block.neighborhoodId && this.cityLookup && this.neighborhoodLookup) {
+    if (block.neighborhoodId && this.neighborhoodLookup && this.cityLookup) {
       neighborhood = this.neighborhoodLookup.get(block.neighborhoodId);
       city = neighborhood ? this.cityLookup.get(neighborhood.cityId) : null;
     }
-    return `${this.retrieveName(city)} - ${this.retrieveName(neighborhood)} - ${this.retrieveName(block)}`;
-  }
-
-  displayNeighborhood(neighborhood: com.unblock.proto.INeighborhood) {
-    if (!neighborhood) return '';
-
-    let city = null;
-    if (neighborhood.cityId && this.cityLookup) {
-      city = this.cityLookup.get(neighborhood.cityId);
-    }
-    return `${this.retrieveName(city)} - ${this.retrieveName(neighborhood)}`;
+    return `${this.retrieveName(block)} (${this.retrieveName(city)} - ${this.retrieveName(neighborhood)})`;
   }
 
   retrieveName(location: { name?: string }) {
@@ -192,11 +221,11 @@ export class AttractionComponent {
   }
 
   navigate(paths: string[]) {
-    this.router.navigate(['admin', 'blocks'].concat(paths));
+    this.router.navigate(['admin', 'attractions'].concat(paths));
   }
 
-  blockSelected(block: com.unblock.proto.IBlock) {
-    this.navigate([block.id]);
+  attractionSelected(attraction: com.unblock.proto.IAttraction) {
+    this.navigate([attraction.id]);
   }
 
   onCreateMode() {
@@ -204,48 +233,49 @@ export class AttractionComponent {
   }
 
   onSave() {
-    if (this.block) {
-      this.updateBlock();
+    if (this.attraction) {
+      this.updateAttraction();
     } else {
-      this.createNewBlock();
+      this.createNewAttraction();
     }
   }
 
-  updateBlock() {
-    this.blockService.updateInfo(new com.unblock.proto.UpdateBlockInfoRequest({
-      id: this.block.id,
+  updateAttraction() {
+    this.attractionService.updateInfo(new com.unblock.proto.UpdateAttractionInfoRequest({
+      id: this.attraction.id,
       info: {
         name: this.nameControl.value
       }
-    })).then(block => {
-      this.block = block;
+    })).then(attraction => {
+      this.attraction = attraction;
     });
   }
 
   onDisableToggle() {
-    const status = this.disabled ? com.unblock.proto.BlockStatus.BLOCK_LIVE : com.unblock.proto.BlockStatus.BLOCK_DISABLED;
-    this.blockService.updateStatus(new com.unblock.proto.UpdateBlockStatusRequest({
-      id: this.block.id,
+    const status = this.disabled ?
+      com.unblock.proto.AttractionStatus.ATTRACTION_LIVE :
+      com.unblock.proto.AttractionStatus.ATTRACTION_DISABLED;
+    this.attractionService.updateStatus(new com.unblock.proto.UpdateAttractionStatusRequest({
+      id: this.attraction.id,
       status
-    })).then(block => {
-      this.block = block;
+    })).then(attraction => {
+      this.attraction = attraction;
     });
   }
 
-  createNewBlock() {
-    this.blockService.create(new com.unblock.proto.CreateBlockRequest({
-      neighborhoodId: (this.neighborhoodControl.value as com.unblock.proto.INeighborhood).id,
+  createNewAttraction() {
+    this.attractionService.create(new com.unblock.proto.CreateAttractionRequest({
+      blockId: (this.blockControl.value as com.unblock.proto.IBlock).id,
       info: {
         name: this.nameControl.value
       }
-    })).then(block => {
-      this.navigate([block.id]);
+    })).then(attraction => {
+      this.navigate([attraction.id]);
     });
   }
 
-  onEditBlock() {
-    // TODO: Implement editing block
-    console.log('edit block');
+  onEditAttraction() {
+    // TODO: Implement editing attraction
+    console.log('edit attraction');
   }
-  */
 }

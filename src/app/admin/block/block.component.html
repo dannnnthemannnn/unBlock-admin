@@ -1,12 +1,11 @@
 <div *ngIf="!loading">
   <div class="search">
     <mat-form-field>
-      <input matInput name="block" placeholder="Search blocks" [matAutocomplete]="blockAutocomplete"
-        [formControl]="blockSearchControl" />
+      <input matInput name="block" placeholder="Search blocks" [matAutocomplete]="blockAutocomplete" [formControl]="blockSearchControl"
+      />
     </mat-form-field>
 
-    <mat-autocomplete #blockAutocomplete="matAutocomplete" [displayWith]="displayableBlock"
-      (optionSelected)="blockSelected($event.option.value)">
+    <mat-autocomplete #blockAutocomplete="matAutocomplete" [displayWith]="displayableBlock" (optionSelected)="blockSelected($event.option.value)">
       <mat-option *ngFor="let block of blocks | async" [value]="block">
         {{ displayBlock(block) }}
       </mat-option>
@@ -20,8 +19,7 @@
   <mat-card class="unblock-card">
     <div class="row">
       <mat-form-field>
-        <input matInput name="name" placeholder="Name" required [formControl]="nameControl"
-        />
+        <input matInput name="name" placeholder="Name" required [formControl]="nameControl" />
       </mat-form-field>
     </div>
 
@@ -34,6 +32,10 @@
         </mat-select>
       </mat-form-field>
     </div>
+
+    <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
 
     <div class="row">
       <div class="mat-form-field">
@@ -68,8 +70,3 @@
     </div>
   </mat-card>
 </div>
-
-
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>

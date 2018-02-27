@@ -1,1 +1,51 @@
-<h1>Attractions!</h1>
+<div *ngIf="!loading">
+  <div class="search">
+    <mat-form-field>
+      <input matInput name="attraction" placeholder="Search attractions" [matAutocomplete]="attractionAutocomplete" [formControl]="attractionSearchControl"
+      />
+    </mat-form-field>
+
+    <mat-autocomplete #attractionAutocomplete="matAutocomplete" [displayWith]="displayableAttraction" (optionSelected)="attractionSelected($event.option.value)">
+      <mat-option *ngFor="let attraction of attractions | async" [value]="attraction">
+        {{ displayAttraction(attraction) }}
+      </mat-option>
+    </mat-autocomplete>
+
+    <button mat-raised-button color="primary" (click)="onCreateMode()">
+      Create New
+    </button>
+  </div>
+
+  <mat-card class="unblock-card">
+    <div class="row">
+      <mat-form-field>
+        <input matInput name="name" placeholder="Name" required [formControl]="nameControl" />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-select placeholder="Select Block" [formControl]="blockControl">
+          <mat-option *ngFor="let block of fullBlocksList | async" [value]="block">
+            {{displayBlock(block)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="row">
+      <div class="mat-form-field">
+        <button mat-raised-button color="primary" (click)="onSave()">
+          {{ attraction ? 'Save' : 'Create' }}
+        </button>
+      </div>
+
+      <div class="mat-form-field" *ngIf="attraction">
+        <button mat-raised-button color="primary" (click)="onDisableToggle()">
+          {{disabled ? 'Enable Attraction' : 'Disable Attraction'}}
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>

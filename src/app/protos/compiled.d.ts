@@ -306,6 +306,96 @@ export namespace com {
                 }
             }
 
+            /** Properties of a ListAttractionsResponse. */
+            interface IListAttractionsResponse {
+
+                /** ListAttractionsResponse attractions */
+                attractions?: (com.unblock.proto.IAttraction[]|null);
+            }
+
+            /** Represents a ListAttractionsResponse. */
+            class ListAttractionsResponse implements IListAttractionsResponse {
+
+                /**
+                 * Constructs a new ListAttractionsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IListAttractionsResponse);
+
+                /** ListAttractionsResponse attractions. */
+                public attractions: com.unblock.proto.IAttraction[];
+
+                /**
+                 * Creates a new ListAttractionsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListAttractionsResponse instance
+                 */
+                public static create(properties?: com.unblock.proto.IListAttractionsResponse): com.unblock.proto.ListAttractionsResponse;
+
+                /**
+                 * Encodes the specified ListAttractionsResponse message. Does not implicitly {@link com.unblock.proto.ListAttractionsResponse.verify|verify} messages.
+                 * @param message ListAttractionsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IListAttractionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListAttractionsResponse message, length delimited. Does not implicitly {@link com.unblock.proto.ListAttractionsResponse.verify|verify} messages.
+                 * @param message ListAttractionsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IListAttractionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListAttractionsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListAttractionsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.ListAttractionsResponse;
+
+                /**
+                 * Decodes a ListAttractionsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListAttractionsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.ListAttractionsResponse;
+
+                /**
+                 * Verifies a ListAttractionsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListAttractionsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListAttractionsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.ListAttractionsResponse;
+
+                /**
+                 * Creates a plain object from a ListAttractionsResponse message. Also converts values to other types if specified.
+                 * @param message ListAttractionsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.ListAttractionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListAttractionsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of an UpdateAttractionInfoRequest. */
             interface IUpdateAttractionInfoRequest {
 

@@ -6,6 +6,7 @@ import { UserService } from './user.service';
 import { CityService } from './city.service';
 import { NeighborhoodService } from './neighborhood.service';
 import { BlockService } from './block.service';
+import { AttractionService } from './attraction.service';
 
 @NgModule({
     providers: [
@@ -14,6 +15,7 @@ import { BlockService } from './block.service';
         CityService,
         NeighborhoodService,
         BlockService,
+        AttractionService,
     ],
 })
 export class ApiModule { }

@@ -1,11 +1,10 @@
 <div class="search">
   <mat-form-field>
-    <input matInput name="city" placeholder="Search cities" [matAutocomplete]="cityAutocomplete"
-      [formControl]="citySearchControl" />
+    <input matInput name="city" placeholder="Search cities" [matAutocomplete]="cityAutocomplete" [formControl]="citySearchControl"
+    />
   </mat-form-field>
 
-  <mat-autocomplete #cityAutocomplete="matAutocomplete" [displayWith]="displayCity"
-    (optionSelected)="citySelected($event.option.value)">
+  <mat-autocomplete #cityAutocomplete="matAutocomplete" [displayWith]="displayCity" (optionSelected)="citySelected($event.option.value)">
     <mat-option *ngFor="let city of cities | async" [value]="city">
       {{ city.name }}
     </mat-option>
@@ -19,8 +18,7 @@
 <mat-card class="unblock-card">
   <div class="row">
     <mat-form-field>
-      <input matInput name="name" placeholder="Name" required [formControl]="nameControl"
-      />
+      <input matInput name="name" placeholder="Name" required [formControl]="nameControl" />
     </mat-form-field>
 
     <div class="mat-form-field">
@@ -50,7 +48,7 @@
     </mat-form-field>
 
     <div class="mat-form-field">
-      <button mat-raised-button color="primary" (click)="editNeighborhood()">
+      <button mat-raised-button color="primary" (click)="onEditNeighborhood()">
         Edit
       </button>
     </div>

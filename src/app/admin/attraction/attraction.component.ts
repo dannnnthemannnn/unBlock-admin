@@ -232,20 +232,21 @@ export class AttractionComponent {
     this.navigate([]);
   }
 
-  onSave() {
-    if (this.attraction) {
-      this.updateAttraction();
-    } else {
-      this.createNewAttraction();
-    }
-  }
-
-  updateAttraction() {
+  onUpdateInfo() {
     this.attractionService.updateInfo(new com.unblock.proto.UpdateAttractionInfoRequest({
       id: this.attraction.id,
       info: {
         name: this.nameControl.value
       }
+    })).then(attraction => {
+      this.attraction = attraction;
+    });
+  }
+
+  onUpdateBlock() {
+    this.attractionService.assignToBlock(new com.unblock.proto.AssignAttractionToBlockRequest({
+      id: this.attraction.id,
+      blockId: this.blockControl.value.id
     })).then(attraction => {
       this.attraction = attraction;
     });
@@ -263,7 +264,7 @@ export class AttractionComponent {
     });
   }
 
-  createNewAttraction() {
+  onCreate() {
     this.attractionService.create(new com.unblock.proto.CreateAttractionRequest({
       blockId: (this.blockControl.value as com.unblock.proto.IBlock).id,
       info: {

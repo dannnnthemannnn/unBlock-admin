@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { AgmMap } from '@agm/core';
+import { AgmMap, MouseEvent, LatLngLiteral } from '@agm/core';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -14,6 +14,8 @@ import { CityService } from '../../api/city.service';
 import { BLOCK_ID_PARAM } from '../../app-routing.const';
 
 import { com } from '../../protos/compiled.js'
+
+declare var randomColor;
 
 // TODO: Figure out how to handle enum values without redefining them here
 const BLOCK_DISABLED = 'BLOCK_DISABLED';
@@ -48,9 +50,13 @@ export class BlockComponent {
 
   block: com.unblock.proto.IBlock | null = null;
 
-  @ViewChild(AgmMap) public agmMap: AgmMap;
+  blockBounds: LatLngLiteral[] = [];
 
   loading = true;
+
+  color = randomColor({
+    luminosity: 'dark'
+  });
 
   displayableBlock = (block: com.unblock.proto.IBlock) => this.displayBlock(block);
 
@@ -82,12 +88,6 @@ export class BlockComponent {
     );
   }
 
-  ngAfterViewInit() {
-    console.log(this.agmMap);
-    this.agmMap.triggerResize();
-    console.log('resized');
-  }
-
   get disabled() {
     return this.block && this.block.status.toString() === BLOCK_DISABLED;
   }
@@ -105,6 +105,12 @@ export class BlockComponent {
     this.updateNeighborhoodDetails(block.neighborhoodId);
     this.attractions = block.attractions;
     this.block = block;
+    console.log(block.bounds.points);
+    if (block.bounds && block.bounds.points) {
+      this.lat = block.bounds.points.map(point => point.x).reduce((a, b) => a + b, 0) / block.bounds.points.length;
+      this.lng = block.bounds.points.map(point => point.y).reduce((a, b) => a + b, 0) / block.bounds.points.length;
+      this.blockBounds = block.bounds.points.map(point => ({ lat: point.x, lng: point.y }));
+    }
   }
 
   updateNeighborhoodDetails(neighborhoodId: string) {
@@ -213,19 +219,42 @@ export class BlockComponent {
     this.navigate([block.id]);
   }
 
+  getBounds() {
+    return new com.unblock.proto.Bounds({
+      points: this.blockBounds.map(bounds => new com.unblock.proto.Bounds.Point({ x: bounds.lat, y: bounds.lng }))
+    });
+  }
+
   onCreateMode() {
     this.navigate([]);
   }
 
-  onSave() {
-    if (this.block) {
-      this.updateBlock();
-    } else {
-      this.createNewBlock();
-    }
+  onCreateNewPoint(mouseEvent: MouseEvent) {
+    this.blockBounds = [...this.blockBounds, mouseEvent.coords];
   }
 
-  updateBlock() {
+  onUpdateNeighborhood() {
+    this.blockService.assignToNeighborhood(new com.unblock.proto.AssignBlockToNeighborhoodRequest({
+      id: this.block.id,
+      neighborhoodId: this.neighborhoodControl.value.id
+    })).then(block => {
+      this.block = block;
+    });
+  }
+
+  onUpdateBounds() {
+    console.log(this.blockBounds);
+    /*this.blockService.updateBounds(new com.unblock.proto.UpdateBlockBoundsRequest({
+      id: this.block.id,
+      update: new com.unblock.proto.UpdateBlockBoundsRequest.UpdateBlockBounds({
+        bounds: this.getBounds()
+      })
+    })).then(block => {
+      this.block = block;
+    });*/
+  }
+
+  onUpdateInfo() {
     this.blockService.updateInfo(new com.unblock.proto.UpdateBlockInfoRequest({
       id: this.block.id,
       info: {
@@ -246,11 +275,12 @@ export class BlockComponent {
     });
   }
 
-  createNewBlock() {
+  onCreate() {
     this.blockService.create(new com.unblock.proto.CreateBlockRequest({
       neighborhoodId: (this.neighborhoodControl.value as com.unblock.proto.INeighborhood).id,
       info: {
-        name: this.nameControl.value
+        name: this.nameControl.value,
+        bounds: this.getBounds()
       }
     })).then(block => {
       this.navigate([block.id]);

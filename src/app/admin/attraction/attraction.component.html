@@ -21,6 +21,20 @@
       <mat-form-field>
         <input matInput name="name" placeholder="Name" required [formControl]="nameControl" />
       </mat-form-field>
+
+      <div class="mat-form-field" *ngIf="attraction">
+        <button mat-raised-button color="primary" (click)="onDisableToggle()">
+          {{disabled ? 'Enable Attraction' : 'Disable Attraction'}}
+        </button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="attraction">
+      <div class="mat-form-field">
+        <button mat-raised-button color="primary" (click)="onUpdateInfo()">
+          Update info
+        </button>
+      </div>
     </div>
 
     <div class="row">
@@ -31,19 +45,19 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <div class="mat-form-field" *ngIf="attraction">
+        <button mat-raised-button color="primary" (click)="onUpdateBlock()">
+          Update block
+        </button>
+      </div>
     </div>
 
 
     <div class="row">
-      <div class="mat-form-field">
-        <button mat-raised-button color="primary" (click)="onSave()">
-          {{ attraction ? 'Save' : 'Create' }}
-        </button>
-      </div>
-
-      <div class="mat-form-field" *ngIf="attraction">
-        <button mat-raised-button color="primary" (click)="onDisableToggle()">
-          {{disabled ? 'Enable Attraction' : 'Disable Attraction'}}
+      <div class="mat-form-field" *ngIf="!attraction">
+        <button mat-raised-button color="primary" (click)="onCreate()">
+          Create
         </button>
       </div>
     </div>

@@ -156,30 +156,27 @@ export class NeighborhoodComponent {
     this.navigate([]);
   }
 
-  onSave() {
-    if (this.neighborhood) {
-      this.updateNeighborhood();
-    } else {
-      this.createNewNeighborhood();
-    }
+  onUpdateInfo() {
+    this.neighborhoodService.updateInfo(new com.unblock.proto.UpdateNeighborhoodInfoRequest({
+      id: this.neighborhood.id,
+      info: {
+        name: this.nameControl.value
+      }
+    })).then(neighborhood => {
+      this.neighborhood = neighborhood;
+    });
   }
 
-  updateNeighborhood() {
+  onUpdateCity() {
     this.neighborhoodService.assignToCity(new com.unblock.proto.AssignNeighborhoodToCityRequest({
       id: this.neighborhood.id,
       cityId: this.cityControl.value.id
-    })).then(() =>
-      this.neighborhoodService.updateInfo(new com.unblock.proto.UpdateNeighborhoodInfoRequest({
-        id: this.neighborhood.id,
-        info: {
-          name: this.nameControl.value
-        }
-      }))).then(neighborhood => {
-        this.neighborhood = neighborhood;
-      });
+    })).then(neighborhood => {
+      this.neighborhood = neighborhood;
+    });
   }
 
-  createNewNeighborhood() {
+  onCreate() {
     this.neighborhoodService.create(new com.unblock.proto.CreateNeighborhoodRequest({
       cityId: (this.cityControl.value as com.unblock.proto.ICity).id,
       info: {

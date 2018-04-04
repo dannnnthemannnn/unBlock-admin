@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatSelectModule, MatSnackBarModule, MatAutocompleteModule } from '@angular/material';
 
 import { CityComponent } from './city.component';
 
@@ -16,6 +16,7 @@ import { CityComponent } from './city.component';
         MatCardModule,
         MatAutocompleteModule,
         MatCheckboxModule,
+        MatSnackBarModule,
         MatSelectModule,
         MatInputModule,
         MatButtonModule,

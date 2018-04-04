@@ -1,11 +1,10 @@
 <div class="search">
   <mat-form-field>
-    <input matInput name="neighborhood" placeholder="Search neighborhoods" [matAutocomplete]="neighborhoodAutocomplete"
-      [formControl]="neighborhoodSearchControl" />
+    <input matInput name="neighborhood" placeholder="Search neighborhoods" [matAutocomplete]="neighborhoodAutocomplete" [formControl]="neighborhoodSearchControl"
+    />
   </mat-form-field>
 
-  <mat-autocomplete #neighborhoodAutocomplete="matAutocomplete" [displayWith]="displayableNeighborhood"
-    (optionSelected)="neighborhoodSelected($event.option.value)">
+  <mat-autocomplete #neighborhoodAutocomplete="matAutocomplete" [displayWith]="displayableNeighborhood" (optionSelected)="neighborhoodSelected($event.option.value)">
     <mat-option *ngFor="let neighborhood of neighborhoods | async" [value]="neighborhood">
       {{ displayNeighborhood(neighborhood) }}
     </mat-option>
@@ -19,9 +18,22 @@
 <mat-card class="unblock-card">
   <div class="row">
     <mat-form-field>
-      <input matInput name="name" placeholder="Name" required [formControl]="nameControl"
-      />
+      <input matInput name="name" placeholder="Name" required [formControl]="nameControl" />
     </mat-form-field>
+
+    <div class="mat-form-field" *ngIf="neighborhood">
+      <button mat-raised-button color="primary" (click)="onUpdateInfo()">
+        Update info
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="neighborhood">
+    <div class="mat-form-field">
+      <button mat-raised-button color="primary" (click)="onDisableToggle()">
+        {{disabled ? 'Enable Neighborhood' : 'Disable Neighborhood'}}
+      </button>
+    </div>
   </div>
 
   <div class="row">
@@ -32,19 +44,18 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-
-
-  <div class="row">
-    <div class="mat-form-field">
-      <button mat-raised-button color="primary" (click)="onSave()">
-        {{ neighborhood ? 'Save' : 'Create' }}
-      </button>
-    </div>
 
     <div class="mat-form-field" *ngIf="neighborhood">
-      <button mat-raised-button color="primary" (click)="onDisableToggle()">
-        {{disabled ? 'Enable Neighborhood' : 'Disable Neighborhood'}}
+      <button mat-raised-button color="primary" (click)="onUpdateCity()">
+        Update city
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!neighborhood">
+    <div class="mat-form-field">
+      <button mat-raised-button color="primary" (click)="onCreate()">
+        Create
       </button>
     </div>
   </div>
@@ -54,7 +65,7 @@
   <div class="row">
     <mat-form-field>
       <mat-select placeholder="Blocks" [formControl]="blockControl">
-        <mat-option *ngFor="let block of blocks">
+        <mat-option *ngFor="let block of blocks" [value]="block">
           {{block.name}}
         </mat-option>
       </mat-select>

@@ -21,6 +21,20 @@
       <mat-form-field>
         <input matInput name="name" placeholder="Name" required [formControl]="nameControl" />
       </mat-form-field>
+
+      <div class="mat-form-field" *ngIf="block">
+        <button mat-raised-button color="primary" (click)="onDisableToggle()">
+          {{disabled ? 'Enable Block' : 'Disable Block'}}
+        </button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="block">
+      <div class="mat-form-field">
+        <button mat-raised-button color="primary" (click)="onUpdateInfo()">
+          Update info
+        </button>
+      </div>
     </div>
 
     <div class="row">
@@ -31,22 +45,29 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
-
-    <agm-map [latitude]="lat" [longitude]="lng">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-    </agm-map>
-
-    <div class="row">
-      <div class="mat-form-field">
-        <button mat-raised-button color="primary" (click)="onSave()">
-          {{ block ? 'Save' : 'Create' }}
-        </button>
-      </div>
 
       <div class="mat-form-field" *ngIf="block">
-        <button mat-raised-button color="primary" (click)="onDisableToggle()">
-          {{disabled ? 'Enable Block' : 'Disable Block'}}
+        <button mat-raised-button color="primary" (click)="onUpdateNeighborhood()">
+          Update neighborhood
+        </button>
+      </div>
+    </div>
+
+    <div class="map-div">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16" (mapRightClick)="onCreateNewPoint($event)">
+        <agm-polygon [paths]="blockBounds" [editable]="true" [fillColor]="color" [fillOpacity]=".5"></agm-polygon>
+      </agm-map>
+    </div>
+
+    <div class="row">
+      <div class="mat-form-field" *ngIf="block">
+        <button mat-raised-button color="primary" (click)="onUpdateBounds()">
+          Update bounds
+        </button>
+      </div>
+      <div class="mat-form-field" *ngIf="!block">
+        <button mat-raised-button color="primary" (click)="onCreate()">
+          Create
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -11,7 +12,7 @@ import { NeighborhoodService } from '../../api/neighborhood.service';
 import { CityService } from '../../api/city.service';
 import { NEIGHBORHOOD_ID_PARAM } from '../../app-routing.const';
 
-import { com } from '../../protos/compiled.js'
+import { com } from '../../protos/compiled.js';
 
 // TODO: Figure out how to handle enum values without redefining them here
 const NEIGHBORHOOD_DISABLED = 'NEIGHBORHOOD_DISABLED';
@@ -20,7 +21,9 @@ const NEIGHBORHOOD_DISABLED = 'NEIGHBORHOOD_DISABLED';
   templateUrl: './neighborhood.component.html',
   styleUrls: ['./neighborhood.component.css']
 })
-export class NeighborhoodComponent {
+export class NeighborhoodComponent implements AfterViewInit {
+  @ViewChild('gmap') gmapElement: any;
+
   fullNeighborhoodList: Promise<com.unblock.proto.INeighborhood[]>;
   fullCitiesList: Promise<com.unblock.proto.ICity[]>;
   cityLookupPromise: Promise<Map<string, com.unblock.proto.ICity>>
@@ -44,6 +47,7 @@ export class NeighborhoodComponent {
     private readonly cityService: CityService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
+    private readonly snackBar: MatSnackBar
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.has(NEIGHBORHOOD_ID_PARAM)) {
@@ -58,6 +62,15 @@ export class NeighborhoodComponent {
     this.neighborhoods = this.neighborhoodSearchControl.valueChanges.startWith('').flatMap(
       value => this.getNeighborhoods(value)
     );
+  }
+
+  ngAfterViewInit() {
+    console.log('searching places');
+    let placesService = new google.maps.places.PlacesService(new google.maps.Map(this.gmapElement.nativeElement));
+    placesService.nearbySearch({ location: { lat: 40.712775, lng: -74.005973 }, radius: 200 }, results => {
+      console.log('results:');
+      console.log(results);
+    })
   }
 
   get disabled() {
@@ -144,16 +157,22 @@ export class NeighborhoodComponent {
     return `${cityDisplay} - ${neighborhood.name}`;
   }
 
+  showNotification(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 3000,
+    });
+  }
+
   navigate(paths: string[]) {
-    this.router.navigate(['admin', 'neighborhoods'].concat(paths));
+    this.router.navigate(['admin'].concat(paths));
   }
 
   neighborhoodSelected(neighborhood: com.unblock.proto.INeighborhood) {
-    this.navigate([neighborhood.id]);
+    this.navigate(['neighborhoods', neighborhood.id]);
   }
 
   onCreateMode() {
-    this.navigate([]);
+    this.navigate(['neighborhoods']);
   }
 
   onUpdateInfo() {
@@ -164,6 +183,7 @@ export class NeighborhoodComponent {
       }
     })).then(neighborhood => {
       this.neighborhood = neighborhood;
+      this.showNotification('Neighborhood info updated.');
     });
   }
 
@@ -173,6 +193,7 @@ export class NeighborhoodComponent {
       cityId: this.cityControl.value.id
     })).then(neighborhood => {
       this.neighborhood = neighborhood;
+      this.showNotification('City updated.');
     });
   }
 
@@ -183,7 +204,7 @@ export class NeighborhoodComponent {
         name: this.nameControl.value
       }
     })).then(neighborhood => {
-      this.navigate([neighborhood.id]);
+      this.navigate(['neighborhoods', neighborhood.id]);
     });
   }
 
@@ -194,11 +215,13 @@ export class NeighborhoodComponent {
       status
     })).then(neighborhood => {
       this.neighborhood = neighborhood;
+      this.showNotification('Neighborhood status updated.');
     });
   }
 
   onEditBlock() {
-    // TODO: Implement editing block
-    console.log('edit block');
+    if (this.blockControl.value) {
+      this.navigate(['blocks', this.blockControl.value.id]);
+    }
   }
 }

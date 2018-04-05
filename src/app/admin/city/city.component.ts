@@ -146,7 +146,7 @@ export class CityComponent {
       status
     })).then(city => {
       this.city = city;
-      this.showNotification('Status updated.');
+      this.showNotification('City status updated.');
     });
   }
 

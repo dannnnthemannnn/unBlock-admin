@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule } from '@agm/_dev/packages/core';
 
 @NgModule({
     imports: [

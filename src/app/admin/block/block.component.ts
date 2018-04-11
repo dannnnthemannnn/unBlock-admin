@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { AgmMap, MouseEvent, LatLngLiteral } from '@agm/core';
+import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core'
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -29,6 +29,7 @@ type BlockOwner = [com.unblock.proto.ICity, com.unblock.proto.INeighborhood];
 })
 export class BlockComponent {
   @ViewChild('gmap') gmapElement: any;
+  @ViewChild(AgmPolygon) agmPolygon: AgmPolygon;
 
   fullBlocksList: Promise<com.unblock.proto.IBlock[]>;
   fullNeighborhoodsList: Promise<com.unblock.proto.INeighborhood[]>;
@@ -274,9 +275,10 @@ export class BlockComponent {
   }
 
   getBounds() {
-    return new com.unblock.proto.Bounds({
-      points: this.blockBounds.map(bounds => new com.unblock.proto.Bounds.Point({ x: bounds.lat, y: bounds.lng }))
-    });
+    return this.agmPolygon.getPolygonPath().then((path: google.maps.MVCArray<google.maps.MVCArray<LatLng>>) =>
+      new com.unblock.proto.Bounds({
+        points: path.getArray()[0].getArray().map(latlng => new com.unblock.proto.Bounds.Point({ x: latlng.lat(), y: latlng.lng() }))
+      }));
   }
 
   onCreateMode() {
@@ -298,14 +300,15 @@ export class BlockComponent {
 
   onUpdateBounds() {
     console.log(this.blockBounds);
-    this.blockService.updateBounds(new com.unblock.proto.UpdateBlockBoundsRequest({
-      id: this.block.id,
-      update: new com.unblock.proto.UpdateBlockBoundsRequest.UpdateBlockBounds({
-        bounds: this.getBounds()
-      })
-    })).then(block => {
-      this.block = block;
-    });
+    this.getBounds().then(bounds =>
+      this.blockService.updateBounds(new com.unblock.proto.UpdateBlockBoundsRequest({
+        id: this.block.id,
+        update: new com.unblock.proto.UpdateBlockBoundsRequest.UpdateBlockBounds({
+          bounds
+        })
+      }))).then(block => {
+        this.block = block;
+      });
   }
 
   onUpdateInfo() {
@@ -330,15 +333,16 @@ export class BlockComponent {
   }
 
   onCreate() {
-    this.blockService.create(new com.unblock.proto.CreateBlockRequest({
-      neighborhoodId: (this.neighborhoodControl.value as com.unblock.proto.INeighborhood).id,
-      info: {
-        name: this.nameControl.value,
-        bounds: this.getBounds()
-      }
-    })).then(block => {
-      this.navigate(['blocks', block.id]);
-    });
+    this.getBounds().then(bounds =>
+      this.blockService.create(new com.unblock.proto.CreateBlockRequest({
+        neighborhoodId: (this.neighborhoodControl.value as com.unblock.proto.INeighborhood).id,
+        info: {
+          name: this.nameControl.value,
+          bounds
+        }
+      }))).then(block => {
+        this.navigate(['blocks', block.id]);
+      });
   }
 
   onEditAttraction() {

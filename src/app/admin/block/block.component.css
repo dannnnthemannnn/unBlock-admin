@@ -5,3 +5,7 @@ agm-map {
 .map-div {
   margin-bottom: 24px;
 }
+
+.google-places mat-form-field {
+  width: 100%
+}

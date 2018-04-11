@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { AgmMap, MouseEvent, LatLngLiteral } from '@agm/core';
@@ -9,6 +9,7 @@ import { flatMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators/map';
 
 import { BlockService } from '../../api/block.service';
+import { AttractionService } from '../../api/attraction.service';
 import { NeighborhoodService } from '../../api/neighborhood.service';
 import { CityService } from '../../api/city.service';
 import { BLOCK_ID_PARAM } from '../../app-routing.const';
@@ -27,6 +28,8 @@ type BlockOwner = [com.unblock.proto.ICity, com.unblock.proto.INeighborhood];
   styleUrls: ['./block.component.css']
 })
 export class BlockComponent {
+  @ViewChild('gmap') gmapElement: any;
+
   fullBlocksList: Promise<com.unblock.proto.IBlock[]>;
   fullNeighborhoodsList: Promise<com.unblock.proto.INeighborhood[]>;
   fullCitiesList: Promise<com.unblock.proto.ICity[]>;
@@ -37,6 +40,7 @@ export class BlockComponent {
   cityLookup: Map<string, com.unblock.proto.ICity> = null;
 
   blocks: Observable<com.unblock.proto.IBlock[]>;
+  places: Observable<google.maps.places.PlaceResult[]>;
   attractions: com.unblock.proto.IAttraction[] = [];
 
   blockSearchControl = new FormControl('');
@@ -44,9 +48,12 @@ export class BlockComponent {
   neighborhoodControl = new FormControl('');
   disabledControl = new FormControl('');
   attractionControl = new FormControl('');
+  placesSearchControl = new FormControl('');
 
   lat: number = 51.678418;
   lng: number = 7.809007;
+
+  selectedPlace: google.maps.places.PlaceResult;
 
   block: com.unblock.proto.IBlock | null = null;
 
@@ -62,6 +69,7 @@ export class BlockComponent {
 
   constructor(
     private readonly blockService: BlockService,
+    private readonly attractionService: AttractionService,
     private readonly neighborhoodService: NeighborhoodService,
     private readonly cityService: CityService,
     private readonly router: Router,
@@ -86,6 +94,12 @@ export class BlockComponent {
     this.blocks = this.blockSearchControl.valueChanges.startWith('').flatMap(
       value => this.getBlocks(value)
     );
+
+    // TODO: Debounce this typing
+    // TODO: Clear selected place on typing
+    this.places = this.placesSearchControl.valueChanges.startWith('').flatMap(
+      value => this.getPlaces(value)
+    );
   }
 
   get disabled() {
@@ -103,6 +117,7 @@ export class BlockComponent {
     this.nameControl.setValue(block.name);
     this.disabledControl.setValue(this.disabled);
     this.updateNeighborhoodDetails(block.neighborhoodId);
+    console.log(this.attractions);
     this.attractions = block.attractions;
     this.block = block;
     console.log(block.bounds.points);
@@ -111,6 +126,37 @@ export class BlockComponent {
       this.lng = block.bounds.points.map(point => point.y).reduce((a, b) => a + b, 0) / block.bounds.points.length;
       this.blockBounds = block.bounds.points.map(point => ({ lat: point.x, lng: point.y }));
     }
+  }
+
+  getPlaces(name: string) {
+    return new Promise<google.maps.places.PlaceResult[]>((resolve, _) => {
+      try {
+        let placesService = new google.maps.places.PlacesService(new google.maps.Map(this.gmapElement.nativeElement));
+        placesService.nearbySearch({ location: { lat: this.lat, lng: this.lng }, radius: 200, name }, results => {
+          resolve(results);
+        });
+      } catch (error) {
+        console.log('error');
+        console.log(error);
+        resolve([]);
+      }
+    });
+  }
+
+  addAttractionToBlock() {
+    this.attractionService.create(new com.unblock.proto.CreateAttractionRequest({
+      blockId: this.block.id,
+      info: {
+        name: this.selectedPlace.name,
+        location: {
+          x: this.selectedPlace.geometry.location.lat(),
+          y: this.selectedPlace.geometry.location.lng()
+        }
+      }
+    }))
+      .then(attraction => {
+        this.navigate(['attractions', attraction.id]);
+      });
   }
 
   updateNeighborhoodDetails(neighborhoodId: string) {
@@ -197,6 +243,10 @@ export class BlockComponent {
     return `${this.retrieveName(city)} - ${this.retrieveName(neighborhood)} - ${this.retrieveName(block)}`;
   }
 
+  displayPlace(place: google.maps.places.PlaceResult) {
+    return place.name;
+  }
+
   displayNeighborhood(neighborhood: com.unblock.proto.INeighborhood) {
     if (!neighborhood) return '';
 
@@ -212,11 +262,15 @@ export class BlockComponent {
   }
 
   navigate(paths: string[]) {
-    this.router.navigate(['admin', 'blocks'].concat(paths));
+    this.router.navigate(['admin'].concat(paths));
   }
 
   blockSelected(block: com.unblock.proto.IBlock) {
-    this.navigate([block.id]);
+    this.navigate(['blocks', block.id]);
+  }
+
+  placeSelected(place: google.maps.places.PlaceResult) {
+    this.selectedPlace = place;
   }
 
   getBounds() {
@@ -226,7 +280,7 @@ export class BlockComponent {
   }
 
   onCreateMode() {
-    this.navigate([]);
+    this.navigate(['blocks']);
   }
 
   onCreateNewPoint(mouseEvent: MouseEvent) {
@@ -244,14 +298,14 @@ export class BlockComponent {
 
   onUpdateBounds() {
     console.log(this.blockBounds);
-    /*this.blockService.updateBounds(new com.unblock.proto.UpdateBlockBoundsRequest({
+    this.blockService.updateBounds(new com.unblock.proto.UpdateBlockBoundsRequest({
       id: this.block.id,
       update: new com.unblock.proto.UpdateBlockBoundsRequest.UpdateBlockBounds({
         bounds: this.getBounds()
       })
     })).then(block => {
       this.block = block;
-    });*/
+    });
   }
 
   onUpdateInfo() {
@@ -283,12 +337,13 @@ export class BlockComponent {
         bounds: this.getBounds()
       }
     })).then(block => {
-      this.navigate([block.id]);
+      this.navigate(['blocks', block.id]);
     });
   }
 
-  onEditBlock() {
-    // TODO: Implement editing block
-    console.log('edit block');
+  onEditAttraction() {
+    if (this.attractionControl.value) {
+      this.navigate(['attractions', this.attractionControl.value.id]);
+    }
   }
 }

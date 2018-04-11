@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
@@ -21,8 +21,7 @@ const NEIGHBORHOOD_DISABLED = 'NEIGHBORHOOD_DISABLED';
   templateUrl: './neighborhood.component.html',
   styleUrls: ['./neighborhood.component.css']
 })
-export class NeighborhoodComponent implements AfterViewInit {
-  @ViewChild('gmap') gmapElement: any;
+export class NeighborhoodComponent {
 
   fullNeighborhoodList: Promise<com.unblock.proto.INeighborhood[]>;
   fullCitiesList: Promise<com.unblock.proto.ICity[]>;
@@ -62,15 +61,6 @@ export class NeighborhoodComponent implements AfterViewInit {
     this.neighborhoods = this.neighborhoodSearchControl.valueChanges.startWith('').flatMap(
       value => this.getNeighborhoods(value)
     );
-  }
-
-  ngAfterViewInit() {
-    console.log('searching places');
-    let placesService = new google.maps.places.PlacesService(new google.maps.Map(this.gmapElement.nativeElement));
-    placesService.nearbySearch({ location: { lat: 40.712775, lng: -74.005973 }, radius: 200 }, results => {
-      console.log('results:');
-      console.log(results);
-    })
   }
 
   get disabled() {

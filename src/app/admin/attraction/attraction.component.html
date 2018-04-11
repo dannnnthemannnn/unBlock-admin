@@ -29,6 +29,12 @@
       </div>
     </div>
 
+    <div class="row">
+      <mat-form-field>
+        <input matInput name="description" placeholder="Description" required [formControl]="descriptionControl" />
+      </mat-form-field>
+    </div>
+
     <div class="row" *ngIf="attraction">
       <div class="mat-form-field">
         <button mat-raised-button color="primary" (click)="onUpdateInfo()">

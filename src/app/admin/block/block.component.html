@@ -84,10 +84,41 @@
       </mat-form-field>
 
       <div class="mat-form-field">
-        <button mat-raised-button color="primary" (click)="editBlock()">
+        <button mat-raised-button color="primary" (click)="onEditAttraction()">
           Edit
         </button>
       </div>
     </div>
   </mat-card>
+
+  <mat-card class="unblock-card" *ngIf="block">
+    <div class="row">
+      <mat-form-field>
+        <input matInput name="place" placeholder="Search google places in block" [matAutocomplete]="placesAutocomplete" [formControl]="placesSearchControl"
+        />
+      </mat-form-field>
+
+      <mat-autocomplete #placesAutocomplete="matAutocomplete" [displayWith]="displayPlace" (optionSelected)="placeSelected($event.option.value)">
+        <mat-option *ngFor="let place of places | async" [value]="place">
+          {{ displayPlace(place) }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+
+    <div class="row" *ngIf="selectedPlace">
+      <div class="mat-form-field">
+        <h2>{{ selectedPlace.name }}</h2>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="selectedPlace">
+      <div class="mat-form-field">
+        <button mat-raised-button color="primary" (click)="addAttractionToBlock()">
+          Add attraction to block
+        </button>
+      </div>
+    </div>
+  </mat-card>
 </div>
+
+<div #gmap></div>

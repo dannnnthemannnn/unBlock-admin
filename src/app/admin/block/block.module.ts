@@ -24,7 +24,8 @@ import { MapsModule } from '../../maps/maps.module';
         MatButtonModule,
         MatFormFieldModule,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyC58Vw5LAsU1APbTdkQb3J14mMadVhx7Sc'
+            apiKey: 'AIzaSyC58Vw5LAsU1APbTdkQb3J14mMadVhx7Sc',
+            libraries: ['places']
         }),
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -39,6 +39,7 @@ export class AttractionComponent {
 
   attractionSearchControl = new FormControl('');
   nameControl = new FormControl('');
+  descriptionControl = new FormControl('');
   blockControl = new FormControl('');
   disabledControl = new FormControl('');
 
@@ -91,6 +92,7 @@ export class AttractionComponent {
   updateAttractionDetails(attraction: com.unblock.proto.IAttraction) {
     this.attractionSearchControl.setValue('');
     this.nameControl.setValue(attraction.name);
+    this.descriptionControl.setValue(attraction.description);
     this.disabledControl.setValue(this.disabled);
     this.updateBlockDetails(attraction.blockId);
     this.attraction = attraction;
@@ -236,7 +238,8 @@ export class AttractionComponent {
     this.attractionService.updateInfo(new com.unblock.proto.UpdateAttractionInfoRequest({
       id: this.attraction.id,
       info: {
-        name: this.nameControl.value
+        name: this.nameControl.value,
+        description: this.descriptionControl.value
       }
     })).then(attraction => {
       this.attraction = attraction;
@@ -268,15 +271,11 @@ export class AttractionComponent {
     this.attractionService.create(new com.unblock.proto.CreateAttractionRequest({
       blockId: (this.blockControl.value as com.unblock.proto.IBlock).id,
       info: {
-        name: this.nameControl.value
+        name: this.nameControl.value,
+        description: this.descriptionControl.value
       }
     })).then(attraction => {
       this.navigate([attraction.id]);
     });
-  }
-
-  onEditAttraction() {
-    // TODO: Implement editing attraction
-    console.log('edit attraction');
   }
 }

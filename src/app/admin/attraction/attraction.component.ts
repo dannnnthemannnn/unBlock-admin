@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -49,6 +50,14 @@ export class AttractionComponent {
 
   displayableAttraction = (attraction: com.unblock.proto.IAttraction) => this.displayAttraction(attraction);
 
+
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+
+  color = '#e34r56';/*randomColor({
+    luminosity: 'dark'
+  });*/
+
   constructor(
     private readonly attractionService: AttractionService,
     private readonly blockService: BlockService,
@@ -56,6 +65,7 @@ export class AttractionComponent {
     private readonly cityService: CityService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
+    private readonly snackBar: MatSnackBar
   ) {
     // TODO: Update this to reflect the attraction parameters
     this.route.paramMap.subscribe(params => {
@@ -81,6 +91,19 @@ export class AttractionComponent {
 
   get disabled() {
     return this.attraction && this.attraction.status.toString() === ATTRACTION_DISABLED;
+  }
+
+  get blockPaths() {
+    if (!this.blockControl.value) {
+      return null;
+    }
+    return this.blockControl.value.block.bounds.points.map(point => ({ lat: point.x, lng: point.y }));
+  }
+
+  showNotification(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 3000,
+    });
   }
 
   loadAttraction(attractionId: string) {
@@ -243,6 +266,7 @@ export class AttractionComponent {
       }
     })).then(attraction => {
       this.attraction = attraction;
+      this.showNotification('Attraction info updated.');
     });
   }
 
@@ -252,6 +276,7 @@ export class AttractionComponent {
       blockId: this.blockControl.value.id
     })).then(attraction => {
       this.attraction = attraction;
+      this.showNotification('Attraction block updated.');
     });
   }
 
@@ -264,6 +289,7 @@ export class AttractionComponent {
       status
     })).then(attraction => {
       this.attraction = attraction;
+      this.showNotification('Attraction status updated.');
     });
   }
 

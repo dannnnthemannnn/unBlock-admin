@@ -77,7 +77,7 @@
     <div class="row">
       <mat-form-field>
         <mat-select placeholder="Attractions" [formControl]="attractionControl">
-          <mat-option *ngFor="let attraction of attractions">
+          <mat-option *ngFor="let attraction of attractions" [value]="attraction">
             {{attraction.name}}
           </mat-option>
         </mat-select>

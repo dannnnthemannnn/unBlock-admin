@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
 import { AgmCoreModule } from '@agm/_dev/packages/core';
 
 import { BlockComponent } from './block.component';
@@ -22,11 +22,9 @@ import { MapsModule } from '../../maps/maps.module';
         MatSelectModule,
         MatInputModule,
         MatButtonModule,
+        MatSnackBarModule,
         MatFormFieldModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyC58Vw5LAsU1APbTdkQb3J14mMadVhx7Sc',
-            libraries: ['places']
-        }),
+        AgmCoreModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

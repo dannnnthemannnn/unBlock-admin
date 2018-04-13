@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatToolbarModule, MatMenuModule, MatTabsModule } from '@angular/material';
 
+import { AgmCoreModule } from '@agm/_dev/packages/core';
+
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,8 +34,13 @@ import { ApiModule } from './api/api.module';
     AppRoutingModule,
     HttpClientModule,
     ApiModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC58Vw5LAsU1APbTdkQb3J14mMadVhx7Sc',
+      libraries: ['places']
+    }),
   ],
   providers: [CookieService],
+  exports: [AgmCoreModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

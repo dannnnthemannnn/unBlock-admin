@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import { AgmCoreModule } from '@agm/_dev/packages/core';
 
 import { AttractionComponent } from './attraction.component';
 
@@ -16,10 +17,12 @@ import { AttractionComponent } from './attraction.component';
         MatCardModule,
         MatAutocompleteModule,
         MatCheckboxModule,
+        MatSnackBarModule,
         MatSelectModule,
         MatInputModule,
         MatButtonModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        AgmCoreModule
     ]
 })
 export class AttractionModule { }

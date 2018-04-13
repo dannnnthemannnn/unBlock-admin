@@ -31,7 +31,7 @@
 
     <div class="row">
       <mat-form-field>
-        <input matInput name="description" placeholder="Description" required [formControl]="descriptionControl" />
+        <textarea matInput name="description" placeholder="Description" required [formControl]="descriptionControl"></textarea>
       </mat-form-field>
     </div>
 
@@ -57,6 +57,12 @@
           Update block
         </button>
       </div>
+    </div>
+
+    <div class="map-div">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16" (mapRightClick)="onCreateNewPoint($event)">
+        <agm-polygon *ngIf="blockBounds" [paths]="blockBounds" [editable]="true" [fillColor]="color" [fillOpacity]=".5"></agm-polygon>
+      </agm-map>
     </div>
 
 

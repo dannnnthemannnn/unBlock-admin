@@ -34,6 +34,13 @@ export class UserService {
         ).map(value => com.unblock.proto.User.create(value)).toPromise();
     }
 
+    getSelf(token: string) {
+        return this.http.get(
+            this.path('user'),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.User.create(value)).toPromise();
+    }
+
     list() {
         console.log('listing');
         return this.http.get(
@@ -63,6 +70,15 @@ export class UserService {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': this.cookieService.get(AuthConstants.COOKIE_TOKEN),
+            })
+        };
+    }
+
+    private getHeadersWithToken(token: string) {
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': token,
             })
         };
     }

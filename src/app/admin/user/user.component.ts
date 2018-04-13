@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -36,6 +37,7 @@ export class UserComponent {
         private readonly userService: UserService,
         private readonly router: Router,
         private readonly route: ActivatedRoute,
+        private readonly snackBar: MatSnackBar
     ) {
         this.route.paramMap.subscribe(params => {
             if (params.has(USER_ID_PARAM)) {
@@ -69,6 +71,12 @@ export class UserComponent {
         this.adminControl.setValue(user.level.toString() === ADMIN)
     }
 
+    showNotification(message: string) {
+        this.snackBar.open(message, '', {
+            duration: 3000,
+        });
+    }
+
     navigate(paths: string[]) {
         this.router.navigate(['admin', 'users'].concat(paths));
     }
@@ -100,6 +108,7 @@ export class UserComponent {
         });
         this.userService.create(userRequest).then(user => {
             this.userSelected(user);
+            this.showNotification('User created.');
         });
     }
 
@@ -113,7 +122,9 @@ export class UserComponent {
                 level
             }
         });
-        this.userService.updateInfo(updateRequest);
+        this.userService.updateInfo(updateRequest).then(() => {
+            this.showNotification('Info updated.');
+        });
     }
 
     onChangePassword() {
@@ -126,6 +137,8 @@ export class UserComponent {
             }
         });
 
-        this.userService.updatePassword(passwordRequest);
+        this.userService.updatePassword(passwordRequest).then(() => {
+            this.showNotification('Password updated.');
+        });
     }
 }

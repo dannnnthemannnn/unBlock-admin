@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core'
 
 import { Observable } from 'rxjs';
@@ -62,9 +63,9 @@ export class BlockComponent {
 
   loading = true;
 
-  color = randomColor({
+  color = '#e34r56';/*randomColor({
     luminosity: 'dark'
-  });
+  });*/
 
   displayableBlock = (block: com.unblock.proto.IBlock) => this.displayBlock(block);
 
@@ -75,6 +76,7 @@ export class BlockComponent {
     private readonly cityService: CityService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
+    private readonly snackBar: MatSnackBar
   ) {
     // TODO: Update this to reflect the block parameters
     this.route.paramMap.subscribe(params => {
@@ -120,6 +122,7 @@ export class BlockComponent {
     this.updateNeighborhoodDetails(block.neighborhoodId);
     console.log(this.attractions);
     this.attractions = block.attractions;
+    console.log(block.attractions);
     this.block = block;
     console.log(block.bounds.points);
     if (block.bounds && block.bounds.points) {
@@ -141,6 +144,12 @@ export class BlockComponent {
         console.log(error);
         resolve([]);
       }
+    });
+  }
+
+  showNotification(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 3000,
     });
   }
 
@@ -295,6 +304,7 @@ export class BlockComponent {
       neighborhoodId: this.neighborhoodControl.value.id
     })).then(block => {
       this.block = block;
+      this.showNotification('Block neighborhood updated.');
     });
   }
 
@@ -308,6 +318,7 @@ export class BlockComponent {
         })
       }))).then(block => {
         this.block = block;
+        this.showNotification('Block bounds updated.');
       });
   }
 
@@ -319,6 +330,7 @@ export class BlockComponent {
       }
     })).then(block => {
       this.block = block;
+      this.showNotification('Block info updated.');
     });
   }
 
@@ -329,6 +341,7 @@ export class BlockComponent {
       status
     })).then(block => {
       this.block = block;
+      this.showNotification('Block status updated.');
     });
   }
 

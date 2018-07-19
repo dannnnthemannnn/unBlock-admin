@@ -467,6 +467,7 @@ $root.com = (function() {
                      * @property {string|null} [name] CreateAttractionInfo name
                      * @property {com.unblock.proto.IAttractionLocation|null} [location] CreateAttractionInfo location
                      * @property {string|null} [description] CreateAttractionInfo description
+                     * @property {string|null} [googlePlaceId] CreateAttractionInfo googlePlaceId
                      */
 
                     /**
@@ -509,6 +510,14 @@ $root.com = (function() {
                     CreateAttractionInfo.prototype.description = "";
 
                     /**
+                     * CreateAttractionInfo googlePlaceId.
+                     * @member {string} googlePlaceId
+                     * @memberof com.unblock.proto.CreateAttractionRequest.CreateAttractionInfo
+                     * @instance
+                     */
+                    CreateAttractionInfo.prototype.googlePlaceId = "";
+
+                    /**
                      * Creates a new CreateAttractionInfo instance using the specified properties.
                      * @function create
                      * @memberof com.unblock.proto.CreateAttractionRequest.CreateAttractionInfo
@@ -538,6 +547,8 @@ $root.com = (function() {
                             $root.com.unblock.proto.AttractionLocation.encode(message.location, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.description != null && message.hasOwnProperty("description"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                        if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.googlePlaceId);
                         return writer;
                     };
 
@@ -580,6 +591,9 @@ $root.com = (function() {
                                 break;
                             case 3:
                                 message.description = reader.string();
+                                break;
+                            case 4:
+                                message.googlePlaceId = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -627,6 +641,9 @@ $root.com = (function() {
                         if (message.description != null && message.hasOwnProperty("description"))
                             if (!$util.isString(message.description))
                                 return "description: string expected";
+                        if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
+                            if (!$util.isString(message.googlePlaceId))
+                                return "googlePlaceId: string expected";
                         return null;
                     };
 
@@ -651,6 +668,8 @@ $root.com = (function() {
                         }
                         if (object.description != null)
                             message.description = String(object.description);
+                        if (object.googlePlaceId != null)
+                            message.googlePlaceId = String(object.googlePlaceId);
                         return message;
                     };
 
@@ -671,6 +690,7 @@ $root.com = (function() {
                             object.name = "";
                             object.location = null;
                             object.description = "";
+                            object.googlePlaceId = "";
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -678,6 +698,8 @@ $root.com = (function() {
                             object.location = $root.com.unblock.proto.AttractionLocation.toObject(message.location, options);
                         if (message.description != null && message.hasOwnProperty("description"))
                             object.description = message.description;
+                        if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
+                            object.googlePlaceId = message.googlePlaceId;
                         return object;
                     };
 
@@ -2012,6 +2034,7 @@ $root.com = (function() {
                  * @property {string|null} [name] Attraction name
                  * @property {string|null} [description] Attraction description
                  * @property {com.unblock.proto.IAttractionLocation|null} [location] Attraction location
+                 * @property {string|null} [googlePlaceId] Attraction googlePlaceId
                  */
 
                 /**
@@ -2078,6 +2101,14 @@ $root.com = (function() {
                 Attraction.prototype.location = null;
 
                 /**
+                 * Attraction googlePlaceId.
+                 * @member {string} googlePlaceId
+                 * @memberof com.unblock.proto.Attraction
+                 * @instance
+                 */
+                Attraction.prototype.googlePlaceId = "";
+
+                /**
                  * Creates a new Attraction instance using the specified properties.
                  * @function create
                  * @memberof com.unblock.proto.Attraction
@@ -2113,6 +2144,8 @@ $root.com = (function() {
                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
                     if (message.location != null && message.hasOwnProperty("location"))
                         $root.com.unblock.proto.AttractionLocation.encode(message.location, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
+                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.googlePlaceId);
                     return writer;
                 };
 
@@ -2164,6 +2197,9 @@ $root.com = (function() {
                             break;
                         case 6:
                             message.location = $root.com.unblock.proto.AttractionLocation.decode(reader, reader.uint32());
+                            break;
+                        case 7:
+                            message.googlePlaceId = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -2226,6 +2262,9 @@ $root.com = (function() {
                         if (error)
                             return "location." + error;
                     }
+                    if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
+                        if (!$util.isString(message.googlePlaceId))
+                            return "googlePlaceId: string expected";
                     return null;
                 };
 
@@ -2268,6 +2307,8 @@ $root.com = (function() {
                             throw TypeError(".com.unblock.proto.Attraction.location: object expected");
                         message.location = $root.com.unblock.proto.AttractionLocation.fromObject(object.location);
                     }
+                    if (object.googlePlaceId != null)
+                        message.googlePlaceId = String(object.googlePlaceId);
                     return message;
                 };
 
@@ -2291,6 +2332,7 @@ $root.com = (function() {
                         object.name = "";
                         object.description = "";
                         object.location = null;
+                        object.googlePlaceId = "";
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -2304,6 +2346,8 @@ $root.com = (function() {
                         object.description = message.description;
                     if (message.location != null && message.hasOwnProperty("location"))
                         object.location = $root.com.unblock.proto.AttractionLocation.toObject(message.location, options);
+                    if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
+                        object.googlePlaceId = message.googlePlaceId;
                     return object;
                 };
 
@@ -4983,6 +5027,635 @@ $root.com = (function() {
                 return Bounds;
             })();
 
+            proto.CheckIn = (function() {
+
+                /**
+                 * Properties of a CheckIn.
+                 * @memberof com.unblock.proto
+                 * @interface ICheckIn
+                 * @property {string|null} [checkinId] CheckIn checkinId
+                 * @property {string|null} [attractionId] CheckIn attractionId
+                 * @property {string|null} [userId] CheckIn userId
+                 */
+
+                /**
+                 * Constructs a new CheckIn.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a CheckIn.
+                 * @implements ICheckIn
+                 * @constructor
+                 * @param {com.unblock.proto.ICheckIn=} [properties] Properties to set
+                 */
+                function CheckIn(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * CheckIn checkinId.
+                 * @member {string} checkinId
+                 * @memberof com.unblock.proto.CheckIn
+                 * @instance
+                 */
+                CheckIn.prototype.checkinId = "";
+
+                /**
+                 * CheckIn attractionId.
+                 * @member {string} attractionId
+                 * @memberof com.unblock.proto.CheckIn
+                 * @instance
+                 */
+                CheckIn.prototype.attractionId = "";
+
+                /**
+                 * CheckIn userId.
+                 * @member {string} userId
+                 * @memberof com.unblock.proto.CheckIn
+                 * @instance
+                 */
+                CheckIn.prototype.userId = "";
+
+                /**
+                 * Creates a new CheckIn instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {com.unblock.proto.ICheckIn=} [properties] Properties to set
+                 * @returns {com.unblock.proto.CheckIn} CheckIn instance
+                 */
+                CheckIn.create = function create(properties) {
+                    return new CheckIn(properties);
+                };
+
+                /**
+                 * Encodes the specified CheckIn message. Does not implicitly {@link com.unblock.proto.CheckIn.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {com.unblock.proto.ICheckIn} message CheckIn message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CheckIn.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.checkinId != null && message.hasOwnProperty("checkinId"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.checkinId);
+                    if (message.attractionId != null && message.hasOwnProperty("attractionId"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.attractionId);
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.userId);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified CheckIn message, length delimited. Does not implicitly {@link com.unblock.proto.CheckIn.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {com.unblock.proto.ICheckIn} message CheckIn message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CheckIn.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a CheckIn message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.CheckIn} CheckIn
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CheckIn.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.CheckIn();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.checkinId = reader.string();
+                            break;
+                        case 2:
+                            message.attractionId = reader.string();
+                            break;
+                        case 3:
+                            message.userId = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a CheckIn message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.CheckIn} CheckIn
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CheckIn.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a CheckIn message.
+                 * @function verify
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CheckIn.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.checkinId != null && message.hasOwnProperty("checkinId"))
+                        if (!$util.isString(message.checkinId))
+                            return "checkinId: string expected";
+                    if (message.attractionId != null && message.hasOwnProperty("attractionId"))
+                        if (!$util.isString(message.attractionId))
+                            return "attractionId: string expected";
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        if (!$util.isString(message.userId))
+                            return "userId: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a CheckIn message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.CheckIn} CheckIn
+                 */
+                CheckIn.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.CheckIn)
+                        return object;
+                    var message = new $root.com.unblock.proto.CheckIn();
+                    if (object.checkinId != null)
+                        message.checkinId = String(object.checkinId);
+                    if (object.attractionId != null)
+                        message.attractionId = String(object.attractionId);
+                    if (object.userId != null)
+                        message.userId = String(object.userId);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a CheckIn message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.CheckIn
+                 * @static
+                 * @param {com.unblock.proto.CheckIn} message CheckIn
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CheckIn.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.checkinId = "";
+                        object.attractionId = "";
+                        object.userId = "";
+                    }
+                    if (message.checkinId != null && message.hasOwnProperty("checkinId"))
+                        object.checkinId = message.checkinId;
+                    if (message.attractionId != null && message.hasOwnProperty("attractionId"))
+                        object.attractionId = message.attractionId;
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        object.userId = message.userId;
+                    return object;
+                };
+
+                /**
+                 * Converts this CheckIn to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.CheckIn
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CheckIn.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return CheckIn;
+            })();
+
+            proto.CreateCheckInRequest = (function() {
+
+                /**
+                 * Properties of a CreateCheckInRequest.
+                 * @memberof com.unblock.proto
+                 * @interface ICreateCheckInRequest
+                 * @property {string|null} [attractionId] CreateCheckInRequest attractionId
+                 * @property {string|null} [userId] CreateCheckInRequest userId
+                 */
+
+                /**
+                 * Constructs a new CreateCheckInRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a CreateCheckInRequest.
+                 * @implements ICreateCheckInRequest
+                 * @constructor
+                 * @param {com.unblock.proto.ICreateCheckInRequest=} [properties] Properties to set
+                 */
+                function CreateCheckInRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * CreateCheckInRequest attractionId.
+                 * @member {string} attractionId
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @instance
+                 */
+                CreateCheckInRequest.prototype.attractionId = "";
+
+                /**
+                 * CreateCheckInRequest userId.
+                 * @member {string} userId
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @instance
+                 */
+                CreateCheckInRequest.prototype.userId = "";
+
+                /**
+                 * Creates a new CreateCheckInRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.ICreateCheckInRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.CreateCheckInRequest} CreateCheckInRequest instance
+                 */
+                CreateCheckInRequest.create = function create(properties) {
+                    return new CreateCheckInRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified CreateCheckInRequest message. Does not implicitly {@link com.unblock.proto.CreateCheckInRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.ICreateCheckInRequest} message CreateCheckInRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CreateCheckInRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.attractionId != null && message.hasOwnProperty("attractionId"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.attractionId);
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.userId);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified CreateCheckInRequest message, length delimited. Does not implicitly {@link com.unblock.proto.CreateCheckInRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.ICreateCheckInRequest} message CreateCheckInRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CreateCheckInRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a CreateCheckInRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.CreateCheckInRequest} CreateCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CreateCheckInRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.CreateCheckInRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.attractionId = reader.string();
+                            break;
+                        case 2:
+                            message.userId = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a CreateCheckInRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.CreateCheckInRequest} CreateCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CreateCheckInRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a CreateCheckInRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CreateCheckInRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.attractionId != null && message.hasOwnProperty("attractionId"))
+                        if (!$util.isString(message.attractionId))
+                            return "attractionId: string expected";
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        if (!$util.isString(message.userId))
+                            return "userId: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a CreateCheckInRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.CreateCheckInRequest} CreateCheckInRequest
+                 */
+                CreateCheckInRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.CreateCheckInRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.CreateCheckInRequest();
+                    if (object.attractionId != null)
+                        message.attractionId = String(object.attractionId);
+                    if (object.userId != null)
+                        message.userId = String(object.userId);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a CreateCheckInRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.CreateCheckInRequest} message CreateCheckInRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CreateCheckInRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.attractionId = "";
+                        object.userId = "";
+                    }
+                    if (message.attractionId != null && message.hasOwnProperty("attractionId"))
+                        object.attractionId = message.attractionId;
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        object.userId = message.userId;
+                    return object;
+                };
+
+                /**
+                 * Converts this CreateCheckInRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.CreateCheckInRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CreateCheckInRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return CreateCheckInRequest;
+            })();
+
+            proto.RemoveCheckInRequest = (function() {
+
+                /**
+                 * Properties of a RemoveCheckInRequest.
+                 * @memberof com.unblock.proto
+                 * @interface IRemoveCheckInRequest
+                 * @property {string|null} [checkinId] RemoveCheckInRequest checkinId
+                 */
+
+                /**
+                 * Constructs a new RemoveCheckInRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a RemoveCheckInRequest.
+                 * @implements IRemoveCheckInRequest
+                 * @constructor
+                 * @param {com.unblock.proto.IRemoveCheckInRequest=} [properties] Properties to set
+                 */
+                function RemoveCheckInRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * RemoveCheckInRequest checkinId.
+                 * @member {string} checkinId
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @instance
+                 */
+                RemoveCheckInRequest.prototype.checkinId = "";
+
+                /**
+                 * Creates a new RemoveCheckInRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.IRemoveCheckInRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.RemoveCheckInRequest} RemoveCheckInRequest instance
+                 */
+                RemoveCheckInRequest.create = function create(properties) {
+                    return new RemoveCheckInRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified RemoveCheckInRequest message. Does not implicitly {@link com.unblock.proto.RemoveCheckInRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.IRemoveCheckInRequest} message RemoveCheckInRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                RemoveCheckInRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.checkinId != null && message.hasOwnProperty("checkinId"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.checkinId);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified RemoveCheckInRequest message, length delimited. Does not implicitly {@link com.unblock.proto.RemoveCheckInRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.IRemoveCheckInRequest} message RemoveCheckInRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                RemoveCheckInRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a RemoveCheckInRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.RemoveCheckInRequest} RemoveCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                RemoveCheckInRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.RemoveCheckInRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.checkinId = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a RemoveCheckInRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.RemoveCheckInRequest} RemoveCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                RemoveCheckInRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a RemoveCheckInRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                RemoveCheckInRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.checkinId != null && message.hasOwnProperty("checkinId"))
+                        if (!$util.isString(message.checkinId))
+                            return "checkinId: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a RemoveCheckInRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.RemoveCheckInRequest} RemoveCheckInRequest
+                 */
+                RemoveCheckInRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.RemoveCheckInRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.RemoveCheckInRequest();
+                    if (object.checkinId != null)
+                        message.checkinId = String(object.checkinId);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a RemoveCheckInRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @static
+                 * @param {com.unblock.proto.RemoveCheckInRequest} message RemoveCheckInRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                RemoveCheckInRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.checkinId = "";
+                    if (message.checkinId != null && message.hasOwnProperty("checkinId"))
+                        object.checkinId = message.checkinId;
+                    return object;
+                };
+
+                /**
+                 * Converts this RemoveCheckInRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.RemoveCheckInRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                RemoveCheckInRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return RemoveCheckInRequest;
+            })();
+
             proto.CreateCityRequest = (function() {
 
                 /**
@@ -5179,6 +5852,7 @@ $root.com = (function() {
                      * @memberof com.unblock.proto.CreateCityRequest
                      * @interface ICreateCityInfo
                      * @property {string|null} [name] CreateCityInfo name
+                     * @property {string|null} [imageFilename] CreateCityInfo imageFilename
                      */
 
                     /**
@@ -5203,6 +5877,14 @@ $root.com = (function() {
                      * @instance
                      */
                     CreateCityInfo.prototype.name = "";
+
+                    /**
+                     * CreateCityInfo imageFilename.
+                     * @member {string} imageFilename
+                     * @memberof com.unblock.proto.CreateCityRequest.CreateCityInfo
+                     * @instance
+                     */
+                    CreateCityInfo.prototype.imageFilename = "";
 
                     /**
                      * Creates a new CreateCityInfo instance using the specified properties.
@@ -5230,6 +5912,8 @@ $root.com = (function() {
                             writer = $Writer.create();
                         if (message.name != null && message.hasOwnProperty("name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.imageFilename);
                         return writer;
                     };
 
@@ -5266,6 +5950,9 @@ $root.com = (function() {
                             switch (tag >>> 3) {
                             case 1:
                                 message.name = reader.string();
+                                break;
+                            case 2:
+                                message.imageFilename = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -5305,6 +5992,9 @@ $root.com = (function() {
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                            if (!$util.isString(message.imageFilename))
+                                return "imageFilename: string expected";
                         return null;
                     };
 
@@ -5322,6 +6012,8 @@ $root.com = (function() {
                         var message = new $root.com.unblock.proto.CreateCityRequest.CreateCityInfo();
                         if (object.name != null)
                             message.name = String(object.name);
+                        if (object.imageFilename != null)
+                            message.imageFilename = String(object.imageFilename);
                         return message;
                     };
 
@@ -5338,10 +6030,14 @@ $root.com = (function() {
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.name = "";
+                            object.imageFilename = "";
+                        }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                            object.imageFilename = message.imageFilename;
                         return object;
                     };
 
@@ -5789,6 +6485,7 @@ $root.com = (function() {
                      * @memberof com.unblock.proto.UpdateCityInfoRequest
                      * @interface IUpdateCityInfo
                      * @property {string|null} [name] UpdateCityInfo name
+                     * @property {string|null} [imageFilename] UpdateCityInfo imageFilename
                      */
 
                     /**
@@ -5813,6 +6510,14 @@ $root.com = (function() {
                      * @instance
                      */
                     UpdateCityInfo.prototype.name = "";
+
+                    /**
+                     * UpdateCityInfo imageFilename.
+                     * @member {string} imageFilename
+                     * @memberof com.unblock.proto.UpdateCityInfoRequest.UpdateCityInfo
+                     * @instance
+                     */
+                    UpdateCityInfo.prototype.imageFilename = "";
 
                     /**
                      * Creates a new UpdateCityInfo instance using the specified properties.
@@ -5840,6 +6545,8 @@ $root.com = (function() {
                             writer = $Writer.create();
                         if (message.name != null && message.hasOwnProperty("name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.imageFilename);
                         return writer;
                     };
 
@@ -5876,6 +6583,9 @@ $root.com = (function() {
                             switch (tag >>> 3) {
                             case 1:
                                 message.name = reader.string();
+                                break;
+                            case 2:
+                                message.imageFilename = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -5915,6 +6625,9 @@ $root.com = (function() {
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                            if (!$util.isString(message.imageFilename))
+                                return "imageFilename: string expected";
                         return null;
                     };
 
@@ -5932,6 +6645,8 @@ $root.com = (function() {
                         var message = new $root.com.unblock.proto.UpdateCityInfoRequest.UpdateCityInfo();
                         if (object.name != null)
                             message.name = String(object.name);
+                        if (object.imageFilename != null)
+                            message.imageFilename = String(object.imageFilename);
                         return message;
                     };
 
@@ -5948,10 +6663,14 @@ $root.com = (function() {
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.name = "";
+                            object.imageFilename = "";
+                        }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                            object.imageFilename = message.imageFilename;
                         return object;
                     };
 
@@ -6226,6 +6945,7 @@ $root.com = (function() {
                  * @property {com.unblock.proto.CityStatus|null} [status] City status
                  * @property {string|null} [name] City name
                  * @property {Array.<com.unblock.proto.INeighborhood>|null} [neighborhoods] City neighborhoods
+                 * @property {string|null} [imageFilename] City imageFilename
                  */
 
                 /**
@@ -6277,6 +6997,14 @@ $root.com = (function() {
                 City.prototype.neighborhoods = $util.emptyArray;
 
                 /**
+                 * City imageFilename.
+                 * @member {string} imageFilename
+                 * @memberof com.unblock.proto.City
+                 * @instance
+                 */
+                City.prototype.imageFilename = "";
+
+                /**
                  * Creates a new City instance using the specified properties.
                  * @function create
                  * @memberof com.unblock.proto.City
@@ -6309,6 +7037,8 @@ $root.com = (function() {
                     if (message.neighborhoods != null && message.neighborhoods.length)
                         for (var i = 0; i < message.neighborhoods.length; ++i)
                             $root.com.unblock.proto.Neighborhood.encode(message.neighborhoods[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.imageFilename);
                     return writer;
                 };
 
@@ -6356,6 +7086,9 @@ $root.com = (function() {
                             if (!(message.neighborhoods && message.neighborhoods.length))
                                 message.neighborhoods = [];
                             message.neighborhoods.push($root.com.unblock.proto.Neighborhood.decode(reader, reader.uint32()));
+                            break;
+                        case 5:
+                            message.imageFilename = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -6416,6 +7149,9 @@ $root.com = (function() {
                                 return "neighborhoods." + error;
                         }
                     }
+                    if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                        if (!$util.isString(message.imageFilename))
+                            return "imageFilename: string expected";
                     return null;
                 };
 
@@ -6459,6 +7195,8 @@ $root.com = (function() {
                             message.neighborhoods[i] = $root.com.unblock.proto.Neighborhood.fromObject(object.neighborhoods[i]);
                         }
                     }
+                    if (object.imageFilename != null)
+                        message.imageFilename = String(object.imageFilename);
                     return message;
                 };
 
@@ -6481,6 +7219,7 @@ $root.com = (function() {
                         object.id = "";
                         object.status = options.enums === String ? "CITY_STATUS_UNSPECIFIED" : 0;
                         object.name = "";
+                        object.imageFilename = "";
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -6493,6 +7232,8 @@ $root.com = (function() {
                         for (var j = 0; j < message.neighborhoods.length; ++j)
                             object.neighborhoods[j] = $root.com.unblock.proto.Neighborhood.toObject(message.neighborhoods[j], options);
                     }
+                    if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
+                        object.imageFilename = message.imageFilename;
                     return object;
                 };
 
@@ -8700,7 +9441,7 @@ $root.com = (function() {
                      * @property {string|null} [username] CreateUserInfo username
                      * @property {string|null} [password] CreateUserInfo password
                      * @property {string|null} [email] CreateUserInfo email
-                     * @property {com.unblock.proto.Level|null} [level] CreateUserInfo level
+                     * @property {com.unblock.proto.UserLevel|null} [level] CreateUserInfo level
                      */
 
                     /**
@@ -8744,7 +9485,7 @@ $root.com = (function() {
 
                     /**
                      * CreateUserInfo level.
-                     * @member {com.unblock.proto.Level} level
+                     * @member {com.unblock.proto.UserLevel} level
                      * @memberof com.unblock.proto.CreateUserRequest.CreateUserInfo
                      * @instance
                      */
@@ -8945,7 +9686,7 @@ $root.com = (function() {
                         if (message.email != null && message.hasOwnProperty("email"))
                             object.email = message.email;
                         if (message.level != null && message.hasOwnProperty("level"))
-                            object.level = options.enums === String ? $root.com.unblock.proto.Level[message.level] : message.level;
+                            object.level = options.enums === String ? $root.com.unblock.proto.UserLevel[message.level] : message.level;
                         return object;
                     };
 
@@ -9394,7 +10135,7 @@ $root.com = (function() {
                      * @interface IUpdateUserInfo
                      * @property {string|null} [username] UpdateUserInfo username
                      * @property {string|null} [email] UpdateUserInfo email
-                     * @property {com.unblock.proto.Level|null} [level] UpdateUserInfo level
+                     * @property {com.unblock.proto.UserLevel|null} [level] UpdateUserInfo level
                      */
 
                     /**
@@ -9430,7 +10171,7 @@ $root.com = (function() {
 
                     /**
                      * UpdateUserInfo level.
-                     * @member {com.unblock.proto.Level} level
+                     * @member {com.unblock.proto.UserLevel} level
                      * @memberof com.unblock.proto.UpdateUserInfoRequest.UpdateUserInfo
                      * @instance
                      */
@@ -9618,7 +10359,7 @@ $root.com = (function() {
                         if (message.email != null && message.hasOwnProperty("email"))
                             object.email = message.email;
                         if (message.level != null && message.hasOwnProperty("level"))
-                            object.level = options.enums === String ? $root.com.unblock.proto.Level[message.level] : message.level;
+                            object.level = options.enums === String ? $root.com.unblock.proto.UserLevel[message.level] : message.level;
                         return object;
                     };
 
@@ -10042,14 +10783,14 @@ $root.com = (function() {
             })();
 
             /**
-             * Level enum.
-             * @name com.unblock.proto.Level
+             * UserLevel enum.
+             * @name com.unblock.proto.UserLevel
              * @enum {string}
              * @property {number} LEVEL_UNSPECIFIED=0 LEVEL_UNSPECIFIED value
              * @property {number} DEFAULT=1 DEFAULT value
              * @property {number} ADMIN=2 ADMIN value
              */
-            proto.Level = (function() {
+            proto.UserLevel = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "LEVEL_UNSPECIFIED"] = 0;
                 values[valuesById[1] = "DEFAULT"] = 1;
@@ -10066,7 +10807,7 @@ $root.com = (function() {
                  * @property {string|null} [id] User id
                  * @property {string|null} [username] User username
                  * @property {string|null} [email] User email
-                 * @property {com.unblock.proto.Level|null} [level] User level
+                 * @property {com.unblock.proto.UserLevel|null} [level] User level
                  */
 
                 /**
@@ -10110,7 +10851,7 @@ $root.com = (function() {
 
                 /**
                  * User level.
-                 * @member {com.unblock.proto.Level} level
+                 * @member {com.unblock.proto.UserLevel} level
                  * @memberof com.unblock.proto.User
                  * @instance
                  */
@@ -10311,7 +11052,7 @@ $root.com = (function() {
                     if (message.email != null && message.hasOwnProperty("email"))
                         object.email = message.email;
                     if (message.level != null && message.hasOwnProperty("level"))
-                        object.level = options.enums === String ? $root.com.unblock.proto.Level[message.level] : message.level;
+                        object.level = options.enums === String ? $root.com.unblock.proto.UserLevel[message.level] : message.level;
                     return object;
                 };
 

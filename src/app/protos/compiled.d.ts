@@ -214,6 +214,9 @@ export namespace com {
 
                     /** CreateAttractionInfo description */
                     description?: (string|null);
+
+                    /** CreateAttractionInfo googlePlaceId */
+                    googlePlaceId?: (string|null);
                 }
 
                 /** Represents a CreateAttractionInfo. */
@@ -233,6 +236,9 @@ export namespace com {
 
                     /** CreateAttractionInfo description. */
                     public description: string;
+
+                    /** CreateAttractionInfo googlePlaceId. */
+                    public googlePlaceId: string;
 
                     /**
                      * Creates a new CreateAttractionInfo instance using the specified properties.
@@ -906,6 +912,9 @@ export namespace com {
 
                 /** Attraction location */
                 location?: (com.unblock.proto.IAttractionLocation|null);
+
+                /** Attraction googlePlaceId */
+                googlePlaceId?: (string|null);
             }
 
             /** Represents an Attraction. */
@@ -934,6 +943,9 @@ export namespace com {
 
                 /** Attraction location. */
                 public location?: (com.unblock.proto.IAttractionLocation|null);
+
+                /** Attraction googlePlaceId. */
+                public googlePlaceId: string;
 
                 /**
                  * Creates a new Attraction instance using the specified properties.
@@ -2177,6 +2189,294 @@ export namespace com {
                 }
             }
 
+            /** Properties of a CheckIn. */
+            interface ICheckIn {
+
+                /** CheckIn checkinId */
+                checkinId?: (string|null);
+
+                /** CheckIn attractionId */
+                attractionId?: (string|null);
+
+                /** CheckIn userId */
+                userId?: (string|null);
+            }
+
+            /** Represents a CheckIn. */
+            class CheckIn implements ICheckIn {
+
+                /**
+                 * Constructs a new CheckIn.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.ICheckIn);
+
+                /** CheckIn checkinId. */
+                public checkinId: string;
+
+                /** CheckIn attractionId. */
+                public attractionId: string;
+
+                /** CheckIn userId. */
+                public userId: string;
+
+                /**
+                 * Creates a new CheckIn instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CheckIn instance
+                 */
+                public static create(properties?: com.unblock.proto.ICheckIn): com.unblock.proto.CheckIn;
+
+                /**
+                 * Encodes the specified CheckIn message. Does not implicitly {@link com.unblock.proto.CheckIn.verify|verify} messages.
+                 * @param message CheckIn message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.ICheckIn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CheckIn message, length delimited. Does not implicitly {@link com.unblock.proto.CheckIn.verify|verify} messages.
+                 * @param message CheckIn message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.ICheckIn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CheckIn message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CheckIn
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.CheckIn;
+
+                /**
+                 * Decodes a CheckIn message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CheckIn
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.CheckIn;
+
+                /**
+                 * Verifies a CheckIn message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CheckIn message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CheckIn
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.CheckIn;
+
+                /**
+                 * Creates a plain object from a CheckIn message. Also converts values to other types if specified.
+                 * @param message CheckIn
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.CheckIn, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CheckIn to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a CreateCheckInRequest. */
+            interface ICreateCheckInRequest {
+
+                /** CreateCheckInRequest attractionId */
+                attractionId?: (string|null);
+
+                /** CreateCheckInRequest userId */
+                userId?: (string|null);
+            }
+
+            /** Represents a CreateCheckInRequest. */
+            class CreateCheckInRequest implements ICreateCheckInRequest {
+
+                /**
+                 * Constructs a new CreateCheckInRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.ICreateCheckInRequest);
+
+                /** CreateCheckInRequest attractionId. */
+                public attractionId: string;
+
+                /** CreateCheckInRequest userId. */
+                public userId: string;
+
+                /**
+                 * Creates a new CreateCheckInRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateCheckInRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.ICreateCheckInRequest): com.unblock.proto.CreateCheckInRequest;
+
+                /**
+                 * Encodes the specified CreateCheckInRequest message. Does not implicitly {@link com.unblock.proto.CreateCheckInRequest.verify|verify} messages.
+                 * @param message CreateCheckInRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.ICreateCheckInRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateCheckInRequest message, length delimited. Does not implicitly {@link com.unblock.proto.CreateCheckInRequest.verify|verify} messages.
+                 * @param message CreateCheckInRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.ICreateCheckInRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateCheckInRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.CreateCheckInRequest;
+
+                /**
+                 * Decodes a CreateCheckInRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.CreateCheckInRequest;
+
+                /**
+                 * Verifies a CreateCheckInRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateCheckInRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateCheckInRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.CreateCheckInRequest;
+
+                /**
+                 * Creates a plain object from a CreateCheckInRequest message. Also converts values to other types if specified.
+                 * @param message CreateCheckInRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.CreateCheckInRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateCheckInRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a RemoveCheckInRequest. */
+            interface IRemoveCheckInRequest {
+
+                /** RemoveCheckInRequest checkinId */
+                checkinId?: (string|null);
+            }
+
+            /** Represents a RemoveCheckInRequest. */
+            class RemoveCheckInRequest implements IRemoveCheckInRequest {
+
+                /**
+                 * Constructs a new RemoveCheckInRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IRemoveCheckInRequest);
+
+                /** RemoveCheckInRequest checkinId. */
+                public checkinId: string;
+
+                /**
+                 * Creates a new RemoveCheckInRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RemoveCheckInRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.IRemoveCheckInRequest): com.unblock.proto.RemoveCheckInRequest;
+
+                /**
+                 * Encodes the specified RemoveCheckInRequest message. Does not implicitly {@link com.unblock.proto.RemoveCheckInRequest.verify|verify} messages.
+                 * @param message RemoveCheckInRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IRemoveCheckInRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RemoveCheckInRequest message, length delimited. Does not implicitly {@link com.unblock.proto.RemoveCheckInRequest.verify|verify} messages.
+                 * @param message RemoveCheckInRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IRemoveCheckInRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RemoveCheckInRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RemoveCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.RemoveCheckInRequest;
+
+                /**
+                 * Decodes a RemoveCheckInRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RemoveCheckInRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.RemoveCheckInRequest;
+
+                /**
+                 * Verifies a RemoveCheckInRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RemoveCheckInRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RemoveCheckInRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.RemoveCheckInRequest;
+
+                /**
+                 * Creates a plain object from a RemoveCheckInRequest message. Also converts values to other types if specified.
+                 * @param message RemoveCheckInRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.RemoveCheckInRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RemoveCheckInRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of a CreateCityRequest. */
             interface ICreateCityRequest {
 
@@ -2274,6 +2574,9 @@ export namespace com {
 
                     /** CreateCityInfo name */
                     name?: (string|null);
+
+                    /** CreateCityInfo imageFilename */
+                    imageFilename?: (string|null);
                 }
 
                 /** Represents a CreateCityInfo. */
@@ -2287,6 +2590,9 @@ export namespace com {
 
                     /** CreateCityInfo name. */
                     public name: string;
+
+                    /** CreateCityInfo imageFilename. */
+                    public imageFilename: string;
 
                     /**
                      * Creates a new CreateCityInfo instance using the specified properties.
@@ -2553,6 +2859,9 @@ export namespace com {
 
                     /** UpdateCityInfo name */
                     name?: (string|null);
+
+                    /** UpdateCityInfo imageFilename */
+                    imageFilename?: (string|null);
                 }
 
                 /** Represents an UpdateCityInfo. */
@@ -2566,6 +2875,9 @@ export namespace com {
 
                     /** UpdateCityInfo name. */
                     public name: string;
+
+                    /** UpdateCityInfo imageFilename. */
+                    public imageFilename: string;
 
                     /**
                      * Creates a new UpdateCityInfo instance using the specified properties.
@@ -2756,6 +3068,9 @@ export namespace com {
 
                 /** City neighborhoods */
                 neighborhoods?: (com.unblock.proto.INeighborhood[]|null);
+
+                /** City imageFilename */
+                imageFilename?: (string|null);
             }
 
             /** Represents a City. */
@@ -2778,6 +3093,9 @@ export namespace com {
 
                 /** City neighborhoods. */
                 public neighborhoods: com.unblock.proto.INeighborhood[];
+
+                /** City imageFilename. */
+                public imageFilename: string;
 
                 /**
                  * Creates a new City instance using the specified properties.
@@ -3832,7 +4150,7 @@ export namespace com {
                     email?: (string|null);
 
                     /** CreateUserInfo level */
-                    level?: (com.unblock.proto.Level|null);
+                    level?: (com.unblock.proto.UserLevel|null);
                 }
 
                 /** Represents a CreateUserInfo. */
@@ -3854,7 +4172,7 @@ export namespace com {
                     public email: string;
 
                     /** CreateUserInfo level. */
-                    public level: com.unblock.proto.Level;
+                    public level: com.unblock.proto.UserLevel;
 
                     /**
                      * Creates a new CreateUserInfo instance using the specified properties.
@@ -4126,7 +4444,7 @@ export namespace com {
                     email?: (string|null);
 
                     /** UpdateUserInfo level */
-                    level?: (com.unblock.proto.Level|null);
+                    level?: (com.unblock.proto.UserLevel|null);
                 }
 
                 /** Represents an UpdateUserInfo. */
@@ -4145,7 +4463,7 @@ export namespace com {
                     public email: string;
 
                     /** UpdateUserInfo level. */
-                    public level: com.unblock.proto.Level;
+                    public level: com.unblock.proto.UserLevel;
 
                     /**
                      * Creates a new UpdateUserInfo instance using the specified properties.
@@ -4408,8 +4726,8 @@ export namespace com {
                 }
             }
 
-            /** Level enum. */
-            enum Level {
+            /** UserLevel enum. */
+            enum UserLevel {
                 LEVEL_UNSPECIFIED = 0,
                 DEFAULT = 1,
                 ADMIN = 2
@@ -4428,7 +4746,7 @@ export namespace com {
                 email?: (string|null);
 
                 /** User level */
-                level?: (com.unblock.proto.Level|null);
+                level?: (com.unblock.proto.UserLevel|null);
             }
 
             /** Represents a User. */
@@ -4450,7 +4768,7 @@ export namespace com {
                 public email: string;
 
                 /** User level. */
-                public level: com.unblock.proto.Level;
+                public level: com.unblock.proto.UserLevel;
 
                 /**
                  * Creates a new User instance using the specified properties.

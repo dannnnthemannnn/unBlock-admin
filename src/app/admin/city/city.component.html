@@ -21,6 +21,10 @@
       <input matInput name="name" placeholder="Name" required [formControl]="nameControl" />
     </mat-form-field>
 
+    <mat-form-field>
+      <input matInput name="imageFilename" placeholder="imageFilename" required [formControl]="imageFilenameControl" />
+    </mat-form-field>
+
     <div class="mat-form-field">
       <button mat-raised-button color="primary" (click)="onSave()">
         Save

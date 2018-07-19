@@ -37,7 +37,7 @@ export class UserService {
     getSelf(token: string) {
         return this.http.get(
             this.path('user'),
-            this.getHeaders()
+            this.getHeadersWithToken(token)
         ).map(value => com.unblock.proto.User.create(value)).toPromise();
     }
 

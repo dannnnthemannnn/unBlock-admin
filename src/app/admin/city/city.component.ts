@@ -28,6 +28,7 @@ export class CityComponent {
 
   citySearchControl = new FormControl('');
   nameControl = new FormControl('');
+  imageFilenameControl = new FormControl('');
   disabledControl = new FormControl('');
   neighborhoodControl = new FormControl('');
 
@@ -69,6 +70,7 @@ export class CityComponent {
   updateCityDetails(city: com.unblock.proto.ICity) {
     this.citySearchControl.setValue('');
     this.nameControl.setValue(city.name);
+    this.imageFilenameControl.setValue(city.imageFilename);
     this.disabledControl.setValue(this.disabled);
     this.neighborhoods = city.neighborhoods;
     this.city = city;
@@ -117,7 +119,8 @@ export class CityComponent {
     this.cityService.updateInfo(new com.unblock.proto.UpdateCityInfoRequest({
       id: this.city.id,
       info: {
-        name: this.nameControl.value
+        name: this.nameControl.value,
+        imageFilename: this.imageFilenameControl.value
       }
     })).then(city => {
       this.city = city;
@@ -153,7 +156,8 @@ export class CityComponent {
   createNewCity() {
     this.cityService.create(new com.unblock.proto.CreateCityRequest({
       info: {
-        name: this.nameControl.value
+        name: this.nameControl.value,
+        imageFilename: this.imageFilenameControl.value
       }
     })).then(city => {
       this.navigate(['cities', city.id]);

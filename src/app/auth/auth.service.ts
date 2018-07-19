@@ -11,6 +11,9 @@ import { AuthConstants } from './auth.const';
 
 import { com } from '../protos/compiled.js'
 
+// TODO: Figure out how to handle enum values without redefining them here
+const ADMIN = 'ADMIN';
+
 @Injectable()
 export class AuthService {
     constructor(
@@ -36,15 +39,16 @@ export class AuthService {
         return this.loginService.login(
             new com.unblock.proto.LoginRequest({ usernameOrEmail, password }))
             .then(resp => {
-                this.userService.getSelf(resp.headers.get(AuthConstants.HEADER_TOKEN)).then(
-                    user => {
-                        if (user.level === com.unblock.proto.Level.ADMIN) {
-                            this.cookieService.set(AuthConstants.COOKIE_TOKEN, resp.headers.get(AuthConstants.HEADER_TOKEN));
-                        } else {
-                            throw Error('User is not an admin');
-                        }
-                    }
-                )
+                const user = com.unblock.proto.User.create(resp.body);
+                console.log(user.level);
+                console.log(user.level.toString());
+                console.log(com.unblock.proto.Level.ADMIN.toString());
+                console.log(com.unblock.proto.Level.ADMIN);
+                if (user.level.toString() === ADMIN) {
+                    this.cookieService.set(AuthConstants.COOKIE_TOKEN, resp.headers.get(AuthConstants.HEADER_TOKEN));
+                } else {
+                    throw Error('User is not an admin');
+                }
             });
     }
 }

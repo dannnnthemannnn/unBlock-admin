@@ -50,8 +50,7 @@ export class AttractionComponent {
 
   displayableAttraction = (attraction: com.unblock.proto.IAttraction) => this.displayAttraction(attraction);
 
-
-  lat: number = 51.678418;
+  lat: number = 40.678418;
   lng: number = 7.809007;
 
   color = '#e34r56';/*randomColor({

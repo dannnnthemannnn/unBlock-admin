@@ -52,8 +52,8 @@ export class BlockComponent {
   attractionControl = new FormControl('');
   placesSearchControl = new FormControl('');
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 40.7831;
+  lng: number = -73.9712;
 
   selectedPlace: google.maps.places.PlaceResult;
 
@@ -63,9 +63,9 @@ export class BlockComponent {
 
   loading = true;
 
-  color = '#e34r56';/*randomColor({
+  color = randomColor({
     luminosity: 'dark'
-  });*/
+  });
 
   displayableBlock = (block: com.unblock.proto.IBlock) => this.displayBlock(block);
 
@@ -137,6 +137,7 @@ export class BlockComponent {
       try {
         let placesService = new google.maps.places.PlacesService(new google.maps.Map(this.gmapElement.nativeElement));
         placesService.nearbySearch({ location: { lat: this.lat, lng: this.lng }, radius: 200, name }, results => {
+          console.log(results);
           resolve(results);
         });
       } catch (error) {

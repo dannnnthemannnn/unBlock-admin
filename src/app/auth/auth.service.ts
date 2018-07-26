@@ -42,8 +42,8 @@ export class AuthService {
                 const user = com.unblock.proto.User.create(resp.body);
                 console.log(user.level);
                 console.log(user.level.toString());
-                console.log(com.unblock.proto.Level.ADMIN.toString());
-                console.log(com.unblock.proto.Level.ADMIN);
+                console.log(com.unblock.proto.UserLevel.ADMIN.toString());
+                console.log(com.unblock.proto.UserLevel.ADMIN);
                 if (user.level.toString() === ADMIN) {
                     this.cookieService.set(AuthConstants.COOKIE_TOKEN, resp.headers.get(AuthConstants.HEADER_TOKEN));
                 } else {

@@ -96,7 +96,7 @@ export class UserComponent {
     onCreateNew() {
         if (!this.passwordControl.value && this.passwordControl.value !== this.passwordConfirmControl.value) return;
 
-        const level = this.adminControl.value ? com.unblock.proto.Level.ADMIN : com.unblock.proto.Level.DEFAULT;
+        const level = this.adminControl.value ? com.unblock.proto.UserLevel.ADMIN : com.unblock.proto.UserLevel.DEFAULT;
 
         const userRequest = new com.unblock.proto.CreateUserRequest({
             info: {
@@ -113,7 +113,7 @@ export class UserComponent {
     }
 
     onSave() {
-        const level = this.adminControl.value ? com.unblock.proto.Level.ADMIN : com.unblock.proto.Level.DEFAULT;
+        const level = this.adminControl.value ? com.unblock.proto.UserLevel.ADMIN : com.unblock.proto.UserLevel.DEFAULT;
         const updateRequest = new com.unblock.proto.UpdateUserInfoRequest({
             id: this.user.id,
             info: {

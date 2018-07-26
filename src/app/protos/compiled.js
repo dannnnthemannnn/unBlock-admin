@@ -6698,12 +6698,14 @@ $root.com = (function() {
              * @property {number} CITY_STATUS_UNSPECIFIED=0 CITY_STATUS_UNSPECIFIED value
              * @property {number} CITY_LIVE=1 CITY_LIVE value
              * @property {number} CITY_DISABLED=2 CITY_DISABLED value
+             * @property {number} CITY_COMING_SOON=3 CITY_COMING_SOON value
              */
             proto.CityStatus = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "CITY_STATUS_UNSPECIFIED"] = 0;
                 values[valuesById[1] = "CITY_LIVE"] = 1;
                 values[valuesById[2] = "CITY_DISABLED"] = 2;
+                values[valuesById[3] = "CITY_COMING_SOON"] = 3;
                 return values;
             })();
 
@@ -6861,6 +6863,7 @@ $root.com = (function() {
                         case 0:
                         case 1:
                         case 2:
+                        case 3:
                             break;
                         }
                     return null;
@@ -6892,6 +6895,10 @@ $root.com = (function() {
                     case "CITY_DISABLED":
                     case 2:
                         message.status = 2;
+                        break;
+                    case "CITY_COMING_SOON":
+                    case 3:
+                        message.status = 3;
                         break;
                     }
                     return message;
@@ -7135,6 +7142,7 @@ $root.com = (function() {
                         case 0:
                         case 1:
                         case 2:
+                        case 3:
                             break;
                         }
                     if (message.name != null && message.hasOwnProperty("name"))
@@ -7181,6 +7189,10 @@ $root.com = (function() {
                     case "CITY_DISABLED":
                     case 2:
                         message.status = 2;
+                        break;
+                    case "CITY_COMING_SOON":
+                    case 3:
+                        message.status = 3;
                         break;
                     }
                     if (object.name != null)

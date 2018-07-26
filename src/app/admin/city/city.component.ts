@@ -29,10 +29,12 @@ export class CityComponent {
   citySearchControl = new FormControl('');
   nameControl = new FormControl('');
   imageFilenameControl = new FormControl('');
-  disabledControl = new FormControl('');
+  cityStatusControl = new FormControl('');
   neighborhoodControl = new FormControl('');
 
   city: com.unblock.proto.ICity | null = null;
+
+  cityStatuses: String[] = Object.keys(com.unblock.proto.CityStatus);
 
   constructor(
     private readonly cityService: CityService,
@@ -49,16 +51,6 @@ export class CityComponent {
     this.cities = this.citySearchControl.valueChanges.startWith('').flatMap(
       value => this.getCities(value)
     );
-
-    this.neighborhoodControl.valueChanges.subscribe(value => {
-
-      console.log('new neighborhood value');
-      console.log(value);
-    })
-  }
-
-  get disabled() {
-    return this.city && this.city.status.toString() === CITY_DISABLED;
   }
 
   loadCity(cityId: string) {
@@ -71,7 +63,8 @@ export class CityComponent {
     this.citySearchControl.setValue('');
     this.nameControl.setValue(city.name);
     this.imageFilenameControl.setValue(city.imageFilename);
-    this.disabledControl.setValue(this.disabled);
+    this.cityStatusControl.setValue(city.status);
+    console.log(this.cityStatusControl.value);
     this.neighborhoods = city.neighborhoods;
     this.city = city;
   }
@@ -142,11 +135,10 @@ export class CityComponent {
     });
   }
 
-  onDisableToggle() {
-    const status = this.disabled ? com.unblock.proto.CityStatus.CITY_LIVE : com.unblock.proto.CityStatus.CITY_DISABLED;
+  onCityStatusUpdate() {
     this.cityService.updateStatus(new com.unblock.proto.UpdateCityStatusRequest({
       id: this.city.id,
-      status
+      status: this.cityStatusControl.value,
     })).then(city => {
       this.city = city;
       this.showNotification('City status updated.');

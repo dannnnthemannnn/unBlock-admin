@@ -2955,7 +2955,8 @@ export namespace com {
             enum CityStatus {
                 CITY_STATUS_UNSPECIFIED = 0,
                 CITY_LIVE = 1,
-                CITY_DISABLED = 2
+                CITY_DISABLED = 2,
+                CITY_COMING_SOON = 3
             }
 
             /** Properties of an UpdateCityStatusRequest. */

@@ -34,8 +34,16 @@
 
   <div class="row" *ngIf="city">
     <div class="mat-form-field">
-      <button mat-raised-button color="primary" (click)="onDisableToggle()">
-        {{disabled ? 'Enable' : 'Disable'}}
+      <mat-select placeholder="City Status" [formControl]="cityStatusControl">
+        <mat-option *ngFor="let cityStatus of cityStatuses" [value]="cityStatus">
+          {{cityStatus}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div class="mat-form-field">
+      <button mat-raised-button color="primary" (click)="onCityStatusUpdate()">
+        Update Status
       </button>
     </div>
   </div>

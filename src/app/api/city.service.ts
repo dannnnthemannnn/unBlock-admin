@@ -57,6 +57,22 @@ export class CityService {
         ).map(value => com.unblock.proto.City.create(value)).toPromise();
     }
 
+    updateCenter(request: com.unblock.proto.UpdateCityCenterRequest) {
+        return this.http.patch(
+            this.path('city:center'),
+            request.toJSON(),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.City.create(value)).toPromise();
+    }
+
+    updateBounds(request: com.unblock.proto.UpdateCityBoundsRequest) {
+        return this.http.patch(
+            this.path('city:bounds'),
+            request.toJSON(),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.City.create(value)).toPromise();
+    }
+
     private getHeaders() {
         return {
             headers: new HttpHeaders({

@@ -36,216 +36,6 @@ $root.com = (function() {
              */
             var proto = {};
 
-            proto.AttractionLocation = (function() {
-
-                /**
-                 * Properties of an AttractionLocation.
-                 * @memberof com.unblock.proto
-                 * @interface IAttractionLocation
-                 * @property {number|null} [x] AttractionLocation x
-                 * @property {number|null} [y] AttractionLocation y
-                 */
-
-                /**
-                 * Constructs a new AttractionLocation.
-                 * @memberof com.unblock.proto
-                 * @classdesc Represents an AttractionLocation.
-                 * @implements IAttractionLocation
-                 * @constructor
-                 * @param {com.unblock.proto.IAttractionLocation=} [properties] Properties to set
-                 */
-                function AttractionLocation(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-
-                /**
-                 * AttractionLocation x.
-                 * @member {number} x
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @instance
-                 */
-                AttractionLocation.prototype.x = 0;
-
-                /**
-                 * AttractionLocation y.
-                 * @member {number} y
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @instance
-                 */
-                AttractionLocation.prototype.y = 0;
-
-                /**
-                 * Creates a new AttractionLocation instance using the specified properties.
-                 * @function create
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {com.unblock.proto.IAttractionLocation=} [properties] Properties to set
-                 * @returns {com.unblock.proto.AttractionLocation} AttractionLocation instance
-                 */
-                AttractionLocation.create = function create(properties) {
-                    return new AttractionLocation(properties);
-                };
-
-                /**
-                 * Encodes the specified AttractionLocation message. Does not implicitly {@link com.unblock.proto.AttractionLocation.verify|verify} messages.
-                 * @function encode
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {com.unblock.proto.IAttractionLocation} message AttractionLocation message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                AttractionLocation.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.x != null && message.hasOwnProperty("x"))
-                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
-                    if (message.y != null && message.hasOwnProperty("y"))
-                        writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
-                    return writer;
-                };
-
-                /**
-                 * Encodes the specified AttractionLocation message, length delimited. Does not implicitly {@link com.unblock.proto.AttractionLocation.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {com.unblock.proto.IAttractionLocation} message AttractionLocation message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                AttractionLocation.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-
-                /**
-                 * Decodes an AttractionLocation message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {com.unblock.proto.AttractionLocation} AttractionLocation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                AttractionLocation.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.AttractionLocation();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.x = reader.float();
-                            break;
-                        case 2:
-                            message.y = reader.float();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-
-                /**
-                 * Decodes an AttractionLocation message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {com.unblock.proto.AttractionLocation} AttractionLocation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                AttractionLocation.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-
-                /**
-                 * Verifies an AttractionLocation message.
-                 * @function verify
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                AttractionLocation.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.x != null && message.hasOwnProperty("x"))
-                        if (typeof message.x !== "number")
-                            return "x: number expected";
-                    if (message.y != null && message.hasOwnProperty("y"))
-                        if (typeof message.y !== "number")
-                            return "y: number expected";
-                    return null;
-                };
-
-                /**
-                 * Creates an AttractionLocation message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {com.unblock.proto.AttractionLocation} AttractionLocation
-                 */
-                AttractionLocation.fromObject = function fromObject(object) {
-                    if (object instanceof $root.com.unblock.proto.AttractionLocation)
-                        return object;
-                    var message = new $root.com.unblock.proto.AttractionLocation();
-                    if (object.x != null)
-                        message.x = Number(object.x);
-                    if (object.y != null)
-                        message.y = Number(object.y);
-                    return message;
-                };
-
-                /**
-                 * Creates a plain object from an AttractionLocation message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @static
-                 * @param {com.unblock.proto.AttractionLocation} message AttractionLocation
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                AttractionLocation.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.x = 0;
-                        object.y = 0;
-                    }
-                    if (message.x != null && message.hasOwnProperty("x"))
-                        object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
-                    if (message.y != null && message.hasOwnProperty("y"))
-                        object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
-                    return object;
-                };
-
-                /**
-                 * Converts this AttractionLocation to JSON.
-                 * @function toJSON
-                 * @memberof com.unblock.proto.AttractionLocation
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                AttractionLocation.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-
-                return AttractionLocation;
-            })();
-
             proto.CreateAttractionRequest = (function() {
 
                 /**
@@ -465,7 +255,7 @@ $root.com = (function() {
                      * @memberof com.unblock.proto.CreateAttractionRequest
                      * @interface ICreateAttractionInfo
                      * @property {string|null} [name] CreateAttractionInfo name
-                     * @property {com.unblock.proto.IAttractionLocation|null} [location] CreateAttractionInfo location
+                     * @property {com.unblock.proto.IPoint|null} [location] CreateAttractionInfo location
                      * @property {string|null} [description] CreateAttractionInfo description
                      * @property {string|null} [googlePlaceId] CreateAttractionInfo googlePlaceId
                      */
@@ -495,7 +285,7 @@ $root.com = (function() {
 
                     /**
                      * CreateAttractionInfo location.
-                     * @member {com.unblock.proto.IAttractionLocation|null|undefined} location
+                     * @member {com.unblock.proto.IPoint|null|undefined} location
                      * @memberof com.unblock.proto.CreateAttractionRequest.CreateAttractionInfo
                      * @instance
                      */
@@ -544,7 +334,7 @@ $root.com = (function() {
                         if (message.name != null && message.hasOwnProperty("name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.location != null && message.hasOwnProperty("location"))
-                            $root.com.unblock.proto.AttractionLocation.encode(message.location, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            $root.com.unblock.proto.Point.encode(message.location, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.description != null && message.hasOwnProperty("description"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
                         if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
@@ -587,7 +377,7 @@ $root.com = (function() {
                                 message.name = reader.string();
                                 break;
                             case 2:
-                                message.location = $root.com.unblock.proto.AttractionLocation.decode(reader, reader.uint32());
+                                message.location = $root.com.unblock.proto.Point.decode(reader, reader.uint32());
                                 break;
                             case 3:
                                 message.description = reader.string();
@@ -634,7 +424,7 @@ $root.com = (function() {
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.location != null && message.hasOwnProperty("location")) {
-                            var error = $root.com.unblock.proto.AttractionLocation.verify(message.location);
+                            var error = $root.com.unblock.proto.Point.verify(message.location);
                             if (error)
                                 return "location." + error;
                         }
@@ -664,7 +454,7 @@ $root.com = (function() {
                         if (object.location != null) {
                             if (typeof object.location !== "object")
                                 throw TypeError(".com.unblock.proto.CreateAttractionRequest.CreateAttractionInfo.location: object expected");
-                            message.location = $root.com.unblock.proto.AttractionLocation.fromObject(object.location);
+                            message.location = $root.com.unblock.proto.Point.fromObject(object.location);
                         }
                         if (object.description != null)
                             message.description = String(object.description);
@@ -695,7 +485,7 @@ $root.com = (function() {
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.location != null && message.hasOwnProperty("location"))
-                            object.location = $root.com.unblock.proto.AttractionLocation.toObject(message.location, options);
+                            object.location = $root.com.unblock.proto.Point.toObject(message.location, options);
                         if (message.description != null && message.hasOwnProperty("description"))
                             object.description = message.description;
                         if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
@@ -1360,7 +1150,7 @@ $root.com = (function() {
                  * @memberof com.unblock.proto
                  * @interface IUpdateAttractionLocationRequest
                  * @property {string|null} [id] UpdateAttractionLocationRequest id
-                 * @property {com.unblock.proto.IAttractionLocation|null} [location] UpdateAttractionLocationRequest location
+                 * @property {com.unblock.proto.IPoint|null} [location] UpdateAttractionLocationRequest location
                  */
 
                 /**
@@ -1388,7 +1178,7 @@ $root.com = (function() {
 
                 /**
                  * UpdateAttractionLocationRequest location.
-                 * @member {com.unblock.proto.IAttractionLocation|null|undefined} location
+                 * @member {com.unblock.proto.IPoint|null|undefined} location
                  * @memberof com.unblock.proto.UpdateAttractionLocationRequest
                  * @instance
                  */
@@ -1421,7 +1211,7 @@ $root.com = (function() {
                     if (message.id != null && message.hasOwnProperty("id"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
                     if (message.location != null && message.hasOwnProperty("location"))
-                        $root.com.unblock.proto.AttractionLocation.encode(message.location, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        $root.com.unblock.proto.Point.encode(message.location, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
 
@@ -1460,7 +1250,7 @@ $root.com = (function() {
                             message.id = reader.string();
                             break;
                         case 2:
-                            message.location = $root.com.unblock.proto.AttractionLocation.decode(reader, reader.uint32());
+                            message.location = $root.com.unblock.proto.Point.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1501,7 +1291,7 @@ $root.com = (function() {
                         if (!$util.isString(message.id))
                             return "id: string expected";
                     if (message.location != null && message.hasOwnProperty("location")) {
-                        var error = $root.com.unblock.proto.AttractionLocation.verify(message.location);
+                        var error = $root.com.unblock.proto.Point.verify(message.location);
                         if (error)
                             return "location." + error;
                     }
@@ -1525,7 +1315,7 @@ $root.com = (function() {
                     if (object.location != null) {
                         if (typeof object.location !== "object")
                             throw TypeError(".com.unblock.proto.UpdateAttractionLocationRequest.location: object expected");
-                        message.location = $root.com.unblock.proto.AttractionLocation.fromObject(object.location);
+                        message.location = $root.com.unblock.proto.Point.fromObject(object.location);
                     }
                     return message;
                 };
@@ -1550,7 +1340,7 @@ $root.com = (function() {
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
                     if (message.location != null && message.hasOwnProperty("location"))
-                        object.location = $root.com.unblock.proto.AttractionLocation.toObject(message.location, options);
+                        object.location = $root.com.unblock.proto.Point.toObject(message.location, options);
                     return object;
                 };
 
@@ -2033,7 +1823,7 @@ $root.com = (function() {
                  * @property {string|null} [blockId] Attraction blockId
                  * @property {string|null} [name] Attraction name
                  * @property {string|null} [description] Attraction description
-                 * @property {com.unblock.proto.IAttractionLocation|null} [location] Attraction location
+                 * @property {com.unblock.proto.IPoint|null} [location] Attraction location
                  * @property {string|null} [googlePlaceId] Attraction googlePlaceId
                  */
 
@@ -2094,7 +1884,7 @@ $root.com = (function() {
 
                 /**
                  * Attraction location.
-                 * @member {com.unblock.proto.IAttractionLocation|null|undefined} location
+                 * @member {com.unblock.proto.IPoint|null|undefined} location
                  * @memberof com.unblock.proto.Attraction
                  * @instance
                  */
@@ -2143,7 +1933,7 @@ $root.com = (function() {
                     if (message.description != null && message.hasOwnProperty("description"))
                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
                     if (message.location != null && message.hasOwnProperty("location"))
-                        $root.com.unblock.proto.AttractionLocation.encode(message.location, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        $root.com.unblock.proto.Point.encode(message.location, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                     if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.googlePlaceId);
                     return writer;
@@ -2196,7 +1986,7 @@ $root.com = (function() {
                             message.description = reader.string();
                             break;
                         case 6:
-                            message.location = $root.com.unblock.proto.AttractionLocation.decode(reader, reader.uint32());
+                            message.location = $root.com.unblock.proto.Point.decode(reader, reader.uint32());
                             break;
                         case 7:
                             message.googlePlaceId = reader.string();
@@ -2258,7 +2048,7 @@ $root.com = (function() {
                         if (!$util.isString(message.description))
                             return "description: string expected";
                     if (message.location != null && message.hasOwnProperty("location")) {
-                        var error = $root.com.unblock.proto.AttractionLocation.verify(message.location);
+                        var error = $root.com.unblock.proto.Point.verify(message.location);
                         if (error)
                             return "location." + error;
                     }
@@ -2305,7 +2095,7 @@ $root.com = (function() {
                     if (object.location != null) {
                         if (typeof object.location !== "object")
                             throw TypeError(".com.unblock.proto.Attraction.location: object expected");
-                        message.location = $root.com.unblock.proto.AttractionLocation.fromObject(object.location);
+                        message.location = $root.com.unblock.proto.Point.fromObject(object.location);
                     }
                     if (object.googlePlaceId != null)
                         message.googlePlaceId = String(object.googlePlaceId);
@@ -2345,7 +2135,7 @@ $root.com = (function() {
                     if (message.description != null && message.hasOwnProperty("description"))
                         object.description = message.description;
                     if (message.location != null && message.hasOwnProperty("location"))
-                        object.location = $root.com.unblock.proto.AttractionLocation.toObject(message.location, options);
+                        object.location = $root.com.unblock.proto.Point.toObject(message.location, options);
                     if (message.googlePlaceId != null && message.hasOwnProperty("googlePlaceId"))
                         object.googlePlaceId = message.googlePlaceId;
                     return object;
@@ -2363,6 +2153,216 @@ $root.com = (function() {
                 };
 
                 return Attraction;
+            })();
+
+            proto.Point = (function() {
+
+                /**
+                 * Properties of a Point.
+                 * @memberof com.unblock.proto
+                 * @interface IPoint
+                 * @property {number|null} [x] Point x
+                 * @property {number|null} [y] Point y
+                 */
+
+                /**
+                 * Constructs a new Point.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents a Point.
+                 * @implements IPoint
+                 * @constructor
+                 * @param {com.unblock.proto.IPoint=} [properties] Properties to set
+                 */
+                function Point(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Point x.
+                 * @member {number} x
+                 * @memberof com.unblock.proto.Point
+                 * @instance
+                 */
+                Point.prototype.x = 0;
+
+                /**
+                 * Point y.
+                 * @member {number} y
+                 * @memberof com.unblock.proto.Point
+                 * @instance
+                 */
+                Point.prototype.y = 0;
+
+                /**
+                 * Creates a new Point instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {com.unblock.proto.IPoint=} [properties] Properties to set
+                 * @returns {com.unblock.proto.Point} Point instance
+                 */
+                Point.create = function create(properties) {
+                    return new Point(properties);
+                };
+
+                /**
+                 * Encodes the specified Point message. Does not implicitly {@link com.unblock.proto.Point.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {com.unblock.proto.IPoint} message Point message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Point.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.x != null && message.hasOwnProperty("x"))
+                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
+                    if (message.y != null && message.hasOwnProperty("y"))
+                        writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Point message, length delimited. Does not implicitly {@link com.unblock.proto.Point.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {com.unblock.proto.IPoint} message Point message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Point.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Point message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.Point} Point
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Point.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.Point();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.x = reader.float();
+                            break;
+                        case 2:
+                            message.y = reader.float();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Point message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.Point} Point
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Point.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Point message.
+                 * @function verify
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Point.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.x != null && message.hasOwnProperty("x"))
+                        if (typeof message.x !== "number")
+                            return "x: number expected";
+                    if (message.y != null && message.hasOwnProperty("y"))
+                        if (typeof message.y !== "number")
+                            return "y: number expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a Point message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.Point} Point
+                 */
+                Point.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.Point)
+                        return object;
+                    var message = new $root.com.unblock.proto.Point();
+                    if (object.x != null)
+                        message.x = Number(object.x);
+                    if (object.y != null)
+                        message.y = Number(object.y);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Point message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.Point
+                 * @static
+                 * @param {com.unblock.proto.Point} message Point
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Point.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.x = 0;
+                        object.y = 0;
+                    }
+                    if (message.x != null && message.hasOwnProperty("x"))
+                        object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+                    if (message.y != null && message.hasOwnProperty("y"))
+                        object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+                    return object;
+                };
+
+                /**
+                 * Converts this Point to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.Point
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Point.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Point;
             })();
 
             proto.CreateBlockRequest = (function() {
@@ -4615,7 +4615,7 @@ $root.com = (function() {
                  * Properties of a Bounds.
                  * @memberof com.unblock.proto
                  * @interface IBounds
-                 * @property {Array.<com.unblock.proto.Bounds.IPoint>|null} [points] Bounds points
+                 * @property {Array.<com.unblock.proto.IPoint>|null} [points] Bounds points
                  */
 
                 /**
@@ -4636,7 +4636,7 @@ $root.com = (function() {
 
                 /**
                  * Bounds points.
-                 * @member {Array.<com.unblock.proto.Bounds.IPoint>} points
+                 * @member {Array.<com.unblock.proto.IPoint>} points
                  * @memberof com.unblock.proto.Bounds
                  * @instance
                  */
@@ -4668,7 +4668,7 @@ $root.com = (function() {
                         writer = $Writer.create();
                     if (message.points != null && message.points.length)
                         for (var i = 0; i < message.points.length; ++i)
-                            $root.com.unblock.proto.Bounds.Point.encode(message.points[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            $root.com.unblock.proto.Point.encode(message.points[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     return writer;
                 };
 
@@ -4706,7 +4706,7 @@ $root.com = (function() {
                         case 1:
                             if (!(message.points && message.points.length))
                                 message.points = [];
-                            message.points.push($root.com.unblock.proto.Bounds.Point.decode(reader, reader.uint32()));
+                            message.points.push($root.com.unblock.proto.Point.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -4747,7 +4747,7 @@ $root.com = (function() {
                         if (!Array.isArray(message.points))
                             return "points: array expected";
                         for (var i = 0; i < message.points.length; ++i) {
-                            var error = $root.com.unblock.proto.Bounds.Point.verify(message.points[i]);
+                            var error = $root.com.unblock.proto.Point.verify(message.points[i]);
                             if (error)
                                 return "points." + error;
                         }
@@ -4774,7 +4774,7 @@ $root.com = (function() {
                         for (var i = 0; i < object.points.length; ++i) {
                             if (typeof object.points[i] !== "object")
                                 throw TypeError(".com.unblock.proto.Bounds.points: object expected");
-                            message.points[i] = $root.com.unblock.proto.Bounds.Point.fromObject(object.points[i]);
+                            message.points[i] = $root.com.unblock.proto.Point.fromObject(object.points[i]);
                         }
                     }
                     return message;
@@ -4798,7 +4798,7 @@ $root.com = (function() {
                     if (message.points && message.points.length) {
                         object.points = [];
                         for (var j = 0; j < message.points.length; ++j)
-                            object.points[j] = $root.com.unblock.proto.Bounds.Point.toObject(message.points[j], options);
+                            object.points[j] = $root.com.unblock.proto.Point.toObject(message.points[j], options);
                     }
                     return object;
                 };
@@ -4813,216 +4813,6 @@ $root.com = (function() {
                 Bounds.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                Bounds.Point = (function() {
-
-                    /**
-                     * Properties of a Point.
-                     * @memberof com.unblock.proto.Bounds
-                     * @interface IPoint
-                     * @property {number|null} [x] Point x
-                     * @property {number|null} [y] Point y
-                     */
-
-                    /**
-                     * Constructs a new Point.
-                     * @memberof com.unblock.proto.Bounds
-                     * @classdesc Represents a Point.
-                     * @implements IPoint
-                     * @constructor
-                     * @param {com.unblock.proto.Bounds.IPoint=} [properties] Properties to set
-                     */
-                    function Point(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-
-                    /**
-                     * Point x.
-                     * @member {number} x
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @instance
-                     */
-                    Point.prototype.x = 0;
-
-                    /**
-                     * Point y.
-                     * @member {number} y
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @instance
-                     */
-                    Point.prototype.y = 0;
-
-                    /**
-                     * Creates a new Point instance using the specified properties.
-                     * @function create
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {com.unblock.proto.Bounds.IPoint=} [properties] Properties to set
-                     * @returns {com.unblock.proto.Bounds.Point} Point instance
-                     */
-                    Point.create = function create(properties) {
-                        return new Point(properties);
-                    };
-
-                    /**
-                     * Encodes the specified Point message. Does not implicitly {@link com.unblock.proto.Bounds.Point.verify|verify} messages.
-                     * @function encode
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {com.unblock.proto.Bounds.IPoint} message Point message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Point.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.x != null && message.hasOwnProperty("x"))
-                            writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
-                        if (message.y != null && message.hasOwnProperty("y"))
-                            writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
-                        return writer;
-                    };
-
-                    /**
-                     * Encodes the specified Point message, length delimited. Does not implicitly {@link com.unblock.proto.Bounds.Point.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {com.unblock.proto.Bounds.IPoint} message Point message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Point.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-
-                    /**
-                     * Decodes a Point message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {com.unblock.proto.Bounds.Point} Point
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Point.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.Bounds.Point();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.x = reader.float();
-                                break;
-                            case 2:
-                                message.y = reader.float();
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-
-                    /**
-                     * Decodes a Point message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {com.unblock.proto.Bounds.Point} Point
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Point.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-
-                    /**
-                     * Verifies a Point message.
-                     * @function verify
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Point.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.x != null && message.hasOwnProperty("x"))
-                            if (typeof message.x !== "number")
-                                return "x: number expected";
-                        if (message.y != null && message.hasOwnProperty("y"))
-                            if (typeof message.y !== "number")
-                                return "y: number expected";
-                        return null;
-                    };
-
-                    /**
-                     * Creates a Point message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {com.unblock.proto.Bounds.Point} Point
-                     */
-                    Point.fromObject = function fromObject(object) {
-                        if (object instanceof $root.com.unblock.proto.Bounds.Point)
-                            return object;
-                        var message = new $root.com.unblock.proto.Bounds.Point();
-                        if (object.x != null)
-                            message.x = Number(object.x);
-                        if (object.y != null)
-                            message.y = Number(object.y);
-                        return message;
-                    };
-
-                    /**
-                     * Creates a plain object from a Point message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @static
-                     * @param {com.unblock.proto.Bounds.Point} message Point
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Point.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.x = 0;
-                            object.y = 0;
-                        }
-                        if (message.x != null && message.hasOwnProperty("x"))
-                            object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
-                        if (message.y != null && message.hasOwnProperty("y"))
-                            object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
-                        return object;
-                    };
-
-                    /**
-                     * Converts this Point to JSON.
-                     * @function toJSON
-                     * @memberof com.unblock.proto.Bounds.Point
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Point.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-
-                    return Point;
-                })();
 
                 return Bounds;
             })();
@@ -6942,6 +6732,436 @@ $root.com = (function() {
                 return UpdateCityStatusRequest;
             })();
 
+            proto.UpdateCityCenterRequest = (function() {
+
+                /**
+                 * Properties of an UpdateCityCenterRequest.
+                 * @memberof com.unblock.proto
+                 * @interface IUpdateCityCenterRequest
+                 * @property {string|null} [id] UpdateCityCenterRequest id
+                 * @property {com.unblock.proto.IPoint|null} [center] UpdateCityCenterRequest center
+                 */
+
+                /**
+                 * Constructs a new UpdateCityCenterRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents an UpdateCityCenterRequest.
+                 * @implements IUpdateCityCenterRequest
+                 * @constructor
+                 * @param {com.unblock.proto.IUpdateCityCenterRequest=} [properties] Properties to set
+                 */
+                function UpdateCityCenterRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * UpdateCityCenterRequest id.
+                 * @member {string} id
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @instance
+                 */
+                UpdateCityCenterRequest.prototype.id = "";
+
+                /**
+                 * UpdateCityCenterRequest center.
+                 * @member {com.unblock.proto.IPoint|null|undefined} center
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @instance
+                 */
+                UpdateCityCenterRequest.prototype.center = null;
+
+                /**
+                 * Creates a new UpdateCityCenterRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateCityCenterRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.UpdateCityCenterRequest} UpdateCityCenterRequest instance
+                 */
+                UpdateCityCenterRequest.create = function create(properties) {
+                    return new UpdateCityCenterRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified UpdateCityCenterRequest message. Does not implicitly {@link com.unblock.proto.UpdateCityCenterRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateCityCenterRequest} message UpdateCityCenterRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateCityCenterRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.center != null && message.hasOwnProperty("center"))
+                        $root.com.unblock.proto.Point.encode(message.center, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified UpdateCityCenterRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateCityCenterRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateCityCenterRequest} message UpdateCityCenterRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateCityCenterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes an UpdateCityCenterRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.UpdateCityCenterRequest} UpdateCityCenterRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateCityCenterRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateCityCenterRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.center = $root.com.unblock.proto.Point.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes an UpdateCityCenterRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.UpdateCityCenterRequest} UpdateCityCenterRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateCityCenterRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies an UpdateCityCenterRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpdateCityCenterRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.center != null && message.hasOwnProperty("center")) {
+                        var error = $root.com.unblock.proto.Point.verify(message.center);
+                        if (error)
+                            return "center." + error;
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates an UpdateCityCenterRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.UpdateCityCenterRequest} UpdateCityCenterRequest
+                 */
+                UpdateCityCenterRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.UpdateCityCenterRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.UpdateCityCenterRequest();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.center != null) {
+                        if (typeof object.center !== "object")
+                            throw TypeError(".com.unblock.proto.UpdateCityCenterRequest.center: object expected");
+                        message.center = $root.com.unblock.proto.Point.fromObject(object.center);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from an UpdateCityCenterRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @static
+                 * @param {com.unblock.proto.UpdateCityCenterRequest} message UpdateCityCenterRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpdateCityCenterRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.center = null;
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.center != null && message.hasOwnProperty("center"))
+                        object.center = $root.com.unblock.proto.Point.toObject(message.center, options);
+                    return object;
+                };
+
+                /**
+                 * Converts this UpdateCityCenterRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.UpdateCityCenterRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpdateCityCenterRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return UpdateCityCenterRequest;
+            })();
+
+            proto.UpdateCityBoundsRequest = (function() {
+
+                /**
+                 * Properties of an UpdateCityBoundsRequest.
+                 * @memberof com.unblock.proto
+                 * @interface IUpdateCityBoundsRequest
+                 * @property {string|null} [id] UpdateCityBoundsRequest id
+                 * @property {com.unblock.proto.IBounds|null} [bounds] UpdateCityBoundsRequest bounds
+                 */
+
+                /**
+                 * Constructs a new UpdateCityBoundsRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents an UpdateCityBoundsRequest.
+                 * @implements IUpdateCityBoundsRequest
+                 * @constructor
+                 * @param {com.unblock.proto.IUpdateCityBoundsRequest=} [properties] Properties to set
+                 */
+                function UpdateCityBoundsRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * UpdateCityBoundsRequest id.
+                 * @member {string} id
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @instance
+                 */
+                UpdateCityBoundsRequest.prototype.id = "";
+
+                /**
+                 * UpdateCityBoundsRequest bounds.
+                 * @member {com.unblock.proto.IBounds|null|undefined} bounds
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @instance
+                 */
+                UpdateCityBoundsRequest.prototype.bounds = null;
+
+                /**
+                 * Creates a new UpdateCityBoundsRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateCityBoundsRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.UpdateCityBoundsRequest} UpdateCityBoundsRequest instance
+                 */
+                UpdateCityBoundsRequest.create = function create(properties) {
+                    return new UpdateCityBoundsRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified UpdateCityBoundsRequest message. Does not implicitly {@link com.unblock.proto.UpdateCityBoundsRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateCityBoundsRequest} message UpdateCityBoundsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateCityBoundsRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.bounds != null && message.hasOwnProperty("bounds"))
+                        $root.com.unblock.proto.Bounds.encode(message.bounds, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified UpdateCityBoundsRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateCityBoundsRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateCityBoundsRequest} message UpdateCityBoundsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateCityBoundsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes an UpdateCityBoundsRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.UpdateCityBoundsRequest} UpdateCityBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateCityBoundsRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateCityBoundsRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.bounds = $root.com.unblock.proto.Bounds.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes an UpdateCityBoundsRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.UpdateCityBoundsRequest} UpdateCityBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateCityBoundsRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies an UpdateCityBoundsRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpdateCityBoundsRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.bounds != null && message.hasOwnProperty("bounds")) {
+                        var error = $root.com.unblock.proto.Bounds.verify(message.bounds);
+                        if (error)
+                            return "bounds." + error;
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates an UpdateCityBoundsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.UpdateCityBoundsRequest} UpdateCityBoundsRequest
+                 */
+                UpdateCityBoundsRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.UpdateCityBoundsRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.UpdateCityBoundsRequest();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.bounds != null) {
+                        if (typeof object.bounds !== "object")
+                            throw TypeError(".com.unblock.proto.UpdateCityBoundsRequest.bounds: object expected");
+                        message.bounds = $root.com.unblock.proto.Bounds.fromObject(object.bounds);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from an UpdateCityBoundsRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.UpdateCityBoundsRequest} message UpdateCityBoundsRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpdateCityBoundsRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.bounds = null;
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.bounds != null && message.hasOwnProperty("bounds"))
+                        object.bounds = $root.com.unblock.proto.Bounds.toObject(message.bounds, options);
+                    return object;
+                };
+
+                /**
+                 * Converts this UpdateCityBoundsRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.UpdateCityBoundsRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpdateCityBoundsRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return UpdateCityBoundsRequest;
+            })();
+
             proto.City = (function() {
 
                 /**
@@ -6953,6 +7173,8 @@ $root.com = (function() {
                  * @property {string|null} [name] City name
                  * @property {Array.<com.unblock.proto.INeighborhood>|null} [neighborhoods] City neighborhoods
                  * @property {string|null} [imageFilename] City imageFilename
+                 * @property {com.unblock.proto.IPoint|null} [center] City center
+                 * @property {com.unblock.proto.IBounds|null} [bounds] City bounds
                  */
 
                 /**
@@ -7012,6 +7234,22 @@ $root.com = (function() {
                 City.prototype.imageFilename = "";
 
                 /**
+                 * City center.
+                 * @member {com.unblock.proto.IPoint|null|undefined} center
+                 * @memberof com.unblock.proto.City
+                 * @instance
+                 */
+                City.prototype.center = null;
+
+                /**
+                 * City bounds.
+                 * @member {com.unblock.proto.IBounds|null|undefined} bounds
+                 * @memberof com.unblock.proto.City
+                 * @instance
+                 */
+                City.prototype.bounds = null;
+
+                /**
                  * Creates a new City instance using the specified properties.
                  * @function create
                  * @memberof com.unblock.proto.City
@@ -7046,6 +7284,10 @@ $root.com = (function() {
                             $root.com.unblock.proto.Neighborhood.encode(message.neighborhoods[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.imageFilename);
+                    if (message.center != null && message.hasOwnProperty("center"))
+                        $root.com.unblock.proto.Point.encode(message.center, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.bounds != null && message.hasOwnProperty("bounds"))
+                        $root.com.unblock.proto.Bounds.encode(message.bounds, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     return writer;
                 };
 
@@ -7096,6 +7338,12 @@ $root.com = (function() {
                             break;
                         case 5:
                             message.imageFilename = reader.string();
+                            break;
+                        case 6:
+                            message.center = $root.com.unblock.proto.Point.decode(reader, reader.uint32());
+                            break;
+                        case 7:
+                            message.bounds = $root.com.unblock.proto.Bounds.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -7160,6 +7408,16 @@ $root.com = (function() {
                     if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
                         if (!$util.isString(message.imageFilename))
                             return "imageFilename: string expected";
+                    if (message.center != null && message.hasOwnProperty("center")) {
+                        var error = $root.com.unblock.proto.Point.verify(message.center);
+                        if (error)
+                            return "center." + error;
+                    }
+                    if (message.bounds != null && message.hasOwnProperty("bounds")) {
+                        var error = $root.com.unblock.proto.Bounds.verify(message.bounds);
+                        if (error)
+                            return "bounds." + error;
+                    }
                     return null;
                 };
 
@@ -7209,6 +7467,16 @@ $root.com = (function() {
                     }
                     if (object.imageFilename != null)
                         message.imageFilename = String(object.imageFilename);
+                    if (object.center != null) {
+                        if (typeof object.center !== "object")
+                            throw TypeError(".com.unblock.proto.City.center: object expected");
+                        message.center = $root.com.unblock.proto.Point.fromObject(object.center);
+                    }
+                    if (object.bounds != null) {
+                        if (typeof object.bounds !== "object")
+                            throw TypeError(".com.unblock.proto.City.bounds: object expected");
+                        message.bounds = $root.com.unblock.proto.Bounds.fromObject(object.bounds);
+                    }
                     return message;
                 };
 
@@ -7232,6 +7500,8 @@ $root.com = (function() {
                         object.status = options.enums === String ? "CITY_STATUS_UNSPECIFIED" : 0;
                         object.name = "";
                         object.imageFilename = "";
+                        object.center = null;
+                        object.bounds = null;
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -7246,6 +7516,10 @@ $root.com = (function() {
                     }
                     if (message.imageFilename != null && message.hasOwnProperty("imageFilename"))
                         object.imageFilename = message.imageFilename;
+                    if (message.center != null && message.hasOwnProperty("center"))
+                        object.center = $root.com.unblock.proto.Point.toObject(message.center, options);
+                    if (message.bounds != null && message.hasOwnProperty("bounds"))
+                        object.bounds = $root.com.unblock.proto.Bounds.toObject(message.bounds, options);
                     return object;
                 };
 

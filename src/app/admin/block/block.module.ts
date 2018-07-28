@@ -6,8 +6,6 @@ import { AgmCoreModule } from '@agm/_dev/packages/core';
 
 import { BlockComponent } from './block.component';
 
-import { MapsModule } from '../../maps/maps.module';
-
 @NgModule({
     declarations: [
         BlockComponent

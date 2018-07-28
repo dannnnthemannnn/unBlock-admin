@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatButtonModule, MatSelectModule, MatSnackBarModule, MatAutocompleteModule } from '@angular/material';
+import { AgmCoreModule } from '@agm/_dev/packages/core';
 
 import { CityComponent } from './city.component';
 
@@ -20,7 +21,8 @@ import { CityComponent } from './city.component';
         MatSelectModule,
         MatInputModule,
         MatButtonModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        AgmCoreModule
     ]
 })
 export class CityModule { }

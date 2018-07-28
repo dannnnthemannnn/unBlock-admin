@@ -9,102 +9,6 @@ export namespace com {
         /** Namespace proto. */
         namespace proto {
 
-            /** Properties of an AttractionLocation. */
-            interface IAttractionLocation {
-
-                /** AttractionLocation x */
-                x?: (number|null);
-
-                /** AttractionLocation y */
-                y?: (number|null);
-            }
-
-            /** Represents an AttractionLocation. */
-            class AttractionLocation implements IAttractionLocation {
-
-                /**
-                 * Constructs a new AttractionLocation.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: com.unblock.proto.IAttractionLocation);
-
-                /** AttractionLocation x. */
-                public x: number;
-
-                /** AttractionLocation y. */
-                public y: number;
-
-                /**
-                 * Creates a new AttractionLocation instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns AttractionLocation instance
-                 */
-                public static create(properties?: com.unblock.proto.IAttractionLocation): com.unblock.proto.AttractionLocation;
-
-                /**
-                 * Encodes the specified AttractionLocation message. Does not implicitly {@link com.unblock.proto.AttractionLocation.verify|verify} messages.
-                 * @param message AttractionLocation message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: com.unblock.proto.IAttractionLocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified AttractionLocation message, length delimited. Does not implicitly {@link com.unblock.proto.AttractionLocation.verify|verify} messages.
-                 * @param message AttractionLocation message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: com.unblock.proto.IAttractionLocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an AttractionLocation message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns AttractionLocation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.AttractionLocation;
-
-                /**
-                 * Decodes an AttractionLocation message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns AttractionLocation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.AttractionLocation;
-
-                /**
-                 * Verifies an AttractionLocation message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an AttractionLocation message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns AttractionLocation
-                 */
-                public static fromObject(object: { [k: string]: any }): com.unblock.proto.AttractionLocation;
-
-                /**
-                 * Creates a plain object from an AttractionLocation message. Also converts values to other types if specified.
-                 * @param message AttractionLocation
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: com.unblock.proto.AttractionLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this AttractionLocation to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-
             /** Properties of a CreateAttractionRequest. */
             interface ICreateAttractionRequest {
 
@@ -210,7 +114,7 @@ export namespace com {
                     name?: (string|null);
 
                     /** CreateAttractionInfo location */
-                    location?: (com.unblock.proto.IAttractionLocation|null);
+                    location?: (com.unblock.proto.IPoint|null);
 
                     /** CreateAttractionInfo description */
                     description?: (string|null);
@@ -232,7 +136,7 @@ export namespace com {
                     public name: string;
 
                     /** CreateAttractionInfo location. */
-                    public location?: (com.unblock.proto.IAttractionLocation|null);
+                    public location?: (com.unblock.proto.IPoint|null);
 
                     /** CreateAttractionInfo description. */
                     public description: string;
@@ -604,7 +508,7 @@ export namespace com {
                 id?: (string|null);
 
                 /** UpdateAttractionLocationRequest location */
-                location?: (com.unblock.proto.IAttractionLocation|null);
+                location?: (com.unblock.proto.IPoint|null);
             }
 
             /** Represents an UpdateAttractionLocationRequest. */
@@ -620,7 +524,7 @@ export namespace com {
                 public id: string;
 
                 /** UpdateAttractionLocationRequest location. */
-                public location?: (com.unblock.proto.IAttractionLocation|null);
+                public location?: (com.unblock.proto.IPoint|null);
 
                 /**
                  * Creates a new UpdateAttractionLocationRequest instance using the specified properties.
@@ -911,7 +815,7 @@ export namespace com {
                 description?: (string|null);
 
                 /** Attraction location */
-                location?: (com.unblock.proto.IAttractionLocation|null);
+                location?: (com.unblock.proto.IPoint|null);
 
                 /** Attraction googlePlaceId */
                 googlePlaceId?: (string|null);
@@ -942,7 +846,7 @@ export namespace com {
                 public description: string;
 
                 /** Attraction location. */
-                public location?: (com.unblock.proto.IAttractionLocation|null);
+                public location?: (com.unblock.proto.IPoint|null);
 
                 /** Attraction googlePlaceId. */
                 public googlePlaceId: string;
@@ -1013,6 +917,102 @@ export namespace com {
 
                 /**
                  * Converts this Attraction to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a Point. */
+            interface IPoint {
+
+                /** Point x */
+                x?: (number|null);
+
+                /** Point y */
+                y?: (number|null);
+            }
+
+            /** Represents a Point. */
+            class Point implements IPoint {
+
+                /**
+                 * Constructs a new Point.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IPoint);
+
+                /** Point x. */
+                public x: number;
+
+                /** Point y. */
+                public y: number;
+
+                /**
+                 * Creates a new Point instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Point instance
+                 */
+                public static create(properties?: com.unblock.proto.IPoint): com.unblock.proto.Point;
+
+                /**
+                 * Encodes the specified Point message. Does not implicitly {@link com.unblock.proto.Point.verify|verify} messages.
+                 * @param message Point message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Point message, length delimited. Does not implicitly {@link com.unblock.proto.Point.verify|verify} messages.
+                 * @param message Point message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Point message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Point
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.Point;
+
+                /**
+                 * Decodes a Point message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Point
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.Point;
+
+                /**
+                 * Verifies a Point message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Point message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Point
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.Point;
+
+                /**
+                 * Creates a plain object from a Point message. Also converts values to other types if specified.
+                 * @param message Point
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.Point, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Point to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
@@ -2004,7 +2004,7 @@ export namespace com {
             interface IBounds {
 
                 /** Bounds points */
-                points?: (com.unblock.proto.Bounds.IPoint[]|null);
+                points?: (com.unblock.proto.IPoint[]|null);
             }
 
             /** Represents a Bounds. */
@@ -2017,7 +2017,7 @@ export namespace com {
                 constructor(properties?: com.unblock.proto.IBounds);
 
                 /** Bounds points. */
-                public points: com.unblock.proto.Bounds.IPoint[];
+                public points: com.unblock.proto.IPoint[];
 
                 /**
                  * Creates a new Bounds instance using the specified properties.
@@ -2088,105 +2088,6 @@ export namespace com {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
-            }
-
-            namespace Bounds {
-
-                /** Properties of a Point. */
-                interface IPoint {
-
-                    /** Point x */
-                    x?: (number|null);
-
-                    /** Point y */
-                    y?: (number|null);
-                }
-
-                /** Represents a Point. */
-                class Point implements IPoint {
-
-                    /**
-                     * Constructs a new Point.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: com.unblock.proto.Bounds.IPoint);
-
-                    /** Point x. */
-                    public x: number;
-
-                    /** Point y. */
-                    public y: number;
-
-                    /**
-                     * Creates a new Point instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Point instance
-                     */
-                    public static create(properties?: com.unblock.proto.Bounds.IPoint): com.unblock.proto.Bounds.Point;
-
-                    /**
-                     * Encodes the specified Point message. Does not implicitly {@link com.unblock.proto.Bounds.Point.verify|verify} messages.
-                     * @param message Point message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: com.unblock.proto.Bounds.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Point message, length delimited. Does not implicitly {@link com.unblock.proto.Bounds.Point.verify|verify} messages.
-                     * @param message Point message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: com.unblock.proto.Bounds.IPoint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Point message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Point
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.Bounds.Point;
-
-                    /**
-                     * Decodes a Point message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Point
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.Bounds.Point;
-
-                    /**
-                     * Verifies a Point message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Point message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Point
-                     */
-                    public static fromObject(object: { [k: string]: any }): com.unblock.proto.Bounds.Point;
-
-                    /**
-                     * Creates a plain object from a Point message. Also converts values to other types if specified.
-                     * @param message Point
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: com.unblock.proto.Bounds.Point, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Point to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
             }
 
             /** Properties of a CheckIn. */
@@ -3055,6 +2956,198 @@ export namespace com {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of an UpdateCityCenterRequest. */
+            interface IUpdateCityCenterRequest {
+
+                /** UpdateCityCenterRequest id */
+                id?: (string|null);
+
+                /** UpdateCityCenterRequest center */
+                center?: (com.unblock.proto.IPoint|null);
+            }
+
+            /** Represents an UpdateCityCenterRequest. */
+            class UpdateCityCenterRequest implements IUpdateCityCenterRequest {
+
+                /**
+                 * Constructs a new UpdateCityCenterRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IUpdateCityCenterRequest);
+
+                /** UpdateCityCenterRequest id. */
+                public id: string;
+
+                /** UpdateCityCenterRequest center. */
+                public center?: (com.unblock.proto.IPoint|null);
+
+                /**
+                 * Creates a new UpdateCityCenterRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateCityCenterRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.IUpdateCityCenterRequest): com.unblock.proto.UpdateCityCenterRequest;
+
+                /**
+                 * Encodes the specified UpdateCityCenterRequest message. Does not implicitly {@link com.unblock.proto.UpdateCityCenterRequest.verify|verify} messages.
+                 * @param message UpdateCityCenterRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IUpdateCityCenterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateCityCenterRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateCityCenterRequest.verify|verify} messages.
+                 * @param message UpdateCityCenterRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IUpdateCityCenterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateCityCenterRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateCityCenterRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateCityCenterRequest;
+
+                /**
+                 * Decodes an UpdateCityCenterRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateCityCenterRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateCityCenterRequest;
+
+                /**
+                 * Verifies an UpdateCityCenterRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateCityCenterRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateCityCenterRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateCityCenterRequest;
+
+                /**
+                 * Creates a plain object from an UpdateCityCenterRequest message. Also converts values to other types if specified.
+                 * @param message UpdateCityCenterRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.UpdateCityCenterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateCityCenterRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an UpdateCityBoundsRequest. */
+            interface IUpdateCityBoundsRequest {
+
+                /** UpdateCityBoundsRequest id */
+                id?: (string|null);
+
+                /** UpdateCityBoundsRequest bounds */
+                bounds?: (com.unblock.proto.IBounds|null);
+            }
+
+            /** Represents an UpdateCityBoundsRequest. */
+            class UpdateCityBoundsRequest implements IUpdateCityBoundsRequest {
+
+                /**
+                 * Constructs a new UpdateCityBoundsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IUpdateCityBoundsRequest);
+
+                /** UpdateCityBoundsRequest id. */
+                public id: string;
+
+                /** UpdateCityBoundsRequest bounds. */
+                public bounds?: (com.unblock.proto.IBounds|null);
+
+                /**
+                 * Creates a new UpdateCityBoundsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateCityBoundsRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.IUpdateCityBoundsRequest): com.unblock.proto.UpdateCityBoundsRequest;
+
+                /**
+                 * Encodes the specified UpdateCityBoundsRequest message. Does not implicitly {@link com.unblock.proto.UpdateCityBoundsRequest.verify|verify} messages.
+                 * @param message UpdateCityBoundsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IUpdateCityBoundsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateCityBoundsRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateCityBoundsRequest.verify|verify} messages.
+                 * @param message UpdateCityBoundsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IUpdateCityBoundsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateCityBoundsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateCityBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateCityBoundsRequest;
+
+                /**
+                 * Decodes an UpdateCityBoundsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateCityBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateCityBoundsRequest;
+
+                /**
+                 * Verifies an UpdateCityBoundsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateCityBoundsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateCityBoundsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateCityBoundsRequest;
+
+                /**
+                 * Creates a plain object from an UpdateCityBoundsRequest message. Also converts values to other types if specified.
+                 * @param message UpdateCityBoundsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.UpdateCityBoundsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateCityBoundsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
             /** Properties of a City. */
             interface ICity {
 
@@ -3072,6 +3165,12 @@ export namespace com {
 
                 /** City imageFilename */
                 imageFilename?: (string|null);
+
+                /** City center */
+                center?: (com.unblock.proto.IPoint|null);
+
+                /** City bounds */
+                bounds?: (com.unblock.proto.IBounds|null);
             }
 
             /** Represents a City. */
@@ -3097,6 +3196,12 @@ export namespace com {
 
                 /** City imageFilename. */
                 public imageFilename: string;
+
+                /** City center. */
+                public center?: (com.unblock.proto.IPoint|null);
+
+                /** City bounds. */
+                public bounds?: (com.unblock.proto.IBounds|null);
 
                 /**
                  * Creates a new City instance using the specified properties.

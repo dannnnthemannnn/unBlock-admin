@@ -287,7 +287,7 @@ export class BlockComponent {
   getBounds() {
     return this.agmPolygon.getPolygonPath().then((path: google.maps.MVCArray<google.maps.MVCArray<LatLng>>) =>
       new com.unblock.proto.Bounds({
-        points: path.getArray()[0].getArray().map(latlng => new com.unblock.proto.Bounds.Point({ x: latlng.lat(), y: latlng.lng() }))
+        points: path.getArray()[0].getArray().map(latlng => new com.unblock.proto.Point({ x: latlng.lat(), y: latlng.lng() }))
       }));
   }
 

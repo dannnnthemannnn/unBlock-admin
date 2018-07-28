@@ -47,6 +47,42 @@
       </button>
     </div>
   </div>
+
+  <div class="row" *ngIf="city">
+    <div class="mat-form-field">
+      <mat-select [formControl]="mapStateControl">
+        <mat-option [value]="mapState.VIEW">View Map</mat-option>
+        <mat-option [value]="mapState.EDIT_CENTER">Edit Center</mat-option>
+        <mat-option [value]="mapState.EDIT_BOUNDS">Edit Bounds</mat-option>
+      </mat-select>
+    </div>
+
+    <div class="mat-form-field" *ngIf="mapStateControl.value === mapState.EDIT_CENTER">
+      <button mat-raised-button color="primary" (click)="onCityCenterUpdate()">
+        Update City Center
+      </button>
+    </div>
+
+    <div class="mat-form-field" *ngIf="mapStateControl.value == mapState.EDIT_BOUNDS">
+      <button mat-raised-button color="primary" (click)="onCityBoundsUpdate()">
+        Update Bounds
+      </button>
+    </div>
+    <div class="mat-form-field" *ngIf="mapStateControl.value == mapState.EDIT_BOUNDS">
+      <button mat-raised-button color="primary" (click)="onCityBoundsReset()">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <div class="map-div" *ngIf="city">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapRightClick)="onCreateNewPoint($event)">
+      <agm-polygon *ngIf="showBounds" [paths]="bounds"></agm-polygon>
+      <ng-container *ngIf="showCenter">
+        <agm-marker [latitude]="center ? center.lat : 0" [longitude]="center ? center.lng : 0"></agm-marker>
+      </ng-container>
+    </agm-map>
+  </div>
 </mat-card>
 
 <mat-card class="unblock-card" *ngIf="city">

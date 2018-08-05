@@ -57,6 +57,14 @@ export class NeighborhoodService {
         ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
     }
 
+    updateBounds(request: com.unblock.proto.UpdateNeighborhoodBoundsRequest) {
+        return this.http.patch(
+            this.path('neighborhood:bounds'),
+            request.toJSON(),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
+    }
+
     assignToCity(request: com.unblock.proto.AssignNeighborhoodToCityRequest) {
         return this.http.patch(
             this.path('neighborhood:assign'),

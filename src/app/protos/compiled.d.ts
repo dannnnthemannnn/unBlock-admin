@@ -3845,6 +3845,195 @@ export namespace com {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of an UpdateNeighborhoodBoundsRequest. */
+            interface IUpdateNeighborhoodBoundsRequest {
+
+                /** UpdateNeighborhoodBoundsRequest id */
+                id?: (string|null);
+
+                /** UpdateNeighborhoodBoundsRequest update */
+                update?: (com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds|null);
+            }
+
+            /** Represents an UpdateNeighborhoodBoundsRequest. */
+            class UpdateNeighborhoodBoundsRequest implements IUpdateNeighborhoodBoundsRequest {
+
+                /**
+                 * Constructs a new UpdateNeighborhoodBoundsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IUpdateNeighborhoodBoundsRequest);
+
+                /** UpdateNeighborhoodBoundsRequest id. */
+                public id: string;
+
+                /** UpdateNeighborhoodBoundsRequest update. */
+                public update?: (com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds|null);
+
+                /**
+                 * Creates a new UpdateNeighborhoodBoundsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateNeighborhoodBoundsRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.IUpdateNeighborhoodBoundsRequest): com.unblock.proto.UpdateNeighborhoodBoundsRequest;
+
+                /**
+                 * Encodes the specified UpdateNeighborhoodBoundsRequest message. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.verify|verify} messages.
+                 * @param message UpdateNeighborhoodBoundsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IUpdateNeighborhoodBoundsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateNeighborhoodBoundsRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.verify|verify} messages.
+                 * @param message UpdateNeighborhoodBoundsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IUpdateNeighborhoodBoundsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateNeighborhoodBoundsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateNeighborhoodBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateNeighborhoodBoundsRequest;
+
+                /**
+                 * Decodes an UpdateNeighborhoodBoundsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateNeighborhoodBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateNeighborhoodBoundsRequest;
+
+                /**
+                 * Verifies an UpdateNeighborhoodBoundsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateNeighborhoodBoundsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateNeighborhoodBoundsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateNeighborhoodBoundsRequest;
+
+                /**
+                 * Creates a plain object from an UpdateNeighborhoodBoundsRequest message. Also converts values to other types if specified.
+                 * @param message UpdateNeighborhoodBoundsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.UpdateNeighborhoodBoundsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateNeighborhoodBoundsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace UpdateNeighborhoodBoundsRequest {
+
+                /** Properties of an UpdateNeighborhoodBounds. */
+                interface IUpdateNeighborhoodBounds {
+
+                    /** UpdateNeighborhoodBounds bounds */
+                    bounds?: (com.unblock.proto.IBounds|null);
+                }
+
+                /** Represents an UpdateNeighborhoodBounds. */
+                class UpdateNeighborhoodBounds implements IUpdateNeighborhoodBounds {
+
+                    /**
+                     * Constructs a new UpdateNeighborhoodBounds.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds);
+
+                    /** UpdateNeighborhoodBounds bounds. */
+                    public bounds?: (com.unblock.proto.IBounds|null);
+
+                    /**
+                     * Creates a new UpdateNeighborhoodBounds instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNeighborhoodBounds instance
+                     */
+                    public static create(properties?: com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds): com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds;
+
+                    /**
+                     * Encodes the specified UpdateNeighborhoodBounds message. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.verify|verify} messages.
+                     * @param message UpdateNeighborhoodBounds message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNeighborhoodBounds message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.verify|verify} messages.
+                     * @param message UpdateNeighborhoodBounds message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNeighborhoodBounds message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNeighborhoodBounds
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds;
+
+                    /**
+                     * Decodes an UpdateNeighborhoodBounds message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNeighborhoodBounds
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds;
+
+                    /**
+                     * Verifies an UpdateNeighborhoodBounds message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNeighborhoodBounds message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNeighborhoodBounds
+                     */
+                    public static fromObject(object: { [k: string]: any }): com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds;
+
+                    /**
+                     * Creates a plain object from an UpdateNeighborhoodBounds message. Also converts values to other types if specified.
+                     * @param message UpdateNeighborhoodBounds
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNeighborhoodBounds to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Properties of an AssignNeighborhoodToCityRequest. */
             interface IAssignNeighborhoodToCityRequest {
 
@@ -3958,6 +4147,9 @@ export namespace com {
 
                 /** Neighborhood blocks */
                 blocks?: (com.unblock.proto.IBlock[]|null);
+
+                /** Neighborhood bounds */
+                bounds?: (com.unblock.proto.IBounds|null);
             }
 
             /** Represents a Neighborhood. */
@@ -3983,6 +4175,9 @@ export namespace com {
 
                 /** Neighborhood blocks. */
                 public blocks: com.unblock.proto.IBlock[];
+
+                /** Neighborhood bounds. */
+                public bounds?: (com.unblock.proto.IBounds|null);
 
                 /**
                  * Creates a new Neighborhood instance using the specified properties.

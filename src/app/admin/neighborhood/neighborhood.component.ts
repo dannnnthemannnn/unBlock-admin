@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -16,6 +17,11 @@ import { com } from '../../protos/compiled.js';
 
 // TODO: Figure out how to handle enum values without redefining them here
 const NEIGHBORHOOD_DISABLED = 'NEIGHBORHOOD_DISABLED';
+
+enum MapState {
+  VIEW,
+  EDIT_BOUNDS
+}
 
 @Component({
   templateUrl: './neighborhood.component.html',
@@ -36,8 +42,16 @@ export class NeighborhoodComponent {
   cityControl = new FormControl('');
   disabledControl = new FormControl('');
   blockControl = new FormControl('');
+  mapStateControl = new FormControl(MapState.VIEW);
 
   neighborhood: com.unblock.proto.INeighborhood | null = null;
+
+  bounds: LatLngLiteral[] = []
+  lat = 42.877742;
+  lng = -97.380979;
+  zoom = 4;
+
+  mapState = MapState;
 
   displayableNeighborhood = (neighborhood: com.unblock.proto.INeighborhood) => this.displayNeighborhood(neighborhood);
 
@@ -80,6 +94,12 @@ export class NeighborhoodComponent {
     this.updateCityDetails(neighborhood.cityId);
     this.blocks = neighborhood.blocks;
     this.neighborhood = neighborhood;
+    if (this.neighborhood.bounds && this.neighborhood.bounds.points) {
+      this.bounds = this.neighborhood.bounds.points.map(point => ({ lat: point.x, lng: point.y }))
+      this.lat = neighborhood.bounds.points.map(point => point.x).reduce((a, b) => a + b, 0) / neighborhood.bounds.points.length;
+      this.lng = neighborhood.bounds.points.map(point => point.y).reduce((a, b) => a + b, 0) / neighborhood.bounds.points.length;
+      this.zoom = 14;
+    }
   }
 
   updateCityDetails(cityId: string) {
@@ -163,6 +183,29 @@ export class NeighborhoodComponent {
 
   onCreateMode() {
     this.navigate(['neighborhoods']);
+  }
+
+  onCreateNewPoint(mouseEvent: MouseEvent) {
+    this.bounds = [...this.bounds, mouseEvent.coords];
+    console.log(this.bounds);
+  }
+
+  onNeighborhoodBoundsUpdate() {
+    this.neighborhoodService.updateBounds(new com.unblock.proto.UpdateNeighborhoodBoundsRequest({
+      id: this.neighborhood.id,
+      update: new com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds({
+        bounds: new com.unblock.proto.Bounds({
+          points: this.bounds.map(latlng => new com.unblock.proto.Point({ x: latlng.lat, y: latlng.lng })),
+        }),
+      })
+    })).then(neighborhood => {
+      this.neighborhood = neighborhood;
+      this.showNotification('Neighborhood bounds updated.');
+    });
+  }
+
+  onNeighborhoodBoundsReset() {
+    this.bounds = [];
   }
 
   onUpdateInfo() {

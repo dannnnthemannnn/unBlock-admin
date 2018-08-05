@@ -59,6 +59,32 @@
       </button>
     </div>
   </div>
+
+  <div class="row" *ngIf="neighborhood">
+    <div class="mat-form-field">
+      <mat-select [formControl]="mapStateControl">
+        <mat-option [value]="mapState.VIEW">View Map</mat-option>
+        <mat-option [value]="mapState.EDIT_BOUNDS">Edit Bounds</mat-option>
+      </mat-select>
+    </div>
+
+    <div class="mat-form-field" *ngIf="mapStateControl.value == mapState.EDIT_BOUNDS">
+      <button mat-raised-button color="primary" (click)="onNeighborhoodBoundsUpdate()">
+        Update Bounds
+      </button>
+    </div>
+    <div class="mat-form-field" *ngIf="mapStateControl.value == mapState.EDIT_BOUNDS">
+      <button mat-raised-button color="primary" (click)="onNeighborhoodBoundsReset()">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <div class="map-div" *ngIf="neighborhood">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapRightClick)="onCreateNewPoint($event)">
+      <agm-polygon [paths]="bounds"></agm-polygon>
+    </agm-map>
+  </div>
 </mat-card>
 
 <mat-card class="unblock-card" *ngIf="neighborhood">

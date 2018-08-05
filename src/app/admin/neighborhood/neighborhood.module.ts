@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatInputModule, MatCheckboxModule, MatFormFieldModule, MatSnackBarModule, MatButtonModule, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import { AgmCoreModule } from '@agm/_dev/packages/core';
 
 import { NeighborhoodComponent } from './neighborhood.component';
 
@@ -20,7 +21,8 @@ import { NeighborhoodComponent } from './neighborhood.component';
         MatSnackBarModule,
         MatInputModule,
         MatButtonModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        AgmCoreModule
     ]
 })
 export class NeighborhoodModule { }

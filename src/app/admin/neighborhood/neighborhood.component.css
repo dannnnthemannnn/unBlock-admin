@@ -1,3 +1,11 @@
 #map {
     display: hidden
 }
+
+agm-map {
+    height: 300px;
+  }
+  
+.map-div {
+  margin-bottom: 24px;
+}

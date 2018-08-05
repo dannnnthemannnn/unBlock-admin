@@ -8793,6 +8793,413 @@ $root.com = (function() {
                 return UpdateNeighborhoodStatusRequest;
             })();
 
+            proto.UpdateNeighborhoodBoundsRequest = (function() {
+
+                /**
+                 * Properties of an UpdateNeighborhoodBoundsRequest.
+                 * @memberof com.unblock.proto
+                 * @interface IUpdateNeighborhoodBoundsRequest
+                 * @property {string|null} [id] UpdateNeighborhoodBoundsRequest id
+                 * @property {com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds|null} [update] UpdateNeighborhoodBoundsRequest update
+                 */
+
+                /**
+                 * Constructs a new UpdateNeighborhoodBoundsRequest.
+                 * @memberof com.unblock.proto
+                 * @classdesc Represents an UpdateNeighborhoodBoundsRequest.
+                 * @implements IUpdateNeighborhoodBoundsRequest
+                 * @constructor
+                 * @param {com.unblock.proto.IUpdateNeighborhoodBoundsRequest=} [properties] Properties to set
+                 */
+                function UpdateNeighborhoodBoundsRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * UpdateNeighborhoodBoundsRequest id.
+                 * @member {string} id
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @instance
+                 */
+                UpdateNeighborhoodBoundsRequest.prototype.id = "";
+
+                /**
+                 * UpdateNeighborhoodBoundsRequest update.
+                 * @member {com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds|null|undefined} update
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @instance
+                 */
+                UpdateNeighborhoodBoundsRequest.prototype.update = null;
+
+                /**
+                 * Creates a new UpdateNeighborhoodBoundsRequest instance using the specified properties.
+                 * @function create
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateNeighborhoodBoundsRequest=} [properties] Properties to set
+                 * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest} UpdateNeighborhoodBoundsRequest instance
+                 */
+                UpdateNeighborhoodBoundsRequest.create = function create(properties) {
+                    return new UpdateNeighborhoodBoundsRequest(properties);
+                };
+
+                /**
+                 * Encodes the specified UpdateNeighborhoodBoundsRequest message. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateNeighborhoodBoundsRequest} message UpdateNeighborhoodBoundsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateNeighborhoodBoundsRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.update != null && message.hasOwnProperty("update"))
+                        $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.encode(message.update, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified UpdateNeighborhoodBoundsRequest message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.IUpdateNeighborhoodBoundsRequest} message UpdateNeighborhoodBoundsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpdateNeighborhoodBoundsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes an UpdateNeighborhoodBoundsRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest} UpdateNeighborhoodBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateNeighborhoodBoundsRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.update = $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes an UpdateNeighborhoodBoundsRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest} UpdateNeighborhoodBoundsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpdateNeighborhoodBoundsRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies an UpdateNeighborhoodBoundsRequest message.
+                 * @function verify
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpdateNeighborhoodBoundsRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.update != null && message.hasOwnProperty("update")) {
+                        var error = $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.verify(message.update);
+                        if (error)
+                            return "update." + error;
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates an UpdateNeighborhoodBoundsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest} UpdateNeighborhoodBoundsRequest
+                 */
+                UpdateNeighborhoodBoundsRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest)
+                        return object;
+                    var message = new $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.update != null) {
+                        if (typeof object.update !== "object")
+                            throw TypeError(".com.unblock.proto.UpdateNeighborhoodBoundsRequest.update: object expected");
+                        message.update = $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.fromObject(object.update);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from an UpdateNeighborhoodBoundsRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @static
+                 * @param {com.unblock.proto.UpdateNeighborhoodBoundsRequest} message UpdateNeighborhoodBoundsRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpdateNeighborhoodBoundsRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.update = null;
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.update != null && message.hasOwnProperty("update"))
+                        object.update = $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.toObject(message.update, options);
+                    return object;
+                };
+
+                /**
+                 * Converts this UpdateNeighborhoodBoundsRequest to JSON.
+                 * @function toJSON
+                 * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpdateNeighborhoodBoundsRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds = (function() {
+
+                    /**
+                     * Properties of an UpdateNeighborhoodBounds.
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                     * @interface IUpdateNeighborhoodBounds
+                     * @property {com.unblock.proto.IBounds|null} [bounds] UpdateNeighborhoodBounds bounds
+                     */
+
+                    /**
+                     * Constructs a new UpdateNeighborhoodBounds.
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest
+                     * @classdesc Represents an UpdateNeighborhoodBounds.
+                     * @implements IUpdateNeighborhoodBounds
+                     * @constructor
+                     * @param {com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds=} [properties] Properties to set
+                     */
+                    function UpdateNeighborhoodBounds(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * UpdateNeighborhoodBounds bounds.
+                     * @member {com.unblock.proto.IBounds|null|undefined} bounds
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @instance
+                     */
+                    UpdateNeighborhoodBounds.prototype.bounds = null;
+
+                    /**
+                     * Creates a new UpdateNeighborhoodBounds instance using the specified properties.
+                     * @function create
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds=} [properties] Properties to set
+                     * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds} UpdateNeighborhoodBounds instance
+                     */
+                    UpdateNeighborhoodBounds.create = function create(properties) {
+                        return new UpdateNeighborhoodBounds(properties);
+                    };
+
+                    /**
+                     * Encodes the specified UpdateNeighborhoodBounds message. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.verify|verify} messages.
+                     * @function encode
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds} message UpdateNeighborhoodBounds message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateNeighborhoodBounds.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.bounds != null && message.hasOwnProperty("bounds"))
+                            $root.com.unblock.proto.Bounds.encode(message.bounds, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified UpdateNeighborhoodBounds message, length delimited. Does not implicitly {@link com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {com.unblock.proto.UpdateNeighborhoodBoundsRequest.IUpdateNeighborhoodBounds} message UpdateNeighborhoodBounds message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateNeighborhoodBounds.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes an UpdateNeighborhoodBounds message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds} UpdateNeighborhoodBounds
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateNeighborhoodBounds.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.bounds = $root.com.unblock.proto.Bounds.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes an UpdateNeighborhoodBounds message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds} UpdateNeighborhoodBounds
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateNeighborhoodBounds.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies an UpdateNeighborhoodBounds message.
+                     * @function verify
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateNeighborhoodBounds.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.bounds != null && message.hasOwnProperty("bounds")) {
+                            var error = $root.com.unblock.proto.Bounds.verify(message.bounds);
+                            if (error)
+                                return "bounds." + error;
+                        }
+                        return null;
+                    };
+
+                    /**
+                     * Creates an UpdateNeighborhoodBounds message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds} UpdateNeighborhoodBounds
+                     */
+                    UpdateNeighborhoodBounds.fromObject = function fromObject(object) {
+                        if (object instanceof $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds)
+                            return object;
+                        var message = new $root.com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds();
+                        if (object.bounds != null) {
+                            if (typeof object.bounds !== "object")
+                                throw TypeError(".com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds.bounds: object expected");
+                            message.bounds = $root.com.unblock.proto.Bounds.fromObject(object.bounds);
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from an UpdateNeighborhoodBounds message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @static
+                     * @param {com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds} message UpdateNeighborhoodBounds
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateNeighborhoodBounds.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.bounds = null;
+                        if (message.bounds != null && message.hasOwnProperty("bounds"))
+                            object.bounds = $root.com.unblock.proto.Bounds.toObject(message.bounds, options);
+                        return object;
+                    };
+
+                    /**
+                     * Converts this UpdateNeighborhoodBounds to JSON.
+                     * @function toJSON
+                     * @memberof com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateNeighborhoodBounds.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    return UpdateNeighborhoodBounds;
+                })();
+
+                return UpdateNeighborhoodBoundsRequest;
+            })();
+
             proto.AssignNeighborhoodToCityRequest = (function() {
 
                 /**
@@ -9014,6 +9421,7 @@ $root.com = (function() {
                  * @property {string|null} [cityId] Neighborhood cityId
                  * @property {string|null} [name] Neighborhood name
                  * @property {Array.<com.unblock.proto.IBlock>|null} [blocks] Neighborhood blocks
+                 * @property {com.unblock.proto.IBounds|null} [bounds] Neighborhood bounds
                  */
 
                 /**
@@ -9073,6 +9481,14 @@ $root.com = (function() {
                 Neighborhood.prototype.blocks = $util.emptyArray;
 
                 /**
+                 * Neighborhood bounds.
+                 * @member {com.unblock.proto.IBounds|null|undefined} bounds
+                 * @memberof com.unblock.proto.Neighborhood
+                 * @instance
+                 */
+                Neighborhood.prototype.bounds = null;
+
+                /**
                  * Creates a new Neighborhood instance using the specified properties.
                  * @function create
                  * @memberof com.unblock.proto.Neighborhood
@@ -9107,6 +9523,8 @@ $root.com = (function() {
                     if (message.blocks != null && message.blocks.length)
                         for (var i = 0; i < message.blocks.length; ++i)
                             $root.com.unblock.proto.Block.encode(message.blocks[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.bounds != null && message.hasOwnProperty("bounds"))
+                        $root.com.unblock.proto.Bounds.encode(message.bounds, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                     return writer;
                 };
 
@@ -9157,6 +9575,9 @@ $root.com = (function() {
                             if (!(message.blocks && message.blocks.length))
                                 message.blocks = [];
                             message.blocks.push($root.com.unblock.proto.Block.decode(reader, reader.uint32()));
+                            break;
+                        case 6:
+                            message.bounds = $root.com.unblock.proto.Bounds.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -9220,6 +9641,11 @@ $root.com = (function() {
                                 return "blocks." + error;
                         }
                     }
+                    if (message.bounds != null && message.hasOwnProperty("bounds")) {
+                        var error = $root.com.unblock.proto.Bounds.verify(message.bounds);
+                        if (error)
+                            return "bounds." + error;
+                    }
                     return null;
                 };
 
@@ -9265,6 +9691,11 @@ $root.com = (function() {
                             message.blocks[i] = $root.com.unblock.proto.Block.fromObject(object.blocks[i]);
                         }
                     }
+                    if (object.bounds != null) {
+                        if (typeof object.bounds !== "object")
+                            throw TypeError(".com.unblock.proto.Neighborhood.bounds: object expected");
+                        message.bounds = $root.com.unblock.proto.Bounds.fromObject(object.bounds);
+                    }
                     return message;
                 };
 
@@ -9288,6 +9719,7 @@ $root.com = (function() {
                         object.status = options.enums === String ? "NEIGHBORHOOD_STATUS_UNSPECIFIED" : 0;
                         object.cityId = "";
                         object.name = "";
+                        object.bounds = null;
                     }
                     if (message.id != null && message.hasOwnProperty("id"))
                         object.id = message.id;
@@ -9302,6 +9734,8 @@ $root.com = (function() {
                         for (var j = 0; j < message.blocks.length; ++j)
                             object.blocks[j] = $root.com.unblock.proto.Block.toObject(message.blocks[j], options);
                     }
+                    if (message.bounds != null && message.hasOwnProperty("bounds"))
+                        object.bounds = $root.com.unblock.proto.Bounds.toObject(message.bounds, options);
                     return object;
                 };
 

@@ -82,7 +82,8 @@
 
   <div class="map-div" *ngIf="neighborhood">
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapRightClick)="onCreateNewPoint($event)">
-      <agm-polygon [paths]="bounds"></agm-polygon>
+      <agm-polygon clickable="false" fillColor="red" strokeColor="red" strokeOpacity="1.0" [paths]="bounds" (polyRightClick)="onCreateNewPoint($event)"></agm-polygon>
+      <agm-polygon clickable="false" fillColor="gray" strokeColor="gray" strokeOpacity="1.0" [paths]="otherBounds" (polyRightClick)="onCreateNewPoint($event)"></agm-polygon>
     </agm-map>
   </div>
 </mat-card>

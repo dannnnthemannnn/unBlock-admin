@@ -47,6 +47,7 @@ export class NeighborhoodComponent {
   neighborhood: com.unblock.proto.INeighborhood | null = null;
 
   bounds: LatLngLiteral[] = []
+  otherBounds: Array<Array<LatLngLiteral>> = [];
   lat = 42.877742;
   lng = -97.380979;
   zoom = 4;
@@ -94,12 +95,27 @@ export class NeighborhoodComponent {
     this.updateCityDetails(neighborhood.cityId);
     this.blocks = neighborhood.blocks;
     this.neighborhood = neighborhood;
+    this.getCitiesLookup().then(lookup => {
+      let city = lookup.get(neighborhood.cityId);
+      this.otherBounds = this.filterNeighborhood(city.neighborhoods).map(n => this.boundsToLatLngBounds(n.bounds));
+      this.lat = city.center.x;
+      this.lng = city.center.y;
+      this.zoom = 12;
+    });
     if (this.neighborhood.bounds && this.neighborhood.bounds.points) {
-      this.bounds = this.neighborhood.bounds.points.map(point => ({ lat: point.x, lng: point.y }))
+      this.bounds = this.boundsToLatLngBounds(this.neighborhood.bounds);
       this.lat = neighborhood.bounds.points.map(point => point.x).reduce((a, b) => a + b, 0) / neighborhood.bounds.points.length;
       this.lng = neighborhood.bounds.points.map(point => point.y).reduce((a, b) => a + b, 0) / neighborhood.bounds.points.length;
       this.zoom = 14;
     }
+  }
+
+  boundsToLatLngBounds(bounds: com.unblock.proto.IBounds) {
+    return new Array().concat(bounds.points.map(point => { return { lat: point.x, lng: point.y }; }));
+  }
+
+  filterNeighborhood(neighborhoods: com.unblock.proto.INeighborhood[]) {
+    return neighborhoods.filter(neighborhood => neighborhood.id != this.neighborhood.id);
   }
 
   updateCityDetails(cityId: string) {
@@ -185,20 +201,28 @@ export class NeighborhoodComponent {
     this.navigate(['neighborhoods']);
   }
 
-  onCreateNewPoint(mouseEvent: MouseEvent) {
-    this.bounds = [...this.bounds, mouseEvent.coords];
-    console.log(this.bounds);
+  onCreateNewPoint(mouseEvent: MouseEvent | { latLng: LatLng }) {
+    let latLng = (<MouseEvent>mouseEvent).coords;
+    if (!latLng) {
+      let temp = (<{ latLng: LatLng }>mouseEvent).latLng;
+      latLng = { lat: temp.lat(), lng: temp.lng() };
+    }
+    this.bounds = [...this.bounds, latLng];
   }
 
   onNeighborhoodBoundsUpdate() {
-    this.neighborhoodService.updateBounds(new com.unblock.proto.UpdateNeighborhoodBoundsRequest({
+    let request = new com.unblock.proto.UpdateNeighborhoodBoundsRequest({
       id: this.neighborhood.id,
       update: new com.unblock.proto.UpdateNeighborhoodBoundsRequest.UpdateNeighborhoodBounds({
         bounds: new com.unblock.proto.Bounds({
           points: this.bounds.map(latlng => new com.unblock.proto.Point({ x: latlng.lat, y: latlng.lng })),
         }),
       })
-    })).then(neighborhood => {
+    });
+    console.log(request);
+    this.neighborhoodService.updateBounds(
+      request
+    ).then(neighborhood => {
       this.neighborhood = neighborhood;
       this.showNotification('Neighborhood bounds updated.');
     });

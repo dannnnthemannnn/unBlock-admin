@@ -1,7 +1,6 @@
 <div class="search">
   <mat-form-field>
-    <input matInput name="city" placeholder="Search cities" [matAutocomplete]="cityAutocomplete" [formControl]="citySearchControl"
-    />
+    <input matInput placeholder="Search cities" [matAutocomplete]="cityAutocomplete" [formControl]="citySearchControl" />
   </mat-form-field>
 
   <mat-autocomplete #cityAutocomplete="matAutocomplete" [displayWith]="displayCity" (optionSelected)="citySelected($event.option.value)">

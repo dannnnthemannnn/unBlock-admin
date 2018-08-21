@@ -2,7 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core'
+import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';

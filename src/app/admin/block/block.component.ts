@@ -136,7 +136,7 @@ export class BlockComponent {
     return new Promise<google.maps.places.PlaceResult[]>((resolve, _) => {
       try {
         let placesService = new google.maps.places.PlacesService(new google.maps.Map(this.gmapElement.nativeElement));
-        placesService.nearbySearch({ location: { lat: this.lat, lng: this.lng }, radius: 200, name }, results => {
+        placesService.nearbySearch({ location: { lat: this.lat, lng: this.lng }, radius: 10000, keyword: name, }, results => {
           console.log(results);
           resolve(results);
         });
@@ -155,18 +155,14 @@ export class BlockComponent {
   }
 
   addAttractionToBlock() {
-    this.attractionService.create(new com.unblock.proto.CreateAttractionRequest({
+    this.attractionService.createAdmin(new com.unblock.proto.CreateAdminAttractionRequest({
       blockId: this.block.id,
       info: {
-        name: this.selectedPlace.name,
-        location: {
-          x: this.selectedPlace.geometry.location.lat(),
-          y: this.selectedPlace.geometry.location.lng()
-        }
+        googlePlaceId: this.selectedPlace.place_id
       }
     }))
       .then(attraction => {
-        this.navigate(['attractions', attraction.id]);
+        this.navigate(['attractions', attraction.attraction.id]);
       });
   }
 

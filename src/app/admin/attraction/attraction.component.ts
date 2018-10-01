@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core';
 
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators/startWith';
@@ -24,7 +25,7 @@ const ATTRACTION_DISABLED = 'ATTRACTION_DISABLED';
   styleUrls: ['./attraction.component.css']
 })
 export class AttractionComponent {
-  fullAttractionsList: Promise<com.unblock.proto.IAttraction[]>;
+  fullAttractionsList: Promise<com.unblock.proto.IAdminAttraction[]>;
   fullBlocksList: Promise<com.unblock.proto.IBlock[]>;
   fullNeighborhoodsList: Promise<com.unblock.proto.INeighborhood[]>;
   fullCitiesList: Promise<com.unblock.proto.ICity[]>;
@@ -36,7 +37,7 @@ export class AttractionComponent {
   cityLookupPromise: Promise<Map<string, com.unblock.proto.ICity>>;
   cityLookup: Map<string, com.unblock.proto.ICity> = null;
 
-  attractions: Observable<com.unblock.proto.IAttraction[]>;
+  attractions: Observable<com.unblock.proto.IAdminAttraction[]>;
 
   attractionSearchControl = new FormControl('');
   nameControl = new FormControl('');
@@ -44,14 +45,16 @@ export class AttractionComponent {
   blockControl = new FormControl('');
   disabledControl = new FormControl('');
 
-  attraction: com.unblock.proto.IAttraction | null = null;
+  attraction: com.unblock.proto.IAdminAttraction | null = null;
 
   loading = true;
 
-  displayableAttraction = (attraction: com.unblock.proto.IAttraction) => this.displayAttraction(attraction);
+  displayableAttraction = (attraction: com.unblock.proto.IAdminAttraction) => this.displayAttraction(attraction);
 
-  lat: number = 40.678418;
-  lng: number = 7.809007;
+  lat: number = 40.7831;
+  lng: number = -73.9712;
+  centerLat: number = null;
+  centerLng: number = null;
 
   color = '#e34r56';/*randomColor({
     luminosity: 'dark'
@@ -89,7 +92,7 @@ export class AttractionComponent {
   }
 
   get disabled() {
-    return this.attraction && this.attraction.status.toString() === ATTRACTION_DISABLED;
+    return this.attraction && this.attraction.attraction.status.toString() === ATTRACTION_DISABLED;
   }
 
   get blockPaths() {
@@ -111,13 +114,20 @@ export class AttractionComponent {
     });
   }
 
-  updateAttractionDetails(attraction: com.unblock.proto.IAttraction) {
+  updateAttractionDetails(attraction: com.unblock.proto.IAdminAttraction) {
     this.attractionSearchControl.setValue('');
-    this.nameControl.setValue(attraction.name);
-    this.descriptionControl.setValue(attraction.description);
+    this.nameControl.setValue(attraction.attraction.name);
+    this.descriptionControl.setValue(attraction.attraction.description);
     this.disabledControl.setValue(this.disabled);
-    this.updateBlockDetails(attraction.blockId);
+    this.updateBlockDetails(attraction.attraction.blockId);
     this.attraction = attraction;
+    if (this.attraction.googlePlace != null) {
+      this.centerLat = this.lat = attraction.googlePlace.location.x;
+      this.centerLng = this.lng = attraction.googlePlace.location.y;
+    } else {
+      this.centerLat = this.lat = attraction.attraction.location.x;
+      this.centerLng = this.lng = attraction.attraction.location.y;
+    }
   }
 
   updateBlockDetails(blockId: string) {
@@ -204,7 +214,7 @@ export class AttractionComponent {
     return this.neighborhoodLookupPromise;
   }
 
-  getAttractions(value: string): Promise<com.unblock.proto.IAttraction[]> {
+  getAttractions(value: string): Promise<com.unblock.proto.IAdminAttraction[]> {
     if (typeof value !== 'string') {
       return Promise.resolve([]);
     }
@@ -214,18 +224,18 @@ export class AttractionComponent {
           this.displayAttraction(attraction).toLowerCase().includes(value.toLowerCase())));
   }
 
-  displayAttraction(attraction: com.unblock.proto.IAttraction) {
+  displayAttraction(attraction: com.unblock.proto.IAdminAttraction) {
     if (!attraction) return '';
 
     let city = null;
     let neighborhood = null;
     let block = null;
-    if (attraction.blockId && this.blockLookup && this.neighborhoodLookup && this.cityLookup) {
-      block = this.blockLookup.get(attraction.blockId);
+    if (attraction.attraction.blockId && this.blockLookup && this.neighborhoodLookup && this.cityLookup) {
+      block = this.blockLookup.get(attraction.attraction.blockId);
       neighborhood = this.neighborhoodLookup.get(block.neighborhoodId);
       city = neighborhood ? this.cityLookup.get(neighborhood.cityId) : null;
     }
-    return `${this.retrieveName(attraction)} (${this.retrieveName(city)} - ${this.retrieveName(neighborhood)} - ${this.retrieveName(block)})`;
+    return `${this.retrieveName(attraction.attraction)} (${this.retrieveName(city)} - ${this.retrieveName(neighborhood)} - ${this.retrieveName(block)})`;
   }
 
   displayBlock(block: com.unblock.proto.IBlock) {
@@ -248,33 +258,38 @@ export class AttractionComponent {
     this.router.navigate(['admin', 'attractions'].concat(paths));
   }
 
-  attractionSelected(attraction: com.unblock.proto.IAttraction) {
-    this.navigate([attraction.id]);
+  attractionSelected(attraction: com.unblock.proto.IAdminAttraction) {
+    this.navigate([attraction.attraction.id]);
   }
 
   onCreateMode() {
     this.navigate([]);
   }
 
+  onCreateNewPoint(mouseEvent: MouseEvent) {
+    this.centerLat = mouseEvent.coords.lat;
+    this.centerLng = mouseEvent.coords.lng;
+  }
+
   onUpdateInfo() {
     this.attractionService.updateInfo(new com.unblock.proto.UpdateAttractionInfoRequest({
-      id: this.attraction.id,
+      id: this.attraction.attraction.id,
       info: {
         name: this.nameControl.value,
         description: this.descriptionControl.value
       }
     })).then(attraction => {
-      this.attraction = attraction;
+      this.attraction.attraction = attraction;
       this.showNotification('Attraction info updated.');
     });
   }
 
   onUpdateBlock() {
     this.attractionService.assignToBlock(new com.unblock.proto.AssignAttractionToBlockRequest({
-      id: this.attraction.id,
+      id: this.attraction.attraction.id,
       blockId: this.blockControl.value.id
     })).then(attraction => {
-      this.attraction = attraction;
+      this.attraction.attraction = attraction;
       this.showNotification('Attraction block updated.');
     });
   }
@@ -284,10 +299,10 @@ export class AttractionComponent {
       com.unblock.proto.AttractionStatus.ATTRACTION_LIVE :
       com.unblock.proto.AttractionStatus.ATTRACTION_DISABLED;
     this.attractionService.updateStatus(new com.unblock.proto.UpdateAttractionStatusRequest({
-      id: this.attraction.id,
+      id: this.attraction.attraction.id,
       status
     })).then(attraction => {
-      this.attraction = attraction;
+      this.attraction.attraction = attraction;
       this.showNotification('Attraction status updated.');
     });
   }
@@ -297,7 +312,11 @@ export class AttractionComponent {
       blockId: (this.blockControl.value as com.unblock.proto.IBlock).id,
       info: {
         name: this.nameControl.value,
-        description: this.descriptionControl.value
+        description: this.descriptionControl.value,
+        location: {
+          x: this.centerLat,
+          y: this.centerLng
+        }
       }
     })).then(attraction => {
       this.navigate([attraction.id]);

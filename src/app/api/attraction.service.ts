@@ -27,18 +27,26 @@ export class AttractionService {
         ).map(value => com.unblock.proto.Attraction.create(value)).toPromise();
     }
 
+    createAdmin(request: com.unblock.proto.CreateAdminAttractionRequest) {
+        return this.http.post(
+            this.path('adminattraction'),
+            request.toJSON(),
+            this.getHeaders()
+        ).map(value => com.unblock.proto.AdminAttraction.create(value)).toPromise();
+    }
+
     get(id: string) {
         return this.http.get(
-            this.path(`attraction/${id}`),
+            this.path(`adminattraction/${id}`),
             this.getHeaders()
-        ).map(value => com.unblock.proto.Attraction.create(value)).toPromise();
+        ).map(value => com.unblock.proto.AdminAttraction.create(value)).toPromise();
     }
 
     list() {
         return this.http.get(
-            this.path(`attractions`),
+            this.path(`adminattractions`),
             this.getHeaders()
-        ).map(value => com.unblock.proto.ListAttractionsResponse.create(value).attractions).toPromise();
+        ).map(value => com.unblock.proto.ListAdminAttractionsResponse.create(value).adminAttractions).toPromise();
     }
 
     updateInfo(request: com.unblock.proto.UpdateAttractionInfoRequest) {

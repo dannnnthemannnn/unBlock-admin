@@ -118,9 +118,6 @@ export namespace com {
 
                     /** CreateAttractionInfo description */
                     description?: (string|null);
-
-                    /** CreateAttractionInfo googlePlaceId */
-                    googlePlaceId?: (string|null);
                 }
 
                 /** Represents a CreateAttractionInfo. */
@@ -140,9 +137,6 @@ export namespace com {
 
                     /** CreateAttractionInfo description. */
                     public description: string;
-
-                    /** CreateAttractionInfo googlePlaceId. */
-                    public googlePlaceId: string;
 
                     /**
                      * Creates a new CreateAttractionInfo instance using the specified properties.
@@ -816,9 +810,6 @@ export namespace com {
 
                 /** Attraction location */
                 location?: (com.unblock.proto.IPoint|null);
-
-                /** Attraction googlePlaceId */
-                googlePlaceId?: (string|null);
             }
 
             /** Represents an Attraction. */
@@ -847,9 +838,6 @@ export namespace com {
 
                 /** Attraction location. */
                 public location?: (com.unblock.proto.IPoint|null);
-
-                /** Attraction googlePlaceId. */
-                public googlePlaceId: string;
 
                 /**
                  * Creates a new Attraction instance using the specified properties.
@@ -917,6 +905,501 @@ export namespace com {
 
                 /**
                  * Converts this Attraction to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a CreateAdminAttractionRequest. */
+            interface ICreateAdminAttractionRequest {
+
+                /** CreateAdminAttractionRequest blockId */
+                blockId?: (string|null);
+
+                /** CreateAdminAttractionRequest info */
+                info?: (com.unblock.proto.CreateAdminAttractionRequest.ICreateAdminAttractionInfo|null);
+            }
+
+            /** Represents a CreateAdminAttractionRequest. */
+            class CreateAdminAttractionRequest implements ICreateAdminAttractionRequest {
+
+                /**
+                 * Constructs a new CreateAdminAttractionRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.ICreateAdminAttractionRequest);
+
+                /** CreateAdminAttractionRequest blockId. */
+                public blockId: string;
+
+                /** CreateAdminAttractionRequest info. */
+                public info?: (com.unblock.proto.CreateAdminAttractionRequest.ICreateAdminAttractionInfo|null);
+
+                /**
+                 * Creates a new CreateAdminAttractionRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateAdminAttractionRequest instance
+                 */
+                public static create(properties?: com.unblock.proto.ICreateAdminAttractionRequest): com.unblock.proto.CreateAdminAttractionRequest;
+
+                /**
+                 * Encodes the specified CreateAdminAttractionRequest message. Does not implicitly {@link com.unblock.proto.CreateAdminAttractionRequest.verify|verify} messages.
+                 * @param message CreateAdminAttractionRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.ICreateAdminAttractionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateAdminAttractionRequest message, length delimited. Does not implicitly {@link com.unblock.proto.CreateAdminAttractionRequest.verify|verify} messages.
+                 * @param message CreateAdminAttractionRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.ICreateAdminAttractionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateAdminAttractionRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateAdminAttractionRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.CreateAdminAttractionRequest;
+
+                /**
+                 * Decodes a CreateAdminAttractionRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateAdminAttractionRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.CreateAdminAttractionRequest;
+
+                /**
+                 * Verifies a CreateAdminAttractionRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateAdminAttractionRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateAdminAttractionRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.CreateAdminAttractionRequest;
+
+                /**
+                 * Creates a plain object from a CreateAdminAttractionRequest message. Also converts values to other types if specified.
+                 * @param message CreateAdminAttractionRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.CreateAdminAttractionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateAdminAttractionRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace CreateAdminAttractionRequest {
+
+                /** Properties of a CreateAdminAttractionInfo. */
+                interface ICreateAdminAttractionInfo {
+
+                    /** CreateAdminAttractionInfo googlePlaceId */
+                    googlePlaceId?: (string|null);
+                }
+
+                /** Represents a CreateAdminAttractionInfo. */
+                class CreateAdminAttractionInfo implements ICreateAdminAttractionInfo {
+
+                    /**
+                     * Constructs a new CreateAdminAttractionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: com.unblock.proto.CreateAdminAttractionRequest.ICreateAdminAttractionInfo);
+
+                    /** CreateAdminAttractionInfo googlePlaceId. */
+                    public googlePlaceId: string;
+
+                    /**
+                     * Creates a new CreateAdminAttractionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAdminAttractionInfo instance
+                     */
+                    public static create(properties?: com.unblock.proto.CreateAdminAttractionRequest.ICreateAdminAttractionInfo): com.unblock.proto.CreateAdminAttractionRequest.CreateAdminAttractionInfo;
+
+                    /**
+                     * Encodes the specified CreateAdminAttractionInfo message. Does not implicitly {@link com.unblock.proto.CreateAdminAttractionRequest.CreateAdminAttractionInfo.verify|verify} messages.
+                     * @param message CreateAdminAttractionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: com.unblock.proto.CreateAdminAttractionRequest.ICreateAdminAttractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAdminAttractionInfo message, length delimited. Does not implicitly {@link com.unblock.proto.CreateAdminAttractionRequest.CreateAdminAttractionInfo.verify|verify} messages.
+                     * @param message CreateAdminAttractionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: com.unblock.proto.CreateAdminAttractionRequest.ICreateAdminAttractionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAdminAttractionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAdminAttractionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.CreateAdminAttractionRequest.CreateAdminAttractionInfo;
+
+                    /**
+                     * Decodes a CreateAdminAttractionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAdminAttractionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.CreateAdminAttractionRequest.CreateAdminAttractionInfo;
+
+                    /**
+                     * Verifies a CreateAdminAttractionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAdminAttractionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAdminAttractionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): com.unblock.proto.CreateAdminAttractionRequest.CreateAdminAttractionInfo;
+
+                    /**
+                     * Creates a plain object from a CreateAdminAttractionInfo message. Also converts values to other types if specified.
+                     * @param message CreateAdminAttractionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: com.unblock.proto.CreateAdminAttractionRequest.CreateAdminAttractionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAdminAttractionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of a ListAdminAttractionsResponse. */
+            interface IListAdminAttractionsResponse {
+
+                /** ListAdminAttractionsResponse adminAttractions */
+                adminAttractions?: (com.unblock.proto.IAdminAttraction[]|null);
+            }
+
+            /** Represents a ListAdminAttractionsResponse. */
+            class ListAdminAttractionsResponse implements IListAdminAttractionsResponse {
+
+                /**
+                 * Constructs a new ListAdminAttractionsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IListAdminAttractionsResponse);
+
+                /** ListAdminAttractionsResponse adminAttractions. */
+                public adminAttractions: com.unblock.proto.IAdminAttraction[];
+
+                /**
+                 * Creates a new ListAdminAttractionsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListAdminAttractionsResponse instance
+                 */
+                public static create(properties?: com.unblock.proto.IListAdminAttractionsResponse): com.unblock.proto.ListAdminAttractionsResponse;
+
+                /**
+                 * Encodes the specified ListAdminAttractionsResponse message. Does not implicitly {@link com.unblock.proto.ListAdminAttractionsResponse.verify|verify} messages.
+                 * @param message ListAdminAttractionsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IListAdminAttractionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListAdminAttractionsResponse message, length delimited. Does not implicitly {@link com.unblock.proto.ListAdminAttractionsResponse.verify|verify} messages.
+                 * @param message ListAdminAttractionsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IListAdminAttractionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListAdminAttractionsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListAdminAttractionsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.ListAdminAttractionsResponse;
+
+                /**
+                 * Decodes a ListAdminAttractionsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListAdminAttractionsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.ListAdminAttractionsResponse;
+
+                /**
+                 * Verifies a ListAdminAttractionsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListAdminAttractionsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListAdminAttractionsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.ListAdminAttractionsResponse;
+
+                /**
+                 * Creates a plain object from a ListAdminAttractionsResponse message. Also converts values to other types if specified.
+                 * @param message ListAdminAttractionsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.ListAdminAttractionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListAdminAttractionsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an AdminAttraction. */
+            interface IAdminAttraction {
+
+                /** AdminAttraction attraction */
+                attraction?: (com.unblock.proto.IAttraction|null);
+
+                /** AdminAttraction googlePlace */
+                googlePlace?: (com.unblock.proto.IGooglePlace|null);
+            }
+
+            /** Represents an AdminAttraction. */
+            class AdminAttraction implements IAdminAttraction {
+
+                /**
+                 * Constructs a new AdminAttraction.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IAdminAttraction);
+
+                /** AdminAttraction attraction. */
+                public attraction?: (com.unblock.proto.IAttraction|null);
+
+                /** AdminAttraction googlePlace. */
+                public googlePlace?: (com.unblock.proto.IGooglePlace|null);
+
+                /**
+                 * Creates a new AdminAttraction instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdminAttraction instance
+                 */
+                public static create(properties?: com.unblock.proto.IAdminAttraction): com.unblock.proto.AdminAttraction;
+
+                /**
+                 * Encodes the specified AdminAttraction message. Does not implicitly {@link com.unblock.proto.AdminAttraction.verify|verify} messages.
+                 * @param message AdminAttraction message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IAdminAttraction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdminAttraction message, length delimited. Does not implicitly {@link com.unblock.proto.AdminAttraction.verify|verify} messages.
+                 * @param message AdminAttraction message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IAdminAttraction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdminAttraction message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdminAttraction
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.AdminAttraction;
+
+                /**
+                 * Decodes an AdminAttraction message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdminAttraction
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.AdminAttraction;
+
+                /**
+                 * Verifies an AdminAttraction message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdminAttraction message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdminAttraction
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.AdminAttraction;
+
+                /**
+                 * Creates a plain object from an AdminAttraction message. Also converts values to other types if specified.
+                 * @param message AdminAttraction
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.AdminAttraction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdminAttraction to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a GooglePlace. */
+            interface IGooglePlace {
+
+                /** GooglePlace placeId */
+                placeId?: (string|null);
+
+                /** GooglePlace name */
+                name?: (string|null);
+
+                /** GooglePlace location */
+                location?: (com.unblock.proto.IPoint|null);
+
+                /** GooglePlace photoUrl */
+                photoUrl?: (string|null);
+
+                /** GooglePlace googleUrl */
+                googleUrl?: (string|null);
+
+                /** GooglePlace website */
+                website?: (string|null);
+            }
+
+            /** Represents a GooglePlace. */
+            class GooglePlace implements IGooglePlace {
+
+                /**
+                 * Constructs a new GooglePlace.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: com.unblock.proto.IGooglePlace);
+
+                /** GooglePlace placeId. */
+                public placeId: string;
+
+                /** GooglePlace name. */
+                public name: string;
+
+                /** GooglePlace location. */
+                public location?: (com.unblock.proto.IPoint|null);
+
+                /** GooglePlace photoUrl. */
+                public photoUrl: string;
+
+                /** GooglePlace googleUrl. */
+                public googleUrl: string;
+
+                /** GooglePlace website. */
+                public website: string;
+
+                /**
+                 * Creates a new GooglePlace instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GooglePlace instance
+                 */
+                public static create(properties?: com.unblock.proto.IGooglePlace): com.unblock.proto.GooglePlace;
+
+                /**
+                 * Encodes the specified GooglePlace message. Does not implicitly {@link com.unblock.proto.GooglePlace.verify|verify} messages.
+                 * @param message GooglePlace message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: com.unblock.proto.IGooglePlace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GooglePlace message, length delimited. Does not implicitly {@link com.unblock.proto.GooglePlace.verify|verify} messages.
+                 * @param message GooglePlace message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: com.unblock.proto.IGooglePlace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GooglePlace message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GooglePlace
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): com.unblock.proto.GooglePlace;
+
+                /**
+                 * Decodes a GooglePlace message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GooglePlace
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): com.unblock.proto.GooglePlace;
+
+                /**
+                 * Verifies a GooglePlace message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GooglePlace message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GooglePlace
+                 */
+                public static fromObject(object: { [k: string]: any }): com.unblock.proto.GooglePlace;
+
+                /**
+                 * Creates a plain object from a GooglePlace message. Also converts values to other types if specified.
+                 * @param message GooglePlace
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: com.unblock.proto.GooglePlace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GooglePlace to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };

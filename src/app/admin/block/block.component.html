@@ -1,8 +1,7 @@
 <div *ngIf="!loading">
   <div class="search">
     <mat-form-field>
-      <input matInput name="block" placeholder="Search blocks" [matAutocomplete]="blockAutocomplete" [formControl]="blockSearchControl"
-      />
+      <input matInput name="block" placeholder="Search blocks" [matAutocomplete]="blockAutocomplete" [formControl]="blockSearchControl" />
     </mat-form-field>
 
     <mat-autocomplete #blockAutocomplete="matAutocomplete" [displayWith]="displayableBlock" (optionSelected)="blockSelected($event.option.value)">
@@ -94,8 +93,8 @@
   <mat-card class="unblock-card" *ngIf="block">
     <div class="row">
       <mat-form-field>
-        <input matInput name="place" placeholder="Search google places in block" [matAutocomplete]="placesAutocomplete" [formControl]="placesSearchControl"
-        />
+        <input matInput name="place" placeholder="Search google places in block" [matAutocomplete]="placesAutocomplete"
+          [formControl]="placesSearchControl" />
       </mat-form-field>
 
       <mat-autocomplete #placesAutocomplete="matAutocomplete" [displayWith]="displayPlace" (optionSelected)="placeSelected($event.option.value)">
@@ -119,4 +118,6 @@
       </div>
     </div>
   </mat-card>
+
+  <div #gmap></div>
 </div>

@@ -1,8 +1,8 @@
 <div *ngIf="!loading">
   <div class="search">
     <mat-form-field>
-      <input matInput name="attraction" placeholder="Search attractions" [matAutocomplete]="attractionAutocomplete" [formControl]="attractionSearchControl"
-      />
+      <input matInput name="attraction" placeholder="Search attractions" [matAutocomplete]="attractionAutocomplete"
+        [formControl]="attractionSearchControl" />
     </mat-form-field>
 
     <mat-autocomplete #attractionAutocomplete="matAutocomplete" [displayWith]="displayableAttraction" (optionSelected)="attractionSelected($event.option.value)">
@@ -15,6 +15,24 @@
       Create New
     </button>
   </div>
+
+  <mat-card *ngIf="attraction?.googlePlace?.placeId != null" class="unblock-card">
+    <div class="row">
+      <div>Name:</div>
+      <div>{{attraction.googlePlace.name}}</div>
+    </div>
+
+    <div class="row">
+      <div>Image:</div>
+      <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{attraction.googlePlace.photoUrl}}&key=AIzaSyC58Vw5LAsU1APbTdkQb3J14mMadVhx7Sc" />
+    </div>
+
+    <div class="row">
+      <div>Website:</div>
+      <a [href]="attraction.googlePlace.website">{{attraction.googlePlace.website}}</a>
+    </div>
+
+  </mat-card>
 
   <mat-card class="unblock-card">
     <div class="row">
@@ -61,7 +79,7 @@
 
     <div class="map-div">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16" (mapRightClick)="onCreateNewPoint($event)">
-        <agm-polygon *ngIf="blockBounds" [paths]="blockBounds" [editable]="true" [fillColor]="color" [fillOpacity]=".5"></agm-polygon>
+        <agm-marker *ngIf="centerLat" [latitude]="centerLat" [longitude]="centerLng"></agm-marker>
       </agm-map>
     </div>
 

@@ -2,12 +2,10 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core';
+import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/core';
 
 import { Observable } from 'rxjs';
-import { startWith } from 'rxjs/operators/startWith';
-import { flatMap } from 'rxjs/operators';
-import { map } from 'rxjs/operators/map';
+import { startWith, flatMap, map } from 'rxjs/operators';
 
 import { BlockService } from '../../api/block.service';
 import { AttractionService } from '../../api/attraction.service';
@@ -109,6 +107,19 @@ export class BlockComponent {
     return this.block && this.block.status.toString() === BLOCK_DISABLED;
   }
 
+  distanceInMeters(one: LatLngLiteral, two: LatLngLiteral) {
+    let earthRadius = 6371000; //meters
+    let dLat = (Math.PI / 180) * (two.lat - one.lat);
+    let dLng = (Math.PI / 180) * (two.lng - one.lng);
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((Math.PI / 180) * one.lat) * Math.cos((Math.PI / 180) * two.lat) *
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let dist = (earthRadius * c);
+
+    return dist;
+  }
+
   loadBlock(blockId: string) {
     this.blockService.get(blockId).then(block => {
       this.updateBlockDetails(block);
@@ -133,10 +144,15 @@ export class BlockComponent {
   }
 
   getPlaces(name: string) {
+    let center = { lat: this.lat, lng: this.lng };
+    let distance = this.blockBounds.map(point => Math.abs(this.distanceInMeters(point, center))).reduce((a, b) => Math.max(a, b));
+
+    console.log(distance);
+
     return new Promise<google.maps.places.PlaceResult[]>((resolve, _) => {
       try {
         let placesService = new google.maps.places.PlacesService(new google.maps.Map(this.gmapElement.nativeElement));
-        placesService.nearbySearch({ location: { lat: this.lat, lng: this.lng }, radius: 10000, keyword: name, }, results => {
+        placesService.nearbySearch({ location: { lat: this.lat, lng: this.lng }, radius: distance, keyword: name, }, results => {
           console.log(results);
           resolve(results);
         });
@@ -162,7 +178,7 @@ export class BlockComponent {
       }
     }))
       .then(attraction => {
-        this.navigate(['attractions', attraction.attraction.id]);
+        this.navigate(['attractions', attraction.id]);
       });
   }
 
@@ -277,14 +293,16 @@ export class BlockComponent {
   }
 
   placeSelected(place: google.maps.places.PlaceResult) {
+    console.log(place);
     this.selectedPlace = place;
   }
 
   getBounds() {
-    return this.agmPolygon.getPolygonPath().then((path: google.maps.MVCArray<google.maps.MVCArray<LatLng>>) =>
+    return Promise.resolve(new com.unblock.proto.Bounds());
+    /*this.agmPolygon.getPolygonPath().then((path: google.maps.MVCArray<google.maps.MVCArray<LatLng>>) =>
       new com.unblock.proto.Bounds({
         points: path.getArray()[0].getArray().map(latlng => new com.unblock.proto.Point({ x: latlng.lat(), y: latlng.lng() }))
-      }));
+      }));*/
   }
 
   onCreateMode() {

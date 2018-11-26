@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { CookieService } from 'ngx-cookie-service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import 'rxjs/Rx';
 
-import { AuthConstants } from '../auth/auth.const';
-
-import { URL_ROOT } from './api.const';
+import { HttpService } from '../api/http.service';
 
 import { com } from '../protos/compiled.js'
 
@@ -15,75 +10,45 @@ import { com } from '../protos/compiled.js'
 export class UserService {
 
     constructor(
-        private http: HttpClient,
-        private cookieService: CookieService,
+        private httpService: HttpService,
     ) { }
 
     create(request: com.unblock.proto.CreateUserRequest) {
-        return this.http.post(
-            this.path('user'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.User.create(value)).toPromise();
+        return this.httpService.post(
+            'user',
+            request.toJSON()
+        ).then(value => com.unblock.proto.User.create(value));
     }
 
     get(id: string) {
-        return this.http.get(
-            this.path(`user/${id}`),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.User.create(value)).toPromise();
+        return this.httpService.get(
+            `user/${id}`,
+        ).then(value => com.unblock.proto.User.create(value));
     }
 
     getSelf(token: string) {
-        return this.http.get(
-            this.path('user'),
-            this.getHeadersWithToken(token)
-        ).map(value => com.unblock.proto.User.create(value)).toPromise();
+        return this.httpService.get(
+            'user'
+        ).then(value => com.unblock.proto.User.create(value));
     }
 
     list() {
-        console.log('listing');
-        return this.http.get(
-            this.path(`users`),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.ListUsersResponse.create(value).users).toPromise();
+        return this.httpService.get(
+            'users'
+        ).then(value => com.unblock.proto.ListUsersResponse.create(value).users);
     }
 
     updateInfo(request: com.unblock.proto.UpdateUserInfoRequest) {
-        return this.http.patch(
-            this.path('user:info'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.User.create(value)).toPromise();
+        return this.httpService.patch(
+            'user:info',
+            request.toJSON()
+        ).then(value => com.unblock.proto.User.create(value));
     }
 
     updatePassword(request: com.unblock.proto.UpdateUserPasswordRequest) {
-        return this.http.patch(
-            this.path('user:password'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.User.create(value)).toPromise();
-    }
-
-    private getHeaders() {
-        return {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': this.cookieService.get(AuthConstants.COOKIE_TOKEN),
-            })
-        };
-    }
-
-    private getHeadersWithToken(token: string) {
-        return {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': token,
-            })
-        };
-    }
-
-    private path(suffix: string) {
-        return `${URL_ROOT}/${suffix}`;
+        return this.httpService.patch(
+            'user:password',
+            request.toJSON()
+        ).then(value => com.unblock.proto.User.create(value));
     }
 }

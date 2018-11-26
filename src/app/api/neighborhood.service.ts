@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { CookieService } from 'ngx-cookie-service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import 'rxjs/Rx';
 
-import { AuthConstants } from '../auth/auth.const';
-
-import { URL_ROOT } from './api.const';
+import { HttpService } from '../api/http.service';
 
 import { com } from '../protos/compiled.js'
 
@@ -15,74 +10,53 @@ import { com } from '../protos/compiled.js'
 export class NeighborhoodService {
 
     constructor(
-        private http: HttpClient,
-        private cookieService: CookieService,
+        private httpService: HttpService,
     ) { }
 
     create(request: com.unblock.proto.CreateNeighborhoodRequest) {
-        return this.http.post(
-            this.path('neighborhood'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
+        return this.httpService.post(
+            'neighborhood',
+            request.toJSON()
+        ).then(value => com.unblock.proto.Neighborhood.create(value));
     }
 
     get(id: string) {
-        return this.http.get(
-            this.path(`neighborhood/${id}`),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
+        return this.httpService.get(
+            `neighborhood/${id}`,
+        ).then(value => com.unblock.proto.Neighborhood.create(value));
     }
 
     list() {
-        return this.http.get(
-            this.path(`neighborhoods`),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.ListNeighborhoodsResponse.create(value).neighborhoods).toPromise();
+        return this.httpService.get(
+            'neighborhoods'
+        ).then(value => com.unblock.proto.ListNeighborhoodsResponse.create(value).neighborhoods);
     }
 
     updateInfo(request: com.unblock.proto.UpdateNeighborhoodInfoRequest) {
-        return this.http.patch(
-            this.path('neighborhood:info'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
+        return this.httpService.patch(
+            'neighborhood:info',
+            request.toJSON()
+        ).then(value => com.unblock.proto.Neighborhood.create(value));
     }
 
     updateStatus(request: com.unblock.proto.UpdateNeighborhoodStatusRequest) {
-        return this.http.patch(
-            this.path('neighborhood:status'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
+        return this.httpService.patch(
+            'neighborhood:status',
+            request.toJSON()
+        ).then(value => com.unblock.proto.Neighborhood.create(value));
     }
 
     updateBounds(request: com.unblock.proto.UpdateNeighborhoodBoundsRequest) {
-        return this.http.patch(
-            this.path('neighborhood:bounds'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
+        return this.httpService.patch(
+            'neighborhood:bounds',
+            request.toJSON()
+        ).then(value => com.unblock.proto.Neighborhood.create(value));
     }
 
     assignToCity(request: com.unblock.proto.AssignNeighborhoodToCityRequest) {
-        return this.http.patch(
-            this.path('neighborhood:assign'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.Neighborhood.create(value)).toPromise();
-    }
-
-    private getHeaders() {
-        return {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': this.cookieService.get(AuthConstants.COOKIE_TOKEN),
-            })
-        };
-    }
-
-    private path(suffix: string) {
-        return `${URL_ROOT}/${suffix}`;
+        return this.httpService.patch(
+            'neighborhood:assign',
+            request.toJSON()
+        ).then(value => com.unblock.proto.Neighborhood.create(value));
     }
 }

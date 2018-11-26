@@ -1,54 +1,59 @@
 import { Injectable } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/do';
 
-import { CookieService } from 'ngx-cookie-service';
-import { LoginService } from '../api/login.service';
-import { UserService } from '../api/user.service';
 
-import { AuthConstants } from './auth.const';
-
-import { com } from '../protos/compiled.js'
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 // TODO: Figure out how to handle enum values without redefining them here
 const ADMIN = 'ADMIN';
 
 @Injectable()
 export class AuthService {
-    constructor(
-        private cookieService: CookieService,
-        private loginService: LoginService,
-        private userService: UserService
-    ) { }
+    private user: Observable<firebase.User>;
+    private userDetails: firebase.User = null;
 
-    getToken() {
-        return this.cookieService.get(AuthConstants.COOKIE_TOKEN);
+    constructor(
+        private firebaseAuth: AngularFireAuth,
+        private router: Router,
+    ) {
+        this.user = firebaseAuth.authState;
+        this.user.subscribe(
+            (user) => {
+                if (user) {
+                    this.userDetails = user;
+                    console.log(this.userDetails);
+                }
+                else {
+                    this.userDetails = null;
+                }
+            }
+        );
+    }
+
+    getAccessToken() {
+        return this.userDetails.getIdToken();
     }
 
     isLoggedIn() {
-        return this.cookieService.check(AuthConstants.COOKIE_TOKEN);
+        if (this.userDetails == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     logout() {
-        console.log(this.cookieService.get(AuthConstants.COOKIE_TOKEN))
-        this.cookieService.delete(AuthConstants.COOKIE_TOKEN);
+        this.firebaseAuth.auth.signOut()
+            .then((res) => this.router.navigate(['/']));
     }
 
-    login(usernameOrEmail: string, password: string) {
-        return this.loginService.login(
-            new com.unblock.proto.LoginRequest({ usernameOrEmail, password }))
-            .then(resp => {
-                const user = com.unblock.proto.User.create(resp.body);
-                console.log(user.level);
-                console.log(user.level.toString());
-                console.log(com.unblock.proto.UserLevel.ADMIN.toString());
-                console.log(com.unblock.proto.UserLevel.ADMIN);
-                if (user.level.toString() === ADMIN) {
-                    this.cookieService.set(AuthConstants.COOKIE_TOKEN, resp.headers.get(AuthConstants.HEADER_TOKEN));
-                } else {
-                    throw Error('User is not an admin');
-                }
-            });
+    signInWithFacebook() {
+        return this.firebaseAuth.auth.signInWithPopup(
+            new firebase.auth.FacebookAuthProvider()
+        );
     }
+
 }

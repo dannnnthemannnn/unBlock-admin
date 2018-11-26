@@ -2,12 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/_dev/packages/core';
+import { AgmMap, MouseEvent, LatLngLiteral, AgmPolygon, LatLng } from '@agm/core';
 
 import { Observable } from 'rxjs';
-import { startWith } from 'rxjs/operators/startWith';
-import { flatMap } from 'rxjs/operators';
-import { map } from 'rxjs/operators/map';
+import { startWith, flatMap, map } from 'rxjs/operators';
 
 import { AttractionService } from '../../api/attraction.service';
 import { BlockService } from '../../api/block.service';

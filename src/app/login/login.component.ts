@@ -10,21 +10,14 @@ import { AuthService } from '../auth/auth.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    username = '';
-    password = '';
-    error = '';
 
     constructor(private authService: AuthService, private router: Router) { }
 
-    login() {
-        this.authService.login(this.username, this.password)
-            .then(data => {
-                this.error = '';
+    signInWithFacebook() {
+        this.authService.signInWithFacebook()
+            .then((res) => {
                 this.router.navigate(['admin', '']);
-            }, error => {
-                console.log('error');
-                console.log(error);
-                this.error = error.error.message;
-            });
+            })
+            .catch((err) => console.log(err));
     }
 }

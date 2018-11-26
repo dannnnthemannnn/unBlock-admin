@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { CookieService } from 'ngx-cookie-service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import 'rxjs/Rx';
 
-import { AuthConstants } from '../auth/auth.const';
-
-import { URL_ROOT } from './api.const';
+import { HttpService } from '../api/http.service';
 
 import { com } from '../protos/compiled.js'
 
@@ -15,74 +10,53 @@ import { com } from '../protos/compiled.js'
 export class CityService {
 
     constructor(
-        private http: HttpClient,
-        private cookieService: CookieService,
+        private httpService: HttpService,
     ) { }
 
     create(request: com.unblock.proto.CreateCityRequest) {
-        return this.http.post(
-            this.path('city'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.City.create(value)).toPromise();
+        return this.httpService.post(
+            'city',
+            request.toJSON()
+        ).then(value => com.unblock.proto.City.create(value));
     }
 
     get(id: string) {
-        return this.http.get(
-            this.path(`city/${id}`),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.City.create(value)).toPromise();
+        return this.httpService.get(
+            `city/${id}`
+        ).then(value => com.unblock.proto.City.create(value));
     }
 
     list() {
-        return this.http.get(
-            this.path(`cities`),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.ListCitiesResponse.create(value).cities).toPromise();
+        return this.httpService.get(
+            'cities'
+        ).then(value => com.unblock.proto.ListCitiesResponse.create(value).cities);
     }
 
     updateInfo(request: com.unblock.proto.UpdateCityInfoRequest) {
-        return this.http.patch(
-            this.path('city:info'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.City.create(value)).toPromise();
+        return this.httpService.patch(
+            'city:info',
+            request.toJSON()
+        ).then(value => com.unblock.proto.City.create(value));
     }
 
     updateStatus(request: com.unblock.proto.UpdateCityStatusRequest) {
-        return this.http.patch(
-            this.path('city:status'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.City.create(value)).toPromise();
+        return this.httpService.patch(
+            'city:status',
+            request.toJSON()
+        ).then(value => com.unblock.proto.City.create(value));
     }
 
     updateCenter(request: com.unblock.proto.UpdateCityCenterRequest) {
-        return this.http.patch(
-            this.path('city:center'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.City.create(value)).toPromise();
+        return this.httpService.patch(
+            'city:center',
+            request.toJSON()
+        ).then(value => com.unblock.proto.City.create(value));
     }
 
     updateBounds(request: com.unblock.proto.UpdateCityBoundsRequest) {
-        return this.http.patch(
-            this.path('city:bounds'),
-            request.toJSON(),
-            this.getHeaders()
-        ).map(value => com.unblock.proto.City.create(value)).toPromise();
-    }
-
-    private getHeaders() {
-        return {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': this.cookieService.get(AuthConstants.COOKIE_TOKEN),
-            })
-        };
-    }
-
-    private path(suffix: string) {
-        return `${URL_ROOT}/${suffix}`;
+        return this.httpService.patch(
+            'city:bounds',
+            request.toJSON()
+        ).then(value => com.unblock.proto.City.create(value));
     }
 }

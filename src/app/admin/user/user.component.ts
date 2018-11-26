@@ -4,9 +4,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
 import { Observable } from 'rxjs';
-import { startWith } from 'rxjs/operators/startWith';
-import { flatMap } from 'rxjs/operators';
-import { map } from 'rxjs/operators/map';
+import { startWith ,  flatMap ,  map } from 'rxjs/operators';
 
 import { UserService } from '../../api/user.service';
 import { USER_ID_PARAM } from '../../app-routing.const';
